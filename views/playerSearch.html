@@ -24,19 +24,30 @@
          <div class="container">
             <!-- Main component for a primary marketing message or call to action-->
             <div class="jumbotron">
+
+
+
+            <select ng-model="selectedAge" ng-options="x.age for x in playerData">
+              <option selected> Select Age </option>
+              <option value="0"> Under 20 </option>
+              <option value="1"> 21 - 24 </option>
+              <option value="2"> 25 - 28 </option>
+              <option value="3"> Above 29 </option>
+            </select>
+
          <div ng-controller="myController">
         <p><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span> Please enter a person login:
             <input name="email" ng-model="email" value="">
             <button type="button" ng-click="Submit()" class="button">Show Persons</button>
         </p>
-        <table border="0" cellpadding="10" cellspacing="1" width="500" align="center"> 
-            <tr> 
+        <table border="0" cellpadding="10" cellspacing="1" width="500" align="center">
+            <tr>
             <td> Name</td>
-            <td> Team </td>            
+            <td> Team </td>
             <td> Age </td>
             <td> Nationality </td>
             <td> Overall </td>
-            <tr ng-repeat="x in data"> 
+            <tr ng-repeat="x in playerData">
             <td> <a href="/player:">{{x.name}}</a>  </td>
             <td> {{x.team}} </td>
             <td> {{x.age}} </td>
