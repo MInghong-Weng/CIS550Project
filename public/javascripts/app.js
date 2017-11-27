@@ -1,6 +1,7 @@
 var app = angular.module('angularjsNodejsTutorial',[]);
 
-app.controller('myController', function($scope, $http) {
+//search player
+app.controller('playerController', function($scope, $http) {
         $scope.message="";
         $scope.Submit = function() {
         var request = $http.get('/playerData/'+$scope.email);

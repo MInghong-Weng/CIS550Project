@@ -7,7 +7,7 @@
         background-image: url(https://images.unsplash.com/photo-1511439664149-58b346f60448?auto=format&fit=crop&w=1950&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D);
         background-position: center top;
         background-size: 100% auto;
-    }    
+    }
     </style>
 
     </head>
@@ -19,7 +19,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-      
+
             <div class="collapse navbar-collapse" id="navbarsExample02">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -47,18 +47,16 @@
             <!-- Main component for a primary marketing message or call to action-->
             <div class="jumbotron">
 
+         <div ng-controller="playerController">
 
-
-            <select ng-controller="playerController">
-              <option selected> Select Age </option>
-              <option value="0"> Under 20 </option>
-              <option value="1"> 21 - 24 </option>
-              <option value="2"> 25 - 28 </option>
-              <option value="3"> Above 29 </option>
+           <select ng-model="playerAge">
+             <option selected> Select Age </option>
+             <option value="0"> Under 20 </option>
+             <option value="1"> 21 - 24 </option>
+             <option value="2"> 25 - 28 </option>
+             <option value="3"> Above 29 </option>
             </select>
 
-
-         <div ng-controller="myController">
         <p><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span> Please enter a person login:
             <input name="email" ng-model="email" value="">
             <button type="button" ng-click="Submit()" class="button">Show Persons</button>
@@ -84,4 +82,3 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     </body>
 </html>
-
