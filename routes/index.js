@@ -61,7 +61,7 @@ router.get('/playerSearch', function(req, res, next) {
   
 });
 
-router.get('/playerSearch', function(req, res, next) {
+router.get('/teamSearch', function(req, res, next) {
   
 });
 
