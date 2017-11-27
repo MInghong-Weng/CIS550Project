@@ -29,6 +29,14 @@ router.get('/', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'index.html'));
 });
 
+router.get('/home', function(req, res, next) {
+  res.sendFile(path.join(__dirname, '../', 'views', 'index.html'));
+});
+
+router.get('/dashboard', function(req, res, next) {
+  res.sendFile(path.join(__dirname, '../', 'views', 'dashboard.html'));
+});
+
 router.get('/playerProfile/:id', function(req, res, next) {
   
 });
@@ -38,7 +46,7 @@ router.get('/teamProfile/:id', function(req, res, next) {
 });
 
 router.get('/playerSearch', function(req, res, next) {
-
+  res.sendFile(path.join(__dirname, '../', 'views', 'playerSearch.html'));
   var playerNationality = req.query.playerNationality;
   var playerCurrentTeam = req.query.playerCurrentTeam;
   var playerHeightL = req.query.playerHeightL;
@@ -51,7 +59,11 @@ router.get('/playerSearch', function(req, res, next) {
 });
 
 router.get('/teamSearch', function(req, res, next) {
-  
+  res.sendFile(path.join(__dirname, '../', 'views', 'teamSearch.html'));
+});
+
+router.get('/matchSearch', function(req, res, next) {
+  res.sendFile(path.join(__dirname, '../', 'views', 'matchSearch.html'));
 });
 
 module.exports = router;
