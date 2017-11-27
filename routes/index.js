@@ -38,6 +38,15 @@ router.get('/teamProfile/:id', function(req, res, next) {
 });
 
 router.get('/playerSearch', function(req, res, next) {
+
+  var playerNationality = req.query.playerNationality;
+  var playerCurrentTeam = req.query.playerCurrentTeam;
+  var playerHeightL = req.query.playerHeightL;
+  var playerHeightH = req.query.playerHeightH;
+  var playerAge = req.query.playerAge;
+  var playerSalary = req.query.playerSalary;
+  var playerPreferredFoot = req.query.playerPreferredFoot;
+  var playerAttackRate = req.query.playerAttackRate;
   
 });
 
