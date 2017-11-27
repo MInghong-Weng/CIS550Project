@@ -2,12 +2,20 @@
 <html ng-app="angularjsNodejsTutorial">
     <head>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <style>
+    body{
+        background-image: url(https://images.unsplash.com/photo-1511439664149-58b346f60448?auto=format&fit=crop&w=1950&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D);
+        background-position: center top;
+        background-size: 100% auto;
+    }    
+    </style>
+
     </head>
-    <body data-spy="scroll" data-target=".scrollspy">
+    <body data-spy="scroll" data-target=".scrollspy" >
         <header></header>
         <!-- Static navbar-->
         <nav class="navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Always expand</a>
+            <a class="navbar-brand" href="#">English Premier League Database</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -18,7 +26,16 @@
                   <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
+                  <a class="nav-link" href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Search Player</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Search Team</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Search Match</a>
                 </li>
               </ul>
               <form class="form-inline my-2 my-md-0">
@@ -27,31 +44,16 @@
             </div>
           </nav>
 
-         <div class="container">
+        <div class="container">
             <!-- Main component for a primary marketing message or call to action-->
-            <div class="jumbotron">
-         <div ng-controller="myController">
-        <p><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span> Please enter a person login:
-            <input name="email" ng-model="email" value="">
-            <button type="button" ng-click="Submit()" class="button">Show Persons</button>
-        </p>
-        <table border="0" cellpadding="10" cellspacing="1" width="700" align="center">
-            <tr>
-            <td> Login </td>
-            <td> Name </td>
-            <td> Sex </td>
-            <td> RelationshipStatus </td>
-            <td> Birthyear </td>
-            <td> Number of friends </td>
-            <tr ng-repeat="x in data">
-            <td> {{x.login}} </td>
-            <td> {{x.name}} </td>
-            <td> {{x.sex}} </td>
-            <td> {{x.relationshipStatus}} </td>
-            <td> {{x.birthyear}} </td>
-            <td> {{x.num}} </td>
-            </tr>
-        </table>
+            <div class="jumbotron" align="center">
+        Welcome To Funny English Premier League Database!!
+          <div ng-controller="myController">
+          <p  style="padding: 10em 5em 5em 5em;"><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span> If you like us:
+              <button type="button" ng-click="Submit()" class="button">Donate</button>
+          </p>
+          
+              
         </div>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
