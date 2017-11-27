@@ -27,13 +27,14 @@
 
 
 
-            <select ng-model="selectedAge" ng-options="x.age for x in playerData">
+            <select ng-controller="playerController">
               <option selected> Select Age </option>
               <option value="0"> Under 20 </option>
               <option value="1"> 21 - 24 </option>
               <option value="2"> 25 - 28 </option>
               <option value="3"> Above 29 </option>
             </select>
+
 
          <div ng-controller="myController">
         <p><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span> Please enter a person login:
