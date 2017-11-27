@@ -4,6 +4,8 @@ var app = angular.module('angularjsNodejsTutorial',[]);
 app.controller('playerController', function($scope, $http) {
         $scope.message="";
         $scope.Submit = function() {
+        console.log("playerSearch");
+        console.log($scope.playerAge);
         var request = $http.get('/playerSearch/'+$scope.playerAge);
         request.success(function(playerSearch) {
             $scope.playerSearch = playerSearch;
