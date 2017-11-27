@@ -4,11 +4,11 @@ var app = angular.module('angularjsNodejsTutorial',[]);
 app.controller('playerController', function($scope, $http) {
         $scope.message="";
         $scope.Submit = function() {
-        var request = $http.get('/playerData/'+$scope.email);
-        request.success(function(playerData) {
-            $scope.playerData = playerData;
+        var request = $http.get('/playerSearch/'+$scope.playerAge);
+        request.success(function(playerSearch) {
+            $scope.playerSearch = playerSearch;
         });
-        request.error(function(playerData){
+        request.error(function(playerSearch){
             console.log('err');
         });
 
