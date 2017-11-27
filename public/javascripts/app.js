@@ -3,11 +3,11 @@ var app = angular.module('angularjsNodejsTutorial',[]);
 app.controller('myController', function($scope, $http) {
         $scope.message="";
         $scope.Submit = function() {
-        var request = $http.get('/data/'+$scope.email);
-        request.success(function(data) {
-            $scope.data = data;
+        var request = $http.get('/playerData/'+$scope.email);
+        request.success(function(playerData) {
+            $scope.playerData = playerData;
         });
-        request.error(function(data){
+        request.error(function(playerData){
             console.log('err');
         });
 
