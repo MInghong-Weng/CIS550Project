@@ -69,7 +69,7 @@ router.get('/playerSearch/age/:playerAge', function(req, res) {
 
   console.log(req.params);
 
-  var query = "select p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where p.age = 20";
+  var query = "select p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where p.age = 20 order by p.overall desc";
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
