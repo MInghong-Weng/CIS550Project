@@ -55,10 +55,11 @@
          <div ng-controller="playerController">
 
            <select ng-model="playerNationality" ng-options=" x.nationality for x in nationalities">
+             <option value="">Please Select Nationality</option>
            </select>
 
            <select ng-model="playerAge">
-             <option selected> Select Age </option>
+             <option value="">Please Select Age</option>
              <option value="0"> Under 20 </option>
              <option value="1"> 21 - 24 </option>
              <option value="2"> 25 - 28 </option>
