@@ -42,9 +42,10 @@
                   <a class="nav-link" href="/matchSearch">Search Match</a>
                 </li>
               </ul>
-              <form class="form-inline my-2 my-md-0">
-                <input class="form-control" type="text" placeholder="Search">
-              </form>
+              <!-- Show user-->
+              <div ng-controller="userInfoController">
+                  <a class="badge badge-secondary" href="/auth/login" ng-model="user">{{user}}</a>
+                </div>
             </div>
           </nav>
          <div class="container">
