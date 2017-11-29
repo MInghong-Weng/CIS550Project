@@ -5,7 +5,7 @@ const path = require('path');
 // Connect string to MySQL
 const mysql = require('mysql');
 const connection = mysql.createConnection({
-  host     : 'project-550-1.cn5iz4eo9j7i.us-east-1.rds.amazonaws.com:3306',
+  host     : 'project-550-1.cn5iz4eo9j7i.us-east-1.rds.amazonaws.com',
   user     : 'Project550',
   password : 'Project550',
   database : 'mydb',
@@ -65,6 +65,11 @@ router.get('/teamSearch', function(req, res, next) {
 router.get('/matchSearch', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'matchSearch.html'));
 });
+
+router.get('/userInfo', function(req, res, next) {
+  console.log(req.user);
+  res.json(req.user);
+})
 
 module.exports = router;
 

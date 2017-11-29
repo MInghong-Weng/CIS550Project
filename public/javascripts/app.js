@@ -39,3 +39,15 @@ app.controller('insertController',function($scope, $http){
     });
   };
 });
+
+app.controller('userInfoController', function($scope, $http) {
+  $scope.user="Please Login";
+  var req = $http.get('/userInfo');
+  req.success((data) => {
+      console.log(data);
+      $scope.user = data.doc.name;
+  })
+  req.error((data) => {
+      console.log('error in get userInfo');
+  })
+});
