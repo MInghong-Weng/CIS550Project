@@ -38,19 +38,34 @@ router.get('/dashboard', function(req, res, next) {
 });
 
 router.get('/playerProfile/:id', function(req, res, next) {
-  
+
 });
 
 router.get('/teamProfile/:id', function(req, res, next) {
-  
+
 });
 
 router.get('/playerSearch', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'playerSearch.html'));
-  
+
 });
 
-router.get('/playerSearch/:playerAge', function(req, res) {
+router.get('/playerSearch/nation', function(req, res, next) {
+
+  var query = "select distinct p.nationality from mydb.PlayerPersonalData p";
+  console.log(query);
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+      console.log("index");
+        console.log(rows);
+        res.json(rows);
+    }
+    });
+
+});
+
+router.get('/playerSearch/age/:playerAge', function(req, res) {
 
   console.log(req.params);
 
@@ -59,10 +74,11 @@ router.get('/playerSearch/:playerAge', function(req, res) {
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
     else {
-        console.log(rows);
+        //console.log(rows);
         res.json(rows);
-    }  
+    }
     });
+
   var playerNationality = req.query.playerNationality;
   var playerCurrentTeam = req.query.playerCurrentTeam;
   var playerHeightL = req.query.playerHeightL;
@@ -71,7 +87,7 @@ router.get('/playerSearch/:playerAge', function(req, res) {
   var playerSalary = req.query.playerSalary;
   var playerPreferredFoot = req.query.playerPreferredFoot;
   var playerAttackRate = req.query.playerAttackRate;
-  
+
 });
 
 router.get('/teamSearch', function(req, res, next) {
