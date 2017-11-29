@@ -75,3 +75,7 @@ app.controller('userInfoController', function($scope, $http) {
       console.log('error in get userInfo');
   });
 });
+
+app.controller('Test', function($scope, $location) {
+  console.log($location.absUrl());
+});
