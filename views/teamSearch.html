@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html ng-app="angularjsNodejsTutorial">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <style>
+    body{
+        background-image: url(https://images.unsplash.com/photo-1511439664149-58b346f60448?auto=format&fit=crop&w=1950&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D);
+        background-position: center top;
+        background-size: 100% auto;
+    }
+    div.jumbotron {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 30px;
+    padding: 10px;
+    margin: 10px;
+    }    
+    </style>
+
+    </head>
+    <body data-spy="scroll" data-target=".scrollspy" >
+        <header></header>
+        <!-- Static navbar-->
+        <nav class="navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand" href="/home"><img src="https://www.premierleague.com/resources/ver/i/elements/premier-league-logo-header.svg" alt="logo" style="height:80px">English Premier League Database</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+      
+            <div class="collapse navbar-collapse" id="navbarsExample02">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/playerSearch">Search Player</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/teamSearch">Search Team</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/matchSearch">Search Match</a>
+                </li>
+              </ul>
+              <form class="form-inline my-2 my-md-0">
+                <input class="form-control" type="text" placeholder="Search">
+              </form>
+            </div>
+          </nav>
+
+        <div class="container" >
+            <!-- Main component for a primary marketing message or call to action-->
+            <div class="jumbotron" align="center" >
+            <p style="padding: 1em; font-size:300%;">Welcome To 34 Teams in EPL!! </p>
+
+        <!-- 34 teams pics gallery-->
+        <div class="row">
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t3.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t3.svg" alt="Arsenal" style="height:fit-content">
+                <div class="caption">
+                  <p>Arsenal</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t8.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t8.svg" alt="Chelsea" style="height:fit-content">
+                <div class="caption">
+                  <p>Chelsea</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t1.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t1.svg" alt="Manchester United" style="height:fit-content">
+                <div class="caption">
+                  <p>Manchester United</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div> <!--row-->
+        <!-- 34 teams pics gallery-->
+        <div class="row">
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t43.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t43.svg" alt="Manchester City" style="height:fit-content">
+                <div class="caption">
+                  <p>Manchester City</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t6.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t6.svg" alt="Tottenham Hotspur" style="height:fit-content" >
+                <div class="caption">
+                  <p>Tottenham Hotspur</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t14.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t14.svg" alt="Liverpool" style="height:fit-content">
+                <div class="caption">
+                  <p>Liverpool</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div> <!--row-->
+        <!-- 34 teams pics gallery-->
+        <div class="row">
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t90.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t90.svg" alt="Burnley" style="height:fit-content">
+                <div class="caption">
+                  <p>Burnley</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t57.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t57.svg" alt="Watford" style="height:fit-content">
+                <div class="caption">
+                  <p>Watford</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://upload.wikimedia.org/wikipedia/en/2/26/Aston_villa_logo16.png">
+                <img src="https://upload.wikimedia.org/wikipedia/en/2/26/Aston_villa_logo16.png" alt="Aston Villa" style="height:150px">
+                <div class="caption">
+                  <p>Aston Villa</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div> <!--row-->
+        <!-- 34 teams pics gallery-->
+        <div class="row">
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t20.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t20.svg" alt="Southampton" style="height:fit-content">
+                <div class="caption">
+                  <p>Southampton</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t91.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t91.svg" alt="AFC Bournemouth" style="height:fit-content">
+                <div class="caption">
+                  <p>AFC Bournemouth</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t13.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t13.svg" alt="Leicester City" style="height:fit-content">
+                <div class="caption">
+                  <p>Leicester City</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div> <!--row-->
+        <!-- 34 teams pics gallery-->
+        <div class="row equal-heights">
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t4.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t4.svg" alt="Newcastle City" style="height:150px">
+                <div class="caption">
+                  <p>Newcastle United</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t110.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t110.svg" alt="Stoke City" style="height:fit-content">
+                <div class="caption">
+                  <p>Stoke City</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t80.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t80.svg" alt="Swansea City" style="height:fit-content">
+                <div class="caption">
+                  <p>Swansea City</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div> <!--row-->
+        <!-- 34 teams pics gallery-->
+        <div class="row">
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t11.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t11.svg" alt="Everton" style="height:fit-content">
+                <div class="caption">
+                  <p>Everton</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t35.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t35.svg" alt="West Bromwich Albion" style="height:fit-content">
+                <div class="caption">
+                  <p>West Bromwich Albion</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t21.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t21.svg" alt="West Ham United" style="height:fit-content">
+                <div class="caption">
+                  <p>West Ham United</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div> <!--row-->
+        <!-- 34 teams pics gallery-->
+        <div class="row">
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t31.svg">
+                <img src="https://platform-static-files.s3.amazonaws.com/premierleague/badges/t31.svg" alt="Crystal Palace" style="height:fit-content">
+                <div class="caption">
+                  <p>Crystal Palace</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://upload.wikimedia.org/wikipedia/en/thumb/6/68/Birmingham_City_FC_logo.svg/150px-Birmingham_City_FC_logo.svg.png">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/68/Birmingham_City_FC_logo.svg/150px-Birmingham_City_FC_logo.svg.png" alt="Birmingham City" style="height:150px">
+                <div class="caption">
+                  <p>Birmingham City</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://upload.wikimedia.org/wikipedia/en/thumb/0/0f/Blackburn_Rovers.svg/270px-Blackburn_Rovers.svg.png">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/0f/Blackburn_Rovers.svg/270px-Blackburn_Rovers.svg.png" alt="Blackburn Rovers" style="height:150px">
+                <div class="caption">
+                  <p>Blackburn Rovers</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div> <!--row-->
+        <!-- 34 teams pics gallery-->
+        <div class="row">
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://upload.wikimedia.org/wikipedia/en/thumb/d/df/Blackpool_FC_logo.svg/270px-Blackpool_FC_logo.svg.png">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/df/Blackpool_FC_logo.svg/270px-Blackpool_FC_logo.svg.png" alt="Blackpool" style="height:150px">
+                <div class="caption">
+                  <p>Blackpool</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://upload.wikimedia.org/wikipedia/en/thumb/8/82/Bolton_Wanderers_FC_logo.svg/278px-Bolton_Wanderers_FC_logo.svg.png">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/82/Bolton_Wanderers_FC_logo.svg/278px-Bolton_Wanderers_FC_logo.svg.png" alt="Bolton Wanderers" style="height:150px">
+                <div class="caption">
+                  <p>Bolton Wanderers</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://upload.wikimedia.org/wikipedia/en/thumb/3/3c/Cardiff_City_crest.svg/300px-Cardiff_City_crest.svg.png">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3c/Cardiff_City_crest.svg/300px-Cardiff_City_crest.svg.png" alt="Cardiff City" style="height:150px">
+                <div class="caption">
+                  <p>Cardiff City</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div> <!--row-->
+        <!-- 34 teams pics gallery-->
+        <div class="row">
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Fulham_FC_%28shield%29.svg/225px-Fulham_FC_%28shield%29.svg.png">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Fulham_FC_%28shield%29.svg/225px-Fulham_FC_%28shield%29.svg.png" alt="Fulham" style="height:150px">
+                <div class="caption">
+                  <p>Fulham</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://upload.wikimedia.org/wikipedia/en/thumb/2/20/Hull_City_Crest_2014.svg/195px-Hull_City_Crest_2014.svg.png">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/2/20/Hull_City_Crest_2014.svg/195px-Hull_City_Crest_2014.svg.png" alt="Hull City" style="height:150px">
+                <div class="caption">
+                  <p>Hull City</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://upload.wikimedia.org/wikipedia/en/thumb/2/2c/Middlesbrough_FC_crest.svg/300px-Middlesbrough_FC_crest.svg.png">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/2/2c/Middlesbrough_FC_crest.svg/300px-Middlesbrough_FC_crest.svg.png" alt="Middlesbrough" style="height:150px">
+                <div class="caption">
+                  <p>Middlesbrough</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div> <!--row-->
+        <!-- 34 teams pics gallery-->
+        <div class="row">
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/Norwich_City.svg/225px-Norwich_City.svg.png">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/Norwich_City.svg/225px-Norwich_City.svg.png" alt="Norwich City" style="height:150px">
+                <div class="caption">
+                  <p>Norwich City</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://upload.wikimedia.org/wikipedia/en/thumb/3/3c/Portsmouth_FC_crest.svg/330px-Portsmouth_FC_crest.svg.png">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3c/Portsmouth_FC_crest.svg/330px-Portsmouth_FC_crest.svg.png" alt="Portsmouth" style="height:150px">
+                <div class="caption">
+                  <p>Portsmouth</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://upload.wikimedia.org/wikipedia/en/thumb/3/31/Queens_Park_Rangers_crest.svg/300px-Queens_Park_Rangers_crest.svg.png">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/31/Queens_Park_Rangers_crest.svg/300px-Queens_Park_Rangers_crest.svg.png" alt="Queens Park Rangers" style="height:150px">
+                <div class="caption">
+                  <p>Queens Park Rangers</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div> <!--row-->
+        <!-- 34 teams pics gallery-->
+        <div class="row">
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://upload.wikimedia.org/wikipedia/en/thumb/1/11/Reading_FC.svg/300px-Reading_FC.svg.png">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/11/Reading_FC.svg/300px-Reading_FC.svg.png" alt="Reading" style="height:150px">
+                <div class="caption">
+                  <p>Readng</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://upload.wikimedia.org/wikipedia/en/thumb/7/77/Logo_Sunderland.svg/330px-Logo_Sunderland.svg.png">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/77/Logo_Sunderland.svg/330px-Logo_Sunderland.svg.png" alt="Sunderland" style="height:150px">
+                <div class="caption">
+                  <p>Sunderland</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <a href="https://upload.wikimedia.org/wikipedia/en/thumb/4/43/Wigan_Athletic.svg/300px-Wigan_Athletic.svg.png">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/43/Wigan_Athletic.svg/300px-Wigan_Athletic.svg.png" alt="Wigan Athletic" style="height:150px">
+                <div class="caption">
+                  <p>Wigan Athletic</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div> <!--row-->
+        <div class="col-md-4">
+          <div class="thumbnail">
+            <a href="https://upload.wikimedia.org/wikipedia/en/thumb/f/fc/Wolverhampton_Wanderers.svg/300px-Wolverhampton_Wanderers.svg.png">
+              <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/fc/Wolverhampton_Wanderers.svg/300px-Wolverhampton_Wanderers.svg.png" alt="Wolverhampton Wanderers" style="height:150px">
+              <div class="caption">
+                <p>Wolverhampton Wanderers</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        </div> <!--container-->
+          
+              
+    </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    </body>
+</html>
