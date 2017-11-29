@@ -47,6 +47,22 @@ router.get('/teamProfile/:id', function(req, res, next) {
 
 router.get('/playerSearch', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'playerSearch.html'));
+  
+});
+
+router.get('/playerSearch/:playerAge', function(req, res) {
+
+  console.log(req.params);
+
+  var query = "select p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where p.age = 20";
+  console.log(query);
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+        console.log(rows);
+        res.json(rows);
+    }  
+    });
   var playerNationality = req.query.playerNationality;
   var playerCurrentTeam = req.query.playerCurrentTeam;
   var playerHeightL = req.query.playerHeightL;

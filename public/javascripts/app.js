@@ -8,6 +8,7 @@ app.controller('playerController', function($scope, $http) {
         console.log($scope.playerAge);
         var request = $http.get('/playerSearch/'+$scope.playerAge);
         request.success(function(playerSearch) {
+          console.log(playerSearch);          
             $scope.playerSearch = playerSearch;
         });
         request.error(function(playerSearch){
