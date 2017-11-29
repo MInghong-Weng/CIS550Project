@@ -52,7 +52,7 @@ router.get('/playerSearch', function(req, res, next) {
 
 router.get('/playerSearch/nation', function(req, res, next) {
 
-  var query = "select distinct p.nationality from mydb.PlayerPersonalData p";
+  var query = "select distinct p.nationality from mydb.PlayerPersonalData p ORDER BY p.nationality";
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
