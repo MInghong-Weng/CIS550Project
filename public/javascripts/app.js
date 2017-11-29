@@ -3,12 +3,32 @@ var app = angular.module('angularjsNodejsTutorial',[]);
 //search player
 app.controller('playerController', function($scope, $http) {
         $scope.message="";
-        $scope.Submit = function() {
+        var req = $http.get('/playerSearch/nation');
+        req.success((nationality) => {
+          $scope.nationalities = nationality;
+          console.log('success');
+    })
+    req.error((nationality) => {
+        console.log('error');
+    })
+
+/*        //$scope.nationality = ["China", "Germany", "US"];
+        var request1 = $http.get('/playerSearch/'+$scope.nationalities);
+        request1.success(function(nationality){
+          console.log(nationality);
+          $scope.nationalities = nationality;
+        });
+        request1.error(function(nationality){
+          console.log('err');
+        });
+*/
+
+    $scope.Submit = function() {
         console.log("playerSearch");
         console.log($scope.playerAge);
-        var request = $http.get('/playerSearch/'+$scope.playerAge);
+        var request = $http.get('/playerSearch/age/'+$scope.playerAge);
         request.success(function(playerSearch) {
-          console.log(playerSearch);          
+          console.log(playerSearch);
             $scope.playerSearch = playerSearch;
         });
         request.error(function(playerSearch){
@@ -24,6 +44,7 @@ app.controller('playerController', function($scope, $http) {
 app.controller('insertController',function($scope, $http){
   $scope.message="";
   $scope.Insert = function() {
+
   $http.get('/ins',
   { params: {
     login:$scope.login,
@@ -39,6 +60,8 @@ app.controller('insertController',function($scope, $http){
       console.log(error);
     });
   };
+
+
 });
 
 app.controller('userInfoController', function($scope, $http) {
@@ -50,5 +73,5 @@ app.controller('userInfoController', function($scope, $http) {
   })
   req.error((data) => {
       console.log('error in get userInfo');
-  })
+  });
 });
