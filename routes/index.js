@@ -5,7 +5,7 @@ const path = require('path');
 // Connect string to MySQL
 const mysql = require('mysql');
 const connection = mysql.createConnection({
-  host     : 'project-550-1.cn5iz4eo9j7i.us-east-1.rds.amazonaws.com:3306',
+  host     : 'project-550-1.cn5iz4eo9j7i.us-east-1.rds.amazonaws.com',
   user     : 'Project550',
   password : 'Project550',
   database : 'mydb',
@@ -47,6 +47,22 @@ router.get('/teamProfile/:id', function(req, res, next) {
 
 router.get('/playerSearch', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'playerSearch.html'));
+  
+});
+
+router.get('/playerSearch/:playerAge', function(req, res) {
+
+  console.log(req.params);
+
+  var query = "select p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where p.age = 20";
+  console.log(query);
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+        console.log(rows);
+        res.json(rows);
+    }  
+    });
   var playerNationality = req.query.playerNationality;
   var playerCurrentTeam = req.query.playerCurrentTeam;
   var playerHeightL = req.query.playerHeightL;
