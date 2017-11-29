@@ -42,7 +42,7 @@ router.get('/playerProfile/:id', function(req, res, next) {
 });
 
 router.get('/teamProfile/:id', function(req, res, next) {
-  
+  res.sendFile(path.join(__dirname, '../', 'views', 'teamProfile.html'));
 });
 
 router.get('/playerSearch', function(req, res, next) {
