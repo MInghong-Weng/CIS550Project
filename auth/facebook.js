@@ -7,6 +7,7 @@ passport.use(new FacebookStrategy({
   clientSecret: "f5b32cc6e9b085b7d426955d3e99e48a",
   callbackURL: "http://127.0.0.1:8080/auth/facebook/callback"
 },
+
 function(accessToken, refreshToken, profile, done) {
   User.findOrCreate({name: profile.displayName}, {name: profile.displayName,userid: profile.id}, function(err, user) {
     if (err) { return done(err); }
