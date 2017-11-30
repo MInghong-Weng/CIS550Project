@@ -57,8 +57,8 @@ router.get('/playerSearch/nation', function(req, res, next) {
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
     else {
-      console.log("index");
-        console.log(rows);
+      //console.log("index");
+        //console.log(rows);
         res.json(rows);
     }
     });
