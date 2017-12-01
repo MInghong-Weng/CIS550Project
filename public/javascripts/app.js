@@ -53,6 +53,7 @@ app.controller('playerController', function($scope, $http) {
         });
 
     };
+
 });
 
 // To implement "Insert a new record", you need to:
@@ -96,3 +97,10 @@ app.controller('userInfoController', function($scope, $http) {
 app.controller('Test', function($scope, $location) {
   console.log($location.absUrl());
 });
+
+app.controller('demoCtrl', ['$scope', '$location', function($scope, $location) {
+  $scope.goPlayer = function(x) {
+  console.log(x.id)
+            window.location = "http://localhost:8080/playerSearch/data/2/Albania";
+  }
+}]);
