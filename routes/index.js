@@ -69,13 +69,13 @@ router.get('/playerSearch/data/:playerAge/:playerNationality', function(req, res
         query_age = "p.age<=20";
         break;
       case '1':
-        query_age = "p.age>21 AND p.age<=24";
+        query_age = "p.age>=21 AND p.age<=24";
         break;
       case '2':
-        query_age = "p.age>25 AND p.age<=28";
+        query_age = "p.age>=25 AND p.age<=28";
         break;
       case '3':
-        query_age = "p.age>29";
+        query_age = "p.age>=29";
         break;
       default:
         query_age = "p.age";    
