@@ -101,7 +101,7 @@ app.controller('Test', function($scope, $location) {
 app.controller('demoCtrl', ['$scope', '$location', function($scope, $location) {
   $scope.goPlayer = function(x) {
   console.log(x.id)
-            window.location = "http://localhost:8080/playerSearch/data/2/Albania";
+            window.location = "http://localhost:8080/teamProfile/9825";
   }
 }]);
 app.controller('TeamProfileController', function($scope, $http, $location) {
