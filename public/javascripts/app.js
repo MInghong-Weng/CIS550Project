@@ -109,7 +109,14 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
   $scope.Submit = function() {    //ng-click的submit操作
   var request = $http.get('/teamProfile/id/' + teamID);     //把参数到, 跳到router操作
   request.success(function(data) {
+    // if (data>=10){
+    //   $scope.color = 'red';
+    // } else {
+    //   $scope.color = 'yellow';
+    // }
       $scope.data = data;
+     
+
   });
   request.error(function(data){
       console.log('err');
