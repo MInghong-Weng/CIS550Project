@@ -58,12 +58,15 @@
 
           <div ng-controller="TeamProfileController" ng-init="Submit()">
 
-                    <table class="table table-striped" border="0" cellpadding="10" cellspacing="1" width="500" align="center">
+                    <table ng-repeat="x in data" class="table table-striped" border="0" cellpadding="10" cellspacing="1" width="fit-content" align="center" >
+                        <tr>
+                        <td> <img ng-src="{{x.logo}}" height="150px"> </td>
+
                         <tr>
                         <th> long name </th>
                         <th> short name </th>
                         <th> buildUpPlaySpeed </th>
-                        <tr ng-repeat="x in data"> <!--controller里面$scope.data-->
+                        <tr > <!--controller里面$scope.data-->
                         <td> {{x.team_long_name}} </td>
                         <td> {{x.team_short_name}} </td>
                         <td ng-class="{red: x.buildUpPlaySpeed >50, yellow: x.buildUpPlaySpeed <=50 }"> {{x.buildUpPlaySpeed}} </td>
@@ -72,11 +75,11 @@
                         <th> id</th>
                         <th> team_api_id </th>
                         <th> team_fifa_api_id </th>
-                        <tr ng-repeat="x in data"> <!--controller里面$scope.data-->
+
+                        <tr > <!--controller里面$scope.data-->
                         <td> {{x.id}} </td>
                         <td> {{x.team_api_id}} </td>
                         <td> {{x.team_fifa_api_id}} </td>
-
 
                     </tr>
                     </table>

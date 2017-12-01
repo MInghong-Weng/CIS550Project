@@ -146,7 +146,7 @@ router.get('/teamProfile/id/:teamID', function(req, res, next) {
     console.log(req.params);
     var teamID = req.params.teamID;
     //var query = "select p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where p.age = "+ teamID + " order by p.overall desc";
-    var query = "select t.id, t.team_api_id, t.team_fifa_api_id, t.team_long_name, t.team_short_name, tt.buildUpPlaySpeed from mydb.Team t, mydb.Team_Data tt where t.team_api_id = "+ teamID +" and tt.team_api_id = " + teamID;
+    var query = "select t.id, t.team_api_id, t.team_fifa_api_id, t.team_long_name, t.team_short_name, tt.buildUpPlaySpeed, l.logo from mydb.Team t, mydb.Team_Data tt, mydb.34teamlogo l where t.team_api_id = "+ teamID +" and tt.team_api_id = " + teamID +" and l.id = " + teamID;
     console.log(query);
     connection.query(query, function(err, rows, fields) {
       if (err) console.log(err);
