@@ -41,10 +41,6 @@ router.get('/playerProfile/:id', function(req, res, next) {
 
 });
 
-router.get('/teamProfile/:id', function(req, res, next) {
-  res.sendFile(path.join(__dirname, '../', 'views', 'teamProfile.html'));
-});
-
 router.get('/playerSearch', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'playerSearch.html'));
 
@@ -90,9 +86,32 @@ router.get('/playerSearch/age/:playerAge', function(req, res) {
 
 });
 
+/************************************** Team *********************************************/
 router.get('/teamSearch', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'teamSearch.html'));
 });
+
+router.get('/teamProfile/:id', function(req, res, next) {
+  var fuckyou = req.params.id;    //get the id?
+  res.sendFile(path.join(__dirname, '../', 'views', 'teamProfile.html'));
+});
+
+router.get('/teamProfile/id/:teamID', function(req, res, next) {
+    console.log(req.params);
+    var teamID = req.params.teamID;
+    //var query = "select p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where p.age = "+ teamID + " order by p.overall desc";
+    var query = "select t.id, t.team_api_id, t.team_fifa_api_id, t.team_long_name, t.team_short_name from mydb.Team t where team_api_id = "+ teamID;
+    console.log(query);
+    connection.query(query, function(err, rows, fields) {
+      if (err) console.log(err);
+      else {
+          //console.log(rows);
+          res.json(rows);
+      }
+      });
+});
+
+/************************************** Team *********************************************/
 
 router.get('/matchSearch', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'matchSearch.html'));
