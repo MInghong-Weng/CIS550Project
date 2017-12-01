@@ -37,10 +37,6 @@ router.get('/dashboard', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'dashboard.html'));
 });
 
-router.get('/playerProfile/:id', function(req, res, next) {
-
-});
-
 router.get('/playerSearch', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'playerSearch.html'));
 
@@ -121,19 +117,20 @@ router.get('/playerProfile/:id', function(req, res, next) {
 });
 
 router.get('/playerProfile/id/:teamID', function(req, res, next) {
-    console.log(req.params);
-    var teamID = req.params.teamID;
-    //var query = "select p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where p.age = "+ teamID + " order by p.overall desc";
-    var query = "select t.id, t.team_api_id, t.team_fifa_api_id, t.team_long_name, t.team_short_name, tt.buildUpPlaySpeed from mydb.Team t, mydb.Team_Data tt where t.team_api_id = "+ teamID +" and tt.team_api_id = " + teamID;
-    console.log(query);
-    connection.query(query, function(err, rows, fields) {
-      if (err) console.log(err);
-      else {
-          //console.log(rows);
-          res.json(rows);
-      }
-      });
+  console.log(req.params);
+  var teamID = req.params.teamID;
+  //var query = "select p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where p.age = "+ teamID + " order by p.overall desc";
+  var query = "select p.name, p.age, p.overall from PlayerPersonalData p where p.ID = "+ teamID;
+  console.log(query);
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+        //console.log(rows);
+        res.json(rows);
+    }
+    });
 });
+
 
 /************************************** Team *********************************************/
 router.get('/teamSearch', function(req, res, next) {

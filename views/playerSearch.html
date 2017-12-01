@@ -66,8 +66,7 @@
              <option value="3"> Above 29 </option>
             </select>
 
-        <p><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span> Please enter a person login:
-            <input name="email" ng-model="email" value="">
+        <p style="padding: 2em;"><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span>
             <button type="button" ng-click="Submit()" class="button">Show Persons</button>
         </p>
         <table border="0" cellpadding="10" cellspacing="1" width="500" align="center">
@@ -78,7 +77,7 @@
             <td> Nationality </td>
             <td> Overall </td>
             <tr ng-repeat="x in playerSearch">
-            <td> <a ng-click="goPlayer(x)" ng-controller="playerSearchToPlayerProfileController">{{x.name}}</a>  </td>
+            <td> <a href="" ng-click="goPlayer(x)" ng-controller="playerSearchToPlayerProfileController">{{x.name}}</a>  </td>
             <td> {{x.club}} </td>
             <td> {{x.age}} </td>
             <td> {{x.nationality}} </td>
