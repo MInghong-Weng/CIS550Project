@@ -98,7 +98,7 @@ app.controller('Test', function($scope, $location) {
   console.log($location.absUrl());
 });
 
-app.controller('demoCtrl', ['$scope', '$location', function($scope, $location) {
+app.controller('playerSearchToPlayerProfileController', ['$scope', '$location', function($scope, $location) {
   $scope.goPlayer = function(x) {
   console.log(x.id)
             window.location = "http://localhost:8080/teamProfile/9825";
