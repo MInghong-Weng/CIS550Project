@@ -94,12 +94,12 @@ router.get('/playerSearch/data/:playerAge/:playerNationality', function(req, res
   } else {
     query_nation = "";
   }
-  var query = "select p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where "+query_age+ query_nation + " order by p.overall desc";
+  var query = "select p.id, p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where "+query_age+ query_nation + " order by p.overall desc";
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
     else {
-        //console.log(rows);
+        console.log(rows);
         res.json(rows);
     }
     });

@@ -78,7 +78,7 @@
             <td> Nationality </td>
             <td> Overall </td>
             <tr ng-repeat="x in playerSearch">
-            <td> <a href="/player:">{{x.name}}</a>  </td>
+            <td> <a ng-click="goPlayer(x)" ng-controller="playerSearchToPlayerProfileController">{{x.name}}</a>  </td>
             <td> {{x.club}} </td>
             <td> {{x.age}} </td>
             <td> {{x.nationality}} </td>

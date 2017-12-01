@@ -53,6 +53,7 @@ app.controller('playerController', function($scope, $http) {
         });
 
     };
+
 });
 
 // To implement "Insert a new record", you need to:
@@ -97,6 +98,12 @@ app.controller('Test', function($scope, $location) {
   console.log($location.absUrl());
 });
 
+app.controller('playerSearchToPlayerProfileController', ['$scope', '$location', function($scope, $location) {
+  $scope.goPlayer = function(x) {
+  console.log(x.id)
+            window.location = "/teamProfile/"+x.id;
+  }
+}]);
 app.controller('TeamProfileController', function($scope, $http, $location) {
   //定义当前controller的范围（scope）内的函数、变量
   $scope.message="";
