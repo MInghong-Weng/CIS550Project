@@ -104,3 +104,24 @@ app.controller('demoCtrl', ['$scope', '$location', function($scope, $location) {
             window.location = "http://localhost:8080/playerSearch/data/2/Albania";
   }
 }]);
+app.controller('TeamProfileController', function($scope, $http, $location) {
+  //定义当前controller的范围（scope）内的函数、变量
+  $scope.message="";
+  console.log($location.absUrl());
+  var url = $location.absUrl();
+  var start = url.lastIndexOf("/")+1;
+  var end = url.length;
+  console.log($location.absUrl().substring(start,end));
+  var teamID = $location.absUrl().substring(start,end);
+  $scope.Submit = function() {    //ng-click的submit操作
+  var request = $http.get('/teamProfile/id/' + teamID);     //把参数到, 跳到router操作
+  request.success(function(data) {
+      $scope.data = data;
+  });
+  request.error(function(data){
+      console.log('err');
+  });
+
+}; 
+
+});
