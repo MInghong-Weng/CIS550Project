@@ -101,7 +101,7 @@ app.controller('Test', function($scope, $location) {
 app.controller('playerSearchToPlayerProfileController', ['$scope', '$location', function($scope, $location) {
   $scope.goPlayer = function(x) {
   console.log(x.id)
-            window.location = "/teamProfile/"+x.id;
+            window.location = "/playerProfile/"+x.id;
   }
 }]);
 app.controller('TeamProfileController', function($scope, $http, $location) {
