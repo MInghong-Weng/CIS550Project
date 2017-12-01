@@ -61,11 +61,40 @@ router.get('/playerSearch/nation', function(req, res, next) {
 
 });
 
-router.get('/playerSearch/age/:playerAge', function(req, res) {
+router.get('/playerSearch/data/:playerAge/:playerNationality', function(req, res) {
 
-  console.log(req.params);
-
-  var query = "select p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where p.age = 20 order by p.overall desc";
+  console.log(req.params.playerNationality);
+  var query_age, query_nation;
+  
+  var age = (req.params.playerAge);
+  if(age !== "ageUndefined") {
+    switch(age) {
+      case '0': 
+        query_age = "p.age<=20";
+        break;
+      case '1':
+        query_age = "p.age>21 AND p.age<=24";
+        break;
+      case '2':
+        query_age = "p.age>25 AND p.age<=28";
+        break;
+      case '3':
+        query_age = "p.age>29";
+        break;
+      default:
+        query_age = "p.age";    
+        break;
+    }  
+  } else {
+    query_age = "p.age";
+  }
+  console.log('age: '+playerAge);
+  if(req.params.playerNationality !== "nationUndefined") {
+    query_nation = " AND p.nationality = '" +  req.params.playerNationality +"'";
+  } else {
+    query_nation = "";
+  }
+  var query = "select p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where "+query_age+ query_nation + " order by p.overall desc";
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);

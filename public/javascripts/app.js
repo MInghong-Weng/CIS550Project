@@ -26,9 +26,26 @@ app.controller('playerController', function($scope, $http) {
     $scope.Submit = function() {
         console.log("playerSearch");
         console.log($scope.playerAge);
-        var request = $http.get('/playerSearch/age/'+$scope.playerAge); 
+        console.log($scope.playerNationality);
+
+        var age = "ageUndefined";
+        var nation="nationUndefined";
+        console.log(nation);
+        
+        if($scope.playerNationality !== undefined && $scope.playerNationality !== null) {
+          nation = $scope.playerNationality.nationality;
+        } 
+
+        if($scope.playerAge !== undefined && $scope.playerAge !== "") {
+          age = $scope.playerAge;
+        }
+
+        console.log(age);
+        
+
+        var request = $http.get('/playerSearch/data/'+age+ '/'+nation);
         request.success(function(playerSearch) {
-          console.log(playerSearch);
+          //console.log(playerSearch);
             $scope.playerSearch = playerSearch;
         });
         request.error(function(playerSearch){
