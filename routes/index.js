@@ -99,7 +99,7 @@ router.get('/matchSearch', function(req, res, next) {
 });
 
 router.get('/userInfo', function(req, res, next) {
-  console.log(req.user);
+  console.log("logined in : " + req.user);
   res.json(req.user);
 })
 

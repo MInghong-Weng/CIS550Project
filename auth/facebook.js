@@ -9,6 +9,7 @@ passport.use(new FacebookStrategy({
 },
 
 function(accessToken, refreshToken, profile, done) {
+  console.log("The facebook profile:", profile);
   User.findOrCreate({name: profile.displayName}, {name: profile.displayName,userid: profile.id}, function(err, user) {
     if (err) { return done(err); }
     done(null, user);
