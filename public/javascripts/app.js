@@ -29,20 +29,25 @@ app.controller('playerController', function($scope, $http) {
 
         var age = "ageUndefined";
         var nation="nationUndefined";
+        var club = "clubUndefined";
         console.log(nation);
 
         if($scope.playerNationality !== undefined && $scope.playerNationality !== null) {
           nation = $scope.playerNationality.nationality;
         }
 
+        if($scope.playerClub !== undefined && $scope.playerClub !== null) {
+          club = $scope.playerClub.club;
+        }
+
         if($scope.playerAge !== undefined && $scope.playerAge !== "") {
           age = $scope.playerAge;
         }
 
-        console.log(age);
+        console.log(club);
 
 
-        var request = $http.get('/playerSearch/data/'+age+ '/'+nation);
+        var request = $http.get('/playerSearch/data/'+age+ '/'+nation + '/' + club);
         request.success(function(playerSearch) {
           //console.log(playerSearch);
             $scope.playerSearch = playerSearch;

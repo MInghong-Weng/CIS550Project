@@ -73,11 +73,12 @@ router.get('/playerSearch/club', function(req, res, next) {
 
 });
 
-router.get('/playerSearch/data/:playerAge/:playerNationality', function(req, res) {
+router.get('/playerSearch/data/:playerAge/:playerNationality/:playerClub', function(req, res) {
 
-  console.log(req.params.playerNationality);
-  var query_age, query_nation;
-
+  console.log(req.params);
+  //console.log(req.params.playerClub);
+  var query_age, query_nation, query_club;
+  
   var age = (req.params.playerAge);
   if(age !== "ageUndefined") {
     switch(age) {
@@ -100,13 +101,22 @@ router.get('/playerSearch/data/:playerAge/:playerNationality', function(req, res
   } else {
     query_age = "p.age";
   }
-  console.log('age: '+playerAge);
+  console.log("Here");
+  
+
   if(req.params.playerNationality !== "nationUndefined") {
     query_nation = " AND p.nationality = '" +  req.params.playerNationality +"'";
   } else {
     query_nation = "";
   }
-  var query = "select p.id, p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where "+query_age+ query_nation + " order by p.overall desc";
+
+  if(req.params.playerClub !== "clubUndefined") {
+    query_club = " AND p.club = '" +  req.params.playerClub +"'";
+  } else {
+    query_club = "";
+  }
+
+  var query = "select p.photo, p.id, p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where "+query_age+ query_nation + query_club+ " order by p.overall desc";
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
