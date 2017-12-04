@@ -12,16 +12,15 @@ app.controller('playerController', function($scope, $http) {
         console.log('error');
     })
 
-/*        //$scope.nationality = ["China", "Germany", "US"];
-        var request1 = $http.get('/playerSearch/'+$scope.nationalities);
-        request1.success(function(nationality){
-          console.log(nationality);
-          $scope.nationalities = nationality;
-        });
-        request1.error(function(nationality){
-          console.log('err');
-        });
-*/
+    var req = $http.get('/playerSearch/club');
+    req.success((club) => {
+      $scope.clubs = club;
+      console.log('success');
+    })
+    req.error((club) => {
+    console.log('error');
+    })
+
 
     $scope.Submit = function() {
         console.log("playerSearch");
@@ -30,20 +29,25 @@ app.controller('playerController', function($scope, $http) {
 
         var age = "ageUndefined";
         var nation="nationUndefined";
+        var club = "clubUndefined";
         console.log(nation);
-        
+
         if($scope.playerNationality !== undefined && $scope.playerNationality !== null) {
           nation = $scope.playerNationality.nationality;
-        } 
+        }
+
+        if($scope.playerClub !== undefined && $scope.playerClub !== null) {
+          club = $scope.playerClub.club;
+        }
 
         if($scope.playerAge !== undefined && $scope.playerAge !== "") {
           age = $scope.playerAge;
         }
 
-        console.log(age);
-        
+        console.log(club);
 
-        var request = $http.get('/playerSearch/data/'+age+ '/'+nation);
+
+        var request = $http.get('/playerSearch/data/'+age+ '/'+nation + '/' + club);
         request.success(function(playerSearch) {
           //console.log(playerSearch);
             $scope.playerSearch = playerSearch;
@@ -51,9 +55,45 @@ app.controller('playerController', function($scope, $http) {
         request.error(function(playerSearch){
             console.log('err');
         });
+    };
+});
+
+//matchSearch controller
+app.controller('matchSearchController', function($scope, $http) {
+        $scope.message="";
+
+        var req = $http.get('/matchSearch/season');
+        req.success((season) => {
+          $scope.seasons = season;
+          console.log('success');
+    })
+    req.error((season) => {
+        console.log('error');
+    })
+
+    $scope.Submit = function() {
+
+        console.log("matchSearch");
+        console.log($scope.matchSeason);
+
+        var season="seasonUndefined";
+        console.log(season);
+
+        //if($scope.playerNationality !== undefined && $scope.playerNationality !== null) {
+          season = $scope.matchSeason;
+        //}
+
+        var request = $http.get('/matchSearch/data/' + season);
+        request.success(function(matchSearch) {
+          //console.log(playerSearch);
+            $scope.matchSearch = macthSearch;
+        });
+        request.error(function(matchSearch){
+            console.log('err');
+        });
+
 
     };
-
 });
 
 // To implement "Insert a new record", you need to:
@@ -122,13 +162,13 @@ app.controller('PlayerProfileController', function($scope, $http, $location) {
   var request = $http.get('/playerProfile/id/' + teamID);     //把参数到, 跳到router操作
   request.success(function(data) {
       $scope.data = data;
-     
+
 
   });
   request.error(function(data){
       console.log('err');
   });
-}; 
+};
 });
 
 app.controller('TeamProfileController', function($scope, $http, $location) {
@@ -149,14 +189,14 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
     //   $scope.color = 'yellow';
     // }
       $scope.data = data;
-     
+
 
   });
   request.error(function(data){
       console.log('err');
   });
 
-}; 
+};
 
 });
 
