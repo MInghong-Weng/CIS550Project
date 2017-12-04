@@ -13,8 +13,9 @@
             background-position: center top;
             background-size: 100% auto;
         }
-        td.red { background-color: red; }
-        td.yellow { background-color: yellow; }
+        td.red { background-color: rgb(255, 153, 153); }
+        td.yellow { background-color:rgb(255, 255, 96); }
+        td.green { background-color: rgb(112, 255, 112); }
         </style>
 
     </head>
@@ -56,31 +57,76 @@
         <div class="container">
             <!-- Main component for a primary marketing message or call to action-->
             <div class="jumbotron" align="center">
-            <p style="padding: 1em; font-size:200%;">Fucking Player Profile!
+            
             
 
           <div ng-controller="PlayerProfileController" ng-init="Submit()">
+            <p ng-repeat="x in data" style="padding: 1em; font-size:200%;">{{x.name}} <img ng-src="{{x.photo}}" height="48px"> </p>
 
                     <table class="table table-striped" border="0" cellpadding="10" cellspacing="1" width="500" align="center">
                         <tr>
-                        <th> name </th>
-                        <th> age </th>
-                        <th> overall </th>
+                        <th> Preferred Position </th>
+                        <th> Age </th>
                         <tr ng-repeat="x in data"> 
-                        <td> {{x.name}} </td>
+                        <td> {{x.preferposition}} </td>
                         <td> {{x.age}} </td>
-                        <td ng-class="{red: x.overall >90, yellow: x.overall <=90 }"> {{x.overall}} </td>
+
 
                         <tr>
-                        <th> nationality</th>
-                        <th> club </th>
-                        <th> wage </th>
+                        <th> Nationality</th>
+                        <th> Club </th>
                         <tr ng-repeat="x in data">
-                        <td> {{x.id}} </td>
-                        <td> {{x.team_api_id}} </td>
-                        <td> {{x.team_fifa_api_id}} </td>
+                        <td> {{x.nationality}}  <img ng-src="{{x.flag}}" height="30px"> </td>
+                        <td> {{x.club}}  <img ng-src="{{x.clublogo}}" height="30px"> </td>
+
+                        <tr>
+                        <th> Overall </th>
+                        <th> Wage </th>
+                        <tr ng-repeat="x in data">
+                        <td ng-class="{green: x.overall >=90, yellow: x.overall >=80, red:x.overall<80 }"> {{x.overall}} </td>
+                        <td> €{{x.wage}} </td>
                         
-                    
+                        <tr>
+                        <th> Acceleration</th>
+                        <th> Aggression</th>
+                        <tr ng-repeat="x in data">
+                          <td ng-class="{green: x.Acceleration >=90, yellow: x.Acceleration >=80, red:x.Acceleration<80 }"> {{x.Acceleration}} </td>
+                          <td ng-class="{green: x.Aggression >=90, yellow: x.Aggression >=80, red:x.Aggression<80 }"> {{x.Aggression}} </td>
+
+                        <tr>
+                        <th> Agility</th>
+                        <th> Balance</th>
+                        <tr ng-repeat="x in data">
+                          <td ng-class="{green: x.Agility >=90, yellow: x.Agility >=80, red:x.Agility<80 }"> {{x.Agility}} </td>
+                          <td ng-class="{green: x.Balance >=90, yellow: x.Balance >=80, red:x.Balance<80 }"> {{x.Balance}} </td>
+
+                        <tr>
+                        <th> Crossing</th>
+                        <th> Curve</th>
+                        <tr ng-repeat="x in data">
+                          <td ng-class="{green: x.Crossing >=90, yellow: x.Crossing >=80, red:x.Crossing<80 }"> {{x.Crossing}} </td>
+                          <td ng-class="{green: x.Curve >=90, yellow: x.Curve >=80, red:x.Curve<80 }"> {{x.Curve}} </td>
+                        
+                        <tr>
+                        <th> Dribbling</th>
+                        <th> Finishing</th>
+                        <tr ng-repeat="x in data">
+                          <td ng-class="{green: x.Dribbling >=90, yellow: x.Dribbling >=80, red:x.Dribbling<80 }"> {{x.Dribbling}} </td>
+                          <td ng-class="{green: x.Finishing >=90, yellow: x.Finishing >=80, red:x.Finishing<80 }"> {{x.Finishing}} </td>
+
+                        <tr>
+                        <th> Free Kick Accuracy</th>
+                        <th> Heading Accuracy</th>
+                        <tr ng-repeat="x in data">
+                          <td ng-class="{green: x.Free_kick_accuracy >=90, yellow: x.Free_kick_accuracy >=80, red:x.Free_kick_accuracy<80 }"> {{x.Free_kick_accuracy}} </td>
+                          <td ng-class="{green: x.Heading_accuracy >=90, yellow: x.Heading_accuracy >=80, red:x.Heading_accuracy<80 }"> {{x.Heading_accuracy}} </td>
+
+                        <tr>
+                        <th> Interceptions</th>
+                        <th> Jumping</th>
+                        <tr ng-repeat="x in data">
+                          <td ng-class="{green: x.Interceptions >=90, yellow: x.Interceptions >=80, red:x.Interceptions<80 }"> {{x.Interceptions}} </td>
+                          <td ng-class="{green: x.Jumping >=90, yellow: x.Jumping >=80, red:x.Jumping<80 }"> {{x.Jumping}} </td>
 
                     </tr>
                     </table>

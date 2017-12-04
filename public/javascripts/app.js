@@ -60,6 +60,7 @@ app.controller('playerController', function($scope, $http) {
 //matchSearch controller
 app.controller('matchSearchController', function($scope, $http) {
         $scope.message="";
+
         var req = $http.get('/matchSearch/season');
         req.success((season) => {
           $scope.seasons = season;
@@ -72,15 +73,13 @@ app.controller('matchSearchController', function($scope, $http) {
     $scope.Submit = function() {
 
         console.log("matchSearch");
-        season = $scope.matchSeason.season.replace("/","-");
-        //season.replace("/","-");
+        console.log($scope.matchSeason);
+
+        var season="seasonUndefined";
         console.log(season);
 
-        //var season="seasonUndefined";
-        //console.log(season);
-
         //if($scope.playerNationality !== undefined && $scope.playerNationality !== null) {
-          //season = $scope.matchSeason.season;
+          season = $scope.matchSeason.season.replace('/','-');
         //}
 
         var request = $http.get('/matchSearch/data/' + season);
@@ -213,4 +212,20 @@ angular.module("app", ["chart.js"]).controller("RadarCtrl", function ($scope) {
     [65, 59, 90, 81, 56, 55, 40],
     [28, 48, 40, 19, 96, 27, 100]
   ];
+});
+
+
+/********************************** dashboard *******************************/
+app.controller('followPlayersController', function($scope, $http, $location, $window) {
+  var request = $http.get('../dashboard/followedPlayers/');
+  request.success(function(data) {
+    console.log(data);
+    $scope.PlayerList = data;
+  });
+  request.error(function(playerSearch){
+      console.log('err');
+  });
+  $scope.Detail = function() {
+    $location.path('/teamProfile/9825');
+  }
 });
