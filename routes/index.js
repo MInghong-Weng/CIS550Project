@@ -23,8 +23,6 @@ mongoose.connect('mongodb://Project550:Project550.@ds113566.mlab.com:13566/mydb'
   }
 });
 
-
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'index.html'));
@@ -40,45 +38,38 @@ router.get('/dashboard', function(req, res, next) {
 
 router.get('/playerSearch', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'playerSearch.html'));
-
 });
 
 router.get('/playerSearch/nation', function(req, res, next) {
-
   var query = "select distinct p.nationality from mydb.PlayerPersonalData p ORDER BY p.nationality";
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
-    else {
-      //console.log("index");
-        //console.log(rows);
-        res.json(rows);
-    }
+    else {res.json(rows);}
     });
-
 });
 
 router.get('/playerSearch/club', function(req, res, next) {
-
   var query = "select distinct p.club from mydb.PlayerPersonalData p ORDER BY p.club";
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
-    else {
-      //console.log("index");
-        //console.log(rows);
-        res.json(rows);
-    }
+    else {res.json(rows);}
     });
-
 });
 
+<<<<<<< Updated upstream
 router.get('/playerSearch/data/:playerAge/:playerNationality/:playerClub', function(req, res) {
 
   console.log(req.params);
   //console.log(req.params.playerClub);
   var query_age, query_nation, query_club;
   
+=======
+router.get('/playerSearch/data/:playerAge/:playerNationality', function(req, res) {
+  console.log(req.params.playerNationality);
+  var query_age, query_nation;
+>>>>>>> Stashed changes
   var age = (req.params.playerAge);
   if(age !== "ageUndefined") {
     switch(age) {
@@ -98,6 +89,7 @@ router.get('/playerSearch/data/:playerAge/:playerNationality/:playerClub', funct
         query_age = "p.age";
         break;
     }
+<<<<<<< Updated upstream
   } else {
     query_age = "p.age";
   }
@@ -117,6 +109,14 @@ router.get('/playerSearch/data/:playerAge/:playerNationality/:playerClub', funct
   }
 
   var query = "select p.photo, p.id, p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where "+query_age+ query_nation + query_club+ " order by p.overall desc";
+=======
+  } else {query_age = "p.age";}
+  console.log('age: '+playerAge);
+  if(req.params.playerNationality !== "nationUndefined") {
+    query_nation = " AND p.nationality = '" +  req.params.playerNationality +"'";
+  } else {query_nation = "";}
+  var query = "select p.id, p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where "+query_age+ query_nation + " order by p.overall desc";
+>>>>>>> Stashed changes
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
@@ -141,10 +141,7 @@ router.get('/playerProfile/id/:teamID', function(req, res, next) {
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
-    else {
-        //console.log(rows);
-        res.json(rows);
-    }
+    else {res.json(rows);}
     });
 });
 
@@ -167,18 +164,50 @@ router.get('/teamProfile/id/:teamID', function(req, res, next) {
     console.log(query);
     connection.query(query, function(err, rows, fields) {
       if (err) console.log(err);
-      else {
-          //console.log(rows);
-          res.json(rows);
-      }
+      else {res.json(rows);}
       });
 });
 
-/************************************** Team *********************************************/
+/************************************** Matches *********************************************/
 
 
 router.get('/matchSearch', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'matchSearch.html'));
+});
+
+router.get('/matchSearch/season', function(req, res, next) {
+  var query = "select distinct m.season from mydb.Matches m ORDER BY m.season";
+  console.log(query);
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+        res.json(rows);
+    }
+    });
+});
+
+
+router.get('/matchSearch/data/:matchSeason', function(req, res) {
+  console.log(req.params.matchSeason);
+
+  var query_season;
+  var season = (req.params.matchSeason);
+
+  //if(req.params.playerNationality !== "nationUndefined") {
+    query_season = " AND m.season = '" +  req.params.matchSeason +"'";
+  //} else {query_nation = "";}
+  var query = "select m.season, m.stage, m.date, m.home_team, m.home_team_goal, m.away_team, away_team_goal from mydb.Matches m where "+query_season+" order by m.date";
+
+  console.log(query);
+
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+        console.log(rows);
+        res.json(rows);
+    }
+    });
+
 });
 
 /************************************* User Info  ************************************/
