@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+const User = require('../models/user');
 
 // Connect string to MySQL
 const mysql = require('mysql');
@@ -164,16 +165,89 @@ router.get('/matchSearch', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'matchSearch.html'));
 });
 
-/************************************* User login  ************************************/
+/************************************* User Info  ************************************/
 router.get('/userInfo', function(req, res, next) {
-  //console.log("logined in : " + req.user);
+  //console.log(req.user);
   if (req.user) {
     res.json(req.user);
   }
-  
+})
+
+router.get('/userInfo/addTeam/:id', function(req, res, next) {
+  var teamId = req.params.id;
+  if (req.user) {
+    User.findById(req.user.doc._id, (err, data) => {
+      //console.log("data",data);
+      var teams = data.followedTeams;
+      console.log(teams);
+      if (!teams) {
+        teams = [];
+      }
+      var exist = false;
+      for (var i = 0; i < teams.length; i++) {
+        if (teams[i] === teamId) {
+            exist = true;
+            res.json(teams);
+        }
+      }
+      teams.push(teamId);
+      User.findByIdAndUpdate(req.user.doc._id, {$set:{followedTeams: teams}},(err, docs)=> {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Successfully add data!");
+        }
+      })
+      res.json(teams);
+    });
+  } else {
+    res.send("You should login first!");
+  }
+})
+
+router.get('/userInfo/DeleteTeam/:id', function(req, res, next) {
+  if (req.user) {
+    
+  }
+})
+
+router.get('/userInfo/addPlayer/:id', function(req, res, next) {
+  var playerId = req.params.id;
+  if (req.user) {
+    User.findById(req.user.doc._id, (err, data) => {
+      //console.log("data",data);
+      var players = data.followedPlayers;
+      console.log(players);
+      if (!players) {
+        players = [];
+      }
+      var exist = false;
+      for (var i = 0; i < players.length; i++) {
+        if (players[i] === playerId) {
+            exist = true;
+            res.json(players);
+        }
+      }
+      teams.push(playerId);
+      User.findByIdAndUpdate(req.user.doc._id, {$set:{followedPlayers: players}},(err, docs)=> {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Successfully add data!");
+        }
+      })
+      res.json(teams);
+    });
+  } else {
+    res.send("You should login first!");
+  }
+})
+
+router.get('/userInfo/DeletePlayer/:id', function(req, res, next) {
+  if (req.user) {
+    res.json(req.user);
+  }
 })
 
 module.exports = router;
 
-//1
-//Connect to Mlab
