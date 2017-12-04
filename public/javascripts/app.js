@@ -46,8 +46,7 @@ app.controller('playerController', function($scope, $http) {
 
         console.log(club);
 
-
-        var request = $http.get('/playerSearch/data/'+age+ '/'+nation + '/' + club);
+        var request = $http.get('/playerSearch/data/' + age + '/'+nation);
         request.success(function(playerSearch) {
           //console.log(playerSearch);
             $scope.playerSearch = playerSearch;
@@ -55,9 +54,44 @@ app.controller('playerController', function($scope, $http) {
         request.error(function(playerSearch){
             console.log('err');
         });
-
     };
+});
 
+//matchSearch controller
+app.controller('matchSearchController', function($scope, $http) {
+        $scope.message="";
+        var req = $http.get('/matchSearch/season');
+        req.success((season) => {
+          $scope.seasons = season;
+          console.log('success');
+    })
+    req.error((season) => {
+        console.log('error');
+    })
+
+    $scope.Submit = function() {
+
+        console.log("matchSearch");
+        season = $scope.matchSeason.season.replace("/","-");
+        //season.replace("/","-");
+        console.log(season);
+
+        //var season="seasonUndefined";
+        //console.log(season);
+
+        //if($scope.playerNationality !== undefined && $scope.playerNationality !== null) {
+          //season = $scope.matchSeason.season;
+        //}
+
+        var request = $http.get('/matchSearch/data/' + season);
+        request.success(function(matchSearch) {
+          //console.log(playerSearch);
+            $scope.matchSearch = matchSearch;
+        });
+        request.error(function(matchSearch){
+            console.log('err');
+        });
+    };
 });
 
 // To implement "Insert a new record", you need to:
@@ -110,6 +144,13 @@ app.controller('playerSearchToPlayerProfileController', ['$scope', '$location', 
   $scope.goPlayer = function(x) {
   console.log(x.id)
             window.location = "/playerProfile/"+x.id;
+  }
+}]);
+
+app.controller('matchSearchToMatchController', ['$scope', '$location', function($scope, $location) {
+  $scope.goTeam = function(x) {
+  //console.log(x.id)
+  //          window.location = "/playerProfile/"+x.id;
   }
 }]);
 

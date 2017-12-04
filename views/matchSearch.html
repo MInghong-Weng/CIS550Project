@@ -53,23 +53,11 @@
             <!-- Main component for a primary marketing message or call to action-->
             <div class="jumbotron">
 
-         <div ng-controller="matchController">
+         <div ng-controller="matchSearchController">
 
            <select ng-model="matchSeason" ng-options=" x.season for x in seasons">
              <option value="">Please Select Season</option>
            </select>
-
-           <select ng-model="playerAge">
-             <option value="">Please Select Age</option>
-             <option value="0"> Under 20 </option>
-             <option value="1"> 21 - 24 </option>
-             <option value="2"> 25 - 28 </option>
-             <option value="3"> Above 29 </option>
-            </select>
-
-            <select ng-model="playerClub" ng-options=" x.club for x in clubs">
-              <option value="">Please Select Club</option>
-            </select>
 
         <p style="padding: 2em;"><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span>
             <button type="button" ng-click="Submit()" class="button">Show Match</button>
@@ -84,7 +72,7 @@
             <td> Away Team </td>
             <td> Away Team Goal </td>
             <tr ng-repeat="x in matchSearch">
-            <td> <a href="" ng-click="goMatch(x)" ng-controller="matchSearchToMatchController">{{x.id}}</a>  </td>
+            <td> <a href="" ng-click="goTeam(x)" ng-controller="matchSearchToMatchController">{{x.id}}</a>  </td>
             <td> {{x.season}} </td>
             <td> {{x.stage}} </td>
             <td> {{x.date}} </td>
