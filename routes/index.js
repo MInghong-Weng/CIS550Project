@@ -101,7 +101,7 @@ router.get('/playerSearch/data/:playerAge/:playerNationality/:playerClub', funct
   } else {
     query_age = "p.age";
   }
-  console.log("Here");
+  //console.log("Here");
   
 
   if(req.params.playerNationality !== "nationUndefined") {
@@ -121,7 +121,7 @@ router.get('/playerSearch/data/:playerAge/:playerNationality/:playerClub', funct
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
     else {
-        console.log(rows);
+        //console.log(rows);
         res.json(rows);
     }
     });
