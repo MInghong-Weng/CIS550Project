@@ -25,6 +25,7 @@
       <!-- Show user-->
       <div ng-controller="userInfoController">
         <a class="badge badge-secondary" href="/auth/login" ng-model="user">{{user}}</a>
+        <a class="badge badge-secondary" href="/auth/logout" ng-hide="visible">Log out</a>
       </div>
     </div>
 </nav>

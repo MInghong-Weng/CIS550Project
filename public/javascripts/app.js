@@ -78,16 +78,20 @@ app.controller('insertController',function($scope, $http){
       console.log(error);
     });
   };
-
-
 });
 
 app.controller('userInfoController', function($scope, $http) {
   $scope.user="Please Login";
+  $scope.visible = true;
   var req = $http.get('/userInfo');
   req.success((data) => {
-      console.log(data);
-      $scope.user = data.doc.name;
+      //console.log(data);
+      if (data) {
+        $scope.user = data.doc.name;
+        $scope.visible = false;
+      } else {
+        $scope.user="Please Login";
+      }
   })
   req.error((data) => {
       console.log('error in get userInfo');

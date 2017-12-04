@@ -159,13 +159,18 @@ router.get('/teamProfile/id/:teamID', function(req, res, next) {
 
 /************************************** Team *********************************************/
 
+
 router.get('/matchSearch', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'matchSearch.html'));
 });
 
+/************************************* User login  ************************************/
 router.get('/userInfo', function(req, res, next) {
-  console.log("logined in : " + req.user);
-  res.json(req.user);
+  //console.log("logined in : " + req.user);
+  if (req.user) {
+    res.json(req.user);
+  }
+  
 })
 
 module.exports = router;
