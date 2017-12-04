@@ -121,7 +121,7 @@ router.get('/playerProfile/id/:teamID', function(req, res, next) {
   console.log(req.params);
   var teamID = req.params.teamID;
   //var query = "select p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where p.age = "+ teamID + " order by p.overall desc";
-  var query = "select p.name, p.age, p.overall from PlayerPersonalData p where p.ID = "+ teamID;
+  var query = "select p.name, p.age, p.overall, p.photo, p.flag, p.clublogo, p.nationality, p.club, p.wage, p2.preferposition, p3.Acceleration, p3.Aggression, p3.Agility, p3.Balance, p3.Crossing, p3.Curve, p3.Dribbling, p3.Finishing, p3.Free_kick_accuracy, p3.Heading_accuracy, p3.Interceptions, p3.Jumping from mydb.PlayerPersonalData p, mydb.PlayerPlayingPositionData p2, mydb.PlayerAttribute p3 where p.ID = "+ teamID + " and p2.ID = "+ teamID + " and p3.ID = "+ teamID;
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
@@ -147,7 +147,7 @@ router.get('/teamProfile/id/:teamID', function(req, res, next) {
     console.log(req.params);
     var teamID = req.params.teamID;
     //var query = "select p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where p.age = "+ teamID + " order by p.overall desc";
-    var query = "select t.id, t.team_api_id, t.team_fifa_api_id, t.team_long_name, t.team_short_name, tt.buildUpPlaySpeed, l.logo from mydb.Team t, mydb.Team_Data tt, mydb.34teamlogo l where t.team_api_id = "+ teamID +" and tt.team_api_id = " + teamID +" and l.id = " + teamID;
+    var query = "select t.id, t.team_api_id, t.team_fifa_api_id, t.team_long_name, t.team_short_name, tt.buildUpPlaySpeed, tt.buildUpPlaySpeedClass, tt.buildUpPlayDribbling, tt.buildUpPlayDribblingClass, tt.buildUpPlayPassing, tt.buildUpPlayPassingClass, tt.chanceCreationPassing, tt.chanceCreationPassingClass, tt.chanceCreationShooting, tt.chanceCreationShootingClass, tt.defencePressure, tt.defencePressureClass, tt.defenceAggression, tt.defenceAggressionClass, l.logo from mydb.Team t, mydb.Team_Data tt, mydb.34teamlogo l where t.team_api_id = "+ teamID +" and tt.team_api_id = " + teamID +" and l.id = " + teamID;
     console.log(query);
     connection.query(query, function(err, rows, fields) {
       if (err) console.log(err);
