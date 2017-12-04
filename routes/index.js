@@ -302,5 +302,35 @@ router.get('/userInfo/DeletePlayer/:id', function(req, res, next) {
   }
 })
 
+router.get('/userInfo/createTeam/:pos/:id', function(req, res, next) {
+  var playerId = req.params.id;
+  var pos = req.params.pos;
+  if (req.user) {
+    User.findById(req.user.doc._id, (err, data) => {
+      var players = data.myTeam;
+      var exist = false;
+      for (var p in players) {
+        if (p != pos && players.p == playerId) {
+          exist = true;
+        }
+      }
+      if (exist) {
+        res.send("Player already exists!");
+      }
+      players.pos = playerId;
+      User.findByIdAndUpdate(req.user.doc._id, {$set:{myTeam: players}},(err, docs)=> {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Successfully update team!");
+        }
+      })
+      res.json(teams);
+    });
+  } else {
+    res.send("Failed, You should login first!");
+  }
+})
+
 module.exports = router;
 
