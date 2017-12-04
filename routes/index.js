@@ -179,7 +179,7 @@ router.get('/userInfo/addTeam/:id', function(req, res, next) {
     User.findById(req.user.doc._id, (err, data) => {
       //console.log("data",data);
       var teams = data.followedTeams;
-      console.log(teams);
+      //console.log(teams);
       if (!teams) {
         teams = [];
       }
@@ -201,13 +201,40 @@ router.get('/userInfo/addTeam/:id', function(req, res, next) {
       res.json(teams);
     });
   } else {
-    res.send("You should login first!");
+    res.send("Failed, You should login first!");
   }
 })
 
 router.get('/userInfo/DeleteTeam/:id', function(req, res, next) {
+  var teamId = req.params.id;
   if (req.user) {
-    
+    User.findById(req.user.doc._id, (err, data) => {
+      //console.log("data",data);
+      var teams = data.followedTeams;
+      var newTeams = [];
+      //console.log(teams);
+      if (!teams) {
+        teams = [];
+        res.send(teams);
+      }
+      
+      for (var i = 0; i < teams.length; i++) {
+        if (teams[i] != teamId) {
+            newTeams.push(teams[i]);
+        }
+      }
+
+      User.findByIdAndUpdate(req.user.doc._id, {$set:{followedTeams: newTeams}},(err, docs)=> {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Successfully delete data!");
+        }
+      })
+      res.json(teams);
+    });
+  } else {
+    res.send("Failed, You should login first!");
   }
 })
 
@@ -217,7 +244,7 @@ router.get('/userInfo/addPlayer/:id', function(req, res, next) {
     User.findById(req.user.doc._id, (err, data) => {
       //console.log("data",data);
       var players = data.followedPlayers;
-      console.log(players);
+      //console.log(players);
       if (!players) {
         players = [];
       }
@@ -244,8 +271,34 @@ router.get('/userInfo/addPlayer/:id', function(req, res, next) {
 })
 
 router.get('/userInfo/DeletePlayer/:id', function(req, res, next) {
+  var playerId = req.params.id;
   if (req.user) {
-    res.json(req.user);
+    User.findById(req.user.doc._id, (err, data) => {
+      //console.log("data",data);
+      var players = data.followedPlayers;
+      var newPlayers = [];
+      //console.log(players);
+      if (!players) {
+        players = [];
+        res.send("Successfully delete data!");
+      }
+
+      for (var i = 0; i < players.length; i++) {
+        if (players[i] != playerId) {
+          newPlayers.push(players[i]);
+        }
+      }
+      User.findByIdAndUpdate(req.user.doc._id, {$set:{followedPlayers: newPlayers}},(err, docs)=> {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Successfully delete data!");
+        }
+      })
+      res.json(teams);
+    });
+  } else {
+    res.send("Failed, You should login first!");
   }
 })
 
