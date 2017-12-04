@@ -46,12 +46,8 @@ app.controller('playerController', function($scope, $http) {
 
         console.log(club);
 
-<<<<<<< Updated upstream
 
         var request = $http.get('/playerSearch/data/'+age+ '/'+nation + '/' + club);
-=======
-        var request = $http.get('/playerSearch/data/' + age + '/'+nation);
->>>>>>> Stashed changes
         request.success(function(playerSearch) {
           //console.log(playerSearch);
             $scope.playerSearch = playerSearch;
