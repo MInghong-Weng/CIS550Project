@@ -58,15 +58,31 @@ router.get('/playerSearch/nation', function(req, res, next) {
 
 });
 
-router.get('/playerSearch/data/:playerAge/:playerNationality', function(req, res) {
+router.get('/playerSearch/club', function(req, res, next) {
 
-  console.log(req.params.playerNationality);
-  var query_age, query_nation;
+  var query = "select distinct p.club from mydb.PlayerPersonalData p ORDER BY p.club";
+  console.log(query);
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+      //console.log("index");
+        //console.log(rows);
+        res.json(rows);
+    }
+    });
+
+});
+
+router.get('/playerSearch/data/:playerAge/:playerNationality/:playerClub', function(req, res) {
+
+  console.log(req.params);
+  //console.log(req.params.playerClub);
+  var query_age, query_nation, query_club;
   
   var age = (req.params.playerAge);
   if(age !== "ageUndefined") {
     switch(age) {
-      case '0': 
+      case '0':
         query_age = "p.age<=20";
         break;
       case '1':
@@ -79,36 +95,36 @@ router.get('/playerSearch/data/:playerAge/:playerNationality', function(req, res
         query_age = "p.age>=29";
         break;
       default:
-        query_age = "p.age";    
+        query_age = "p.age";
         break;
-    }  
+    }
   } else {
     query_age = "p.age";
   }
-  console.log('age: '+playerAge);
+  //console.log("Here");
+  
+
   if(req.params.playerNationality !== "nationUndefined") {
     query_nation = " AND p.nationality = '" +  req.params.playerNationality +"'";
   } else {
     query_nation = "";
   }
-  var query = "select p.id, p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where "+query_age+ query_nation + " order by p.overall desc";
+
+  if(req.params.playerClub !== "clubUndefined") {
+    query_club = " AND p.club = '" +  req.params.playerClub +"'";
+  } else {
+    query_club = "";
+  }
+
+  var query = "select p.photo, p.id, p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where "+query_age+ query_nation + query_club+ " order by p.overall desc limit 50";
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
     else {
-        console.log(rows);
+        //console.log(rows);
         res.json(rows);
     }
     });
-
-  var playerNationality = req.query.playerNationality;
-  var playerCurrentTeam = req.query.playerCurrentTeam;
-  var playerHeightL = req.query.playerHeightL;
-  var playerHeightH = req.query.playerHeightH;
-  var playerAge = req.query.playerAge;
-  var playerSalary = req.query.playerSalary;
-  var playerPreferredFoot = req.query.playerPreferredFoot;
-  var playerAttackRate = req.query.playerAttackRate;
 
 });
 
@@ -217,7 +233,7 @@ router.get('/userInfo/DeleteTeam/:id', function(req, res, next) {
         teams = [];
         res.send(teams);
       }
-      
+
       for (var i = 0; i < teams.length; i++) {
         if (teams[i] != teamId) {
             newTeams.push(teams[i]);
@@ -333,4 +349,3 @@ router.get('/userInfo/createTeam/:pos/:id', function(req, res, next) {
 })
 
 module.exports = router;
-
