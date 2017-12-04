@@ -348,4 +348,32 @@ router.get('/userInfo/createTeam/:pos/:id', function(req, res, next) {
   }
 })
 
+/************************************* Dashboard  ************************************/
+router.get('/dashboard/followedPlayers/', function(req, res, next){
+  if (req.user) {
+    User.findById(req.user.doc._id, (err, data)=>{
+      var players = data.followedPlayers;
+      var sqlLine = `select p.Photo ,p.id, p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p Where p.id in (${players.toString()})`;
+      connection.query(sqlLine, function(err, rows, fields) {
+        if (err) console.log(err);
+        else {
+          console.log(rows);
+          res.json(rows);
+        }
+      });
+    });
+  } else {
+    res.send('Failed, You should login first!');
+  }
+})
+
+router.get('/dashboard/followedTeams/', function(req, res, next){
+  if (req.user) {
+    User.findById(req.user.doc._id, (err, data)=>{
+      var teams = data.followedTeams;
+    });
+  } else {
+    res.send('Failed, You should login first!');
+  }
+})
 module.exports = router;

@@ -209,3 +209,21 @@ angular.module("app", ["chart.js"]).controller("RadarCtrl", function ($scope) {
     [28, 48, 40, 19, 96, 27, 100]
   ];
 });
+
+
+/********************************** dashboard *******************************/
+app.controller('followPlayersController', function($scope, $http, $location, $window) {
+  var request = $http.get('../dashboard/followedPlayers/');
+  request.success(function(data) {
+    console.log(data);
+    $scope.PlayerList = data;
+  });
+  request.error(function(playerSearch){
+      console.log('err');
+  });
+  $scope.Detail = function() {
+    $location.path('/teamProfile/9825');
+  }
+});
+
+
