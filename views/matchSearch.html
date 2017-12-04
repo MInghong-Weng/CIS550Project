@@ -53,10 +53,10 @@
             <!-- Main component for a primary marketing message or call to action-->
             <div class="jumbotron">
 
-         <div ng-controller="playerController">
+         <div ng-controller="matchController">
 
-           <select ng-model="playerNationality" ng-options=" x.nationality for x in nationalities">
-             <option value="">Please Select Nationality</option>
+           <select ng-model="matchSeason" ng-options=" x.season for x in seasons">
+             <option value="">Please Select Season</option>
            </select>
 
            <select ng-model="playerAge">
@@ -72,21 +72,26 @@
             </select>
 
         <p style="padding: 2em;"><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span>
-            <button type="button" ng-click="Submit()" class="button">Show Persons</button>
+            <button type="button" ng-click="Submit()" class="button">Show Match</button>
         </p>
         <table border="0" cellpadding="10" cellspacing="1" width="500" align="center">
             <tr>
-            <td> Name</td>
-            <td> Team </td>
-            <td> Age </td>
-            <td> Nationality </td>
-            <td> Overall </td>
-            <tr ng-repeat="x in playerSearch">
-            <td> <a href="" ng-click="goPlayer(x)" ng-controller="playerSearchToPlayerProfileController">{{x.name}}</a>  </td>
-            <td> {{x.club}} </td>
-            <td> {{x.age}} </td>
-            <td> {{x.nationality}} </td>
-            <td> {{x.overall}} </td>
+            <td> Season</td>
+            <td> Stage </td>
+            <td> Date </td>
+            <td> Home Team </td>
+            <td> Home Team Goal </td>
+            <td> Away Team </td>
+            <td> Away Team Goal </td>
+            <tr ng-repeat="x in matchSearch">
+            <td> <a href="" ng-click="goMatch(x)" ng-controller="matchSearchToMatchController">{{x.id}}</a>  </td>
+            <td> {{x.season}} </td>
+            <td> {{x.stage}} </td>
+            <td> {{x.date}} </td>
+            <td> {{x.home_team}} </td>
+            <td> {{x.home_team_goal}} </td>
+            <td> {{x.away_team}} </td>
+            <td> {{x.away_team_goal}} </td>
         </tr>
         </table>
         </div>

@@ -12,16 +12,15 @@ app.controller('playerController', function($scope, $http) {
         console.log('error');
     })
 
-/*        //$scope.nationality = ["China", "Germany", "US"];
-        var request1 = $http.get('/playerSearch/'+$scope.nationalities);
-        request1.success(function(nationality){
-          console.log(nationality);
-          $scope.nationalities = nationality;
-        });
-        request1.error(function(nationality){
-          console.log('err');
-        });
-*/
+    var req = $http.get('/playerSearch/club');
+    req.success((club) => {
+      $scope.clubs = club;
+      console.log('success');
+    })
+    req.error((club) => {
+    console.log('error');
+    })
+
 
     $scope.Submit = function() {
         console.log("playerSearch");
@@ -31,17 +30,17 @@ app.controller('playerController', function($scope, $http) {
         var age = "ageUndefined";
         var nation="nationUndefined";
         console.log(nation);
-        
+
         if($scope.playerNationality !== undefined && $scope.playerNationality !== null) {
           nation = $scope.playerNationality.nationality;
-        } 
+        }
 
         if($scope.playerAge !== undefined && $scope.playerAge !== "") {
           age = $scope.playerAge;
         }
 
         console.log(age);
-        
+
 
         var request = $http.get('/playerSearch/data/'+age+ '/'+nation);
         request.success(function(playerSearch) {
@@ -122,13 +121,13 @@ app.controller('PlayerProfileController', function($scope, $http, $location) {
   var request = $http.get('/playerProfile/id/' + teamID);     //把参数到, 跳到router操作
   request.success(function(data) {
       $scope.data = data;
-     
+
 
   });
   request.error(function(data){
       console.log('err');
   });
-}; 
+};
 });
 
 app.controller('TeamProfileController', function($scope, $http, $location) {
@@ -149,14 +148,14 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
     //   $scope.color = 'yellow';
     // }
       $scope.data = data;
-     
+
 
   });
   request.error(function(data){
       console.log('err');
   });
 
-}; 
+};
 
 });
 
