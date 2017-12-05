@@ -23,8 +23,6 @@ mongoose.connect('mongodb://Project550:Project550.@ds113566.mlab.com:13566/mydb'
   }
 });
 
-
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'index.html'));
@@ -40,45 +38,29 @@ router.get('/dashboard', function(req, res, next) {
 
 router.get('/playerSearch', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'playerSearch.html'));
-
 });
 
 router.get('/playerSearch/nation', function(req, res, next) {
-
   var query = "select distinct p.nationality from mydb.PlayerPersonalData p ORDER BY p.nationality";
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
-    else {
-      //console.log("index");
-        //console.log(rows);
-        res.json(rows);
-    }
+    else {res.json(rows);}
     });
-
 });
 
 router.get('/playerSearch/club', function(req, res, next) {
-
   var query = "select distinct p.club from mydb.PlayerPersonalData p ORDER BY p.club";
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
-    else {
-      //console.log("index");
-        //console.log(rows);
-        res.json(rows);
-    }
+    else {res.json(rows);}
     });
-
 });
 
-router.get('/playerSearch/data/:playerAge/:playerNationality/:playerClub', function(req, res) {
-
-  console.log(req.params);
-  //console.log(req.params.playerClub);
-  var query_age, query_nation, query_club;
-  
+router.get('/playerSearch/data/:playerAge/:playerNationality', function(req, res) {
+  console.log(req.params.playerNationality);
+  var query_age, query_nation;
   var age = (req.params.playerAge);
   if(age !== "ageUndefined") {
     switch(age) {
@@ -101,8 +83,6 @@ router.get('/playerSearch/data/:playerAge/:playerNationality/:playerClub', funct
   } else {
     query_age = "p.age";
   }
-  //console.log("Here");
-  
 
   if(req.params.playerNationality !== "nationUndefined") {
     query_nation = " AND p.nationality = '" +  req.params.playerNationality +"'";
@@ -137,14 +117,11 @@ router.get('/playerProfile/id/:teamID', function(req, res, next) {
   console.log(req.params);
   var teamID = req.params.teamID;
   //var query = "select p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where p.age = "+ teamID + " order by p.overall desc";
-  var query = "select p.name, p.age, p.overall from PlayerPersonalData p where p.ID = "+ teamID;
+  var query = "select p.name, p.age, p.overall, p.photo, p.flag, p.clublogo, p.nationality, p.club, p.wage, p2.preferposition, p3.Acceleration, p3.Aggression, p3.Agility, p3.Balance, p3.Crossing, p3.Curve, p3.Dribbling, p3.Finishing, p3.Free_kick_accuracy, p3.Heading_accuracy, p3.Interceptions, p3.Jumping from mydb.PlayerPersonalData p, mydb.PlayerPlayingPositionData p2, mydb.PlayerAttribute p3 where p.ID = "+ teamID + " and p2.ID = "+ teamID + " and p3.ID = "+ teamID;
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
-    else {
-        //console.log(rows);
-        res.json(rows);
-    }
+    else {res.json(rows);}
     });
 });
 
@@ -163,22 +140,56 @@ router.get('/teamProfile/id/:teamID', function(req, res, next) {
     console.log(req.params);
     var teamID = req.params.teamID;
     //var query = "select p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where p.age = "+ teamID + " order by p.overall desc";
-    var query = "select t.id, t.team_api_id, t.team_fifa_api_id, t.team_long_name, t.team_short_name, tt.buildUpPlaySpeed, l.logo from mydb.Team t, mydb.Team_Data tt, mydb.34teamlogo l where t.team_api_id = "+ teamID +" and tt.team_api_id = " + teamID +" and l.id = " + teamID;
+    var query = "select t.id, t.team_api_id, t.team_fifa_api_id, t.team_long_name, t.team_short_name, tt.buildUpPlaySpeed, tt.buildUpPlaySpeedClass, tt.buildUpPlayDribbling, tt.buildUpPlayDribblingClass, tt.buildUpPlayPassing, tt.buildUpPlayPassingClass, tt.chanceCreationPassing, tt.chanceCreationPassingClass, tt.chanceCreationShooting, tt.chanceCreationShootingClass, tt.defencePressure, tt.defencePressureClass, tt.defenceAggression, tt.defenceAggressionClass, l.logo from mydb.Team t, mydb.Team_Data tt, mydb.34teamlogo l where t.team_api_id = "+ teamID +" and tt.team_api_id = " + teamID +" and l.id = " + teamID;
     console.log(query);
     connection.query(query, function(err, rows, fields) {
       if (err) console.log(err);
-      else {
-          //console.log(rows);
-          res.json(rows);
-      }
+      else {res.json(rows);}
       });
 });
 
-/************************************** Team *********************************************/
+/************************************** Matches *********************************************/
 
 
 router.get('/matchSearch', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../', 'views', 'matchSearch.html'));
+});
+
+router.get('/matchSearch/season', function(req, res, next) {
+  var query = "select distinct m.season from mydb.Matches m ORDER BY m.season";
+  console.log(query);
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+        res.json(rows);
+    }
+    });
+});
+
+
+router.get('/matchSearch/data/:matchSeason', function(req, res) {
+  console.log(req.params.matchSeason);
+
+  var query_season;
+  var season = (req.params.matchSeason).replace('-','/');
+  console.log(season);
+
+  //if(req.params.playerNationality !== "nationUndefined") {
+    query_season = "m.season = '" +  season +"'";
+    console.log(query_season);
+  //} else {query_nation = "";}
+  var query = "select m.season, m.stage, m.date, m.home_team_api_id, m.home_team_goal, m.away_team_api_id, away_team_goal from mydb.Matches m where "+query_season+" order by m.date";
+
+  console.log(query);
+
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+        console.log(rows);
+        res.json(rows);
+    }
+    });
+
 });
 
 /************************************* User Info  ************************************/

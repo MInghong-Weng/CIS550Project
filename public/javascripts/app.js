@@ -46,8 +46,7 @@ app.controller('playerController', function($scope, $http) {
 
         console.log(club);
 
-
-        var request = $http.get('/playerSearch/data/'+age+ '/'+nation + '/' + club);
+        var request = $http.get('/playerSearch/data/' + age + '/'+nation);
         request.success(function(playerSearch) {
           //console.log(playerSearch);
             $scope.playerSearch = playerSearch;
@@ -80,19 +79,17 @@ app.controller('matchSearchController', function($scope, $http) {
         console.log(season);
 
         //if($scope.playerNationality !== undefined && $scope.playerNationality !== null) {
-          season = $scope.matchSeason;
+          season = $scope.matchSeason.season.replace('/','-');
         //}
 
         var request = $http.get('/matchSearch/data/' + season);
         request.success(function(matchSearch) {
           //console.log(playerSearch);
-            $scope.matchSearch = macthSearch;
+            $scope.matchSearch = matchSearch;
         });
         request.error(function(matchSearch){
             console.log('err');
         });
-
-
     };
 });
 
@@ -146,6 +143,13 @@ app.controller('playerSearchToPlayerProfileController', ['$scope', '$location', 
   $scope.goPlayer = function(x) {
   console.log(x.id)
             window.location = "/playerProfile/"+x.id;
+  }
+}]);
+
+app.controller('matchSearchToMatchController', ['$scope', '$location', function($scope, $location) {
+  $scope.goTeam = function(x) {
+  //console.log(x.id)
+  //          window.location = "/playerProfile/"+x.id;
   }
 }]);
 
@@ -221,5 +225,3 @@ app.controller('followPlayersController', function($scope, $http, $location, $wi
     $window.location = `/playerProfile/${x.id}`;
   }
 });
-
-
