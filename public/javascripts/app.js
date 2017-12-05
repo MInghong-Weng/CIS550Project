@@ -1,4 +1,4 @@
-var app = angular.module('angularjsNodejsTutorial',[]);
+var app = angular.module('angularjsNodejsTutorial',['chart.js']);
 
 //search player
 app.controller('playerController', function($scope, $http) {
@@ -199,9 +199,7 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
 };
 
 });
-
-
-angular.module("app", ["chart.js"]).controller("RadarCtrl", function ($scope) {
+app.controller("RadarCtrl", function ($scope) {
   $scope.labels =["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"];
 
   $scope.data = [
@@ -209,8 +207,6 @@ angular.module("app", ["chart.js"]).controller("RadarCtrl", function ($scope) {
     [28, 48, 40, 19, 96, 27, 100]
   ];
 });
-
-
 /********************************** dashboard *******************************/
 app.controller('followPlayersController', function($scope, $http, $location, $window) {
   var request = $http.get('../dashboard/followedPlayers/');
@@ -221,8 +217,8 @@ app.controller('followPlayersController', function($scope, $http, $location, $wi
   request.error(function(playerSearch){
       console.log('err');
   });
-  $scope.Detail = function() {
-    $location.path('/teamProfile/9825');
+  $scope.Detail = function(x) {
+    $window.location = `/playerProfile/${x.id}`;
   }
 });
 
