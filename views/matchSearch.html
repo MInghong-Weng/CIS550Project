@@ -67,20 +67,20 @@
         <table border="0" cellpadding="10" cellspacing="1" width="500" align="center">
             <tr>
             <td> Season</td>
-            <td> Stage </td>
+            <td> Round </td>
             <td> Date </td>
             <td> Home Team </td>
             <td> Home Team Goal </td>
             <td> Away Team </td>
             <td> Away Team Goal </td>
             <tr ng-repeat="x in matchSearch">
-            <td> <a href="" ng-click="goMatch(x)" ng-controller="matchSearchToMatchController">{{x.id}}</a>  </td>
+            <!--<td> <a href="" ng-click="goTeam(x)" ng-controller="matchSearchToMatchController">{{x.id}}</a>  </td>-->
             <td> {{x.season}} </td>
             <td> {{x.stage}} </td>
             <td> {{x.date}} </td>
-            <td> {{x.home_team}} </td>
+            <td> {{x.home_team_name}} </td>
             <td> {{x.home_team_goal}} </td>
-            <td> {{x.away_team}} </td>
+            <td> {{x.away_team_name}} </td>
             <td> {{x.away_team_goal}} </td>
         </tr>
         </table>
