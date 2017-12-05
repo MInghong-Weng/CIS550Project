@@ -58,7 +58,7 @@ router.get('/playerSearch/club', function(req, res, next) {
     });
 });
 
-router.get('/playerSearch/data/:playerAge/:playerNationality', function(req, res) {
+router.get('/playerSearch/data/:playerAge/:playerNationality/:playerClub', function(req, res) {
   console.log(req.params.playerNationality);
   var query_age, query_nation;
   var age = (req.params.playerAge);
