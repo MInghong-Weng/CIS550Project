@@ -1,4 +1,4 @@
-var app = angular.module('angularjsNodejsTutorial',[]);
+var app = angular.module('angularjsNodejsTutorial',['chart.js']);
 
 //search player
 app.controller('playerController', function($scope, $http) {
