@@ -1,4 +1,4 @@
-var app = angular.module('angularjsNodejsTutorial',[]);
+var app = angular.module('angularjsNodejsTutorial',['chart.js']);
 
 //search player
 app.controller('playerController', function($scope, $http) {
@@ -30,6 +30,7 @@ app.controller('playerController', function($scope, $http) {
         var age = "ageUndefined";
         var nation="nationUndefined";
         var club = "clubUndefined";
+        var overall = "overallUndefined";
         console.log(nation);
 
         if($scope.playerNationality !== undefined && $scope.playerNationality !== null) {
@@ -43,11 +44,15 @@ app.controller('playerController', function($scope, $http) {
         if($scope.playerAge !== undefined && $scope.playerAge !== "") {
           age = $scope.playerAge;
         }
+        
+        if($scope.playerOverall !== undefined && $scope.playerOverall !== "") {
+          overall = $scope.playerOverall;
+        }
+        
 
         console.log(club);
 
-
-        var request = $http.get('/playerSearch/data/'+age+ '/'+nation + '/' + club);
+        var request = $http.get('/playerSearch/data/' + age + '/'+nation+'/'+club + '/' + overall);
         request.success(function(playerSearch) {
           //console.log(playerSearch);
             $scope.playerSearch = playerSearch;
@@ -80,19 +85,17 @@ app.controller('matchSearchController', function($scope, $http) {
         console.log(season);
 
         //if($scope.playerNationality !== undefined && $scope.playerNationality !== null) {
-          season = $scope.matchSeason;
+          season = $scope.matchSeason.season.replace('/','-');
         //}
 
         var request = $http.get('/matchSearch/data/' + season);
         request.success(function(matchSearch) {
           //console.log(playerSearch);
-            $scope.matchSearch = macthSearch;
+            $scope.matchSearch = matchSearch;
         });
         request.error(function(matchSearch){
             console.log('err');
         });
-
-
     };
 });
 
@@ -142,10 +145,25 @@ app.controller('Test', function($scope, $location) {
   console.log($location.absUrl());
 });
 
+app.controller('addPlayerController', ['$scope', '$location', function($scope, $location) {
+  $scope.addPlayer = function(x) {
+  console.log(x.id)
+            window.location = "/userInfo/addPlayer/"+x.id;
+  }
+}]);
+
 app.controller('playerSearchToPlayerProfileController', ['$scope', '$location', function($scope, $location) {
   $scope.goPlayer = function(x) {
   console.log(x.id)
             window.location = "/playerProfile/"+x.id;
+  }
+}]);
+
+
+app.controller('matchSearchToMatchController', ['$scope', '$location', function($scope, $location) {
+  $scope.goTeam = function(x) {
+  //console.log(x.id)
+  //          window.location = "/playerProfile/"+x.id;
   }
 }]);
 
@@ -199,9 +217,7 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
 };
 
 });
-
-
-angular.module("app", ["chart.js"]).controller("RadarCtrl", function ($scope) {
+app.controller("RadarCtrl", function ($scope) {
   $scope.labels =["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"];
 
   $scope.data = [
@@ -209,8 +225,6 @@ angular.module("app", ["chart.js"]).controller("RadarCtrl", function ($scope) {
     [28, 48, 40, 19, 96, 27, 100]
   ];
 });
-
-
 /********************************** dashboard *******************************/
 app.controller('followPlayersController', function($scope, $http, $location, $window) {
   var request = $http.get('../dashboard/followedPlayers/');
@@ -221,9 +235,14 @@ app.controller('followPlayersController', function($scope, $http, $location, $wi
   request.error(function(playerSearch){
       console.log('err');
   });
-  $scope.Detail = function() {
-    $location.path('/teamProfile/9825');
+
+  $scope.Detail = function(x) {
+    $window.location = `/playerProfile/${x.id}`;
   }
+
+  $scope.Pos = function(p, x) {
+    $http.get(`/userInfo/createTeam/${p}/${x.id}`);
+    $window.alert("add!");
+  }
+
 });
-
-
