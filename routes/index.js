@@ -58,7 +58,7 @@ router.get('/playerSearch/club', function(req, res, next) {
     });
 });
 
-router.get('/playerSearch/data/:playerAge/:playerNationality/:playerClub', function(req, res) {
+router.get('/playerSearch/data/:playerAge/:playerNationality/:playerClub/:playerOverall', function(req, res) {
   console.log(req.params.playerNationality);
   var query_age, query_nation;
   var age = (req.params.playerAge);
@@ -84,6 +84,30 @@ router.get('/playerSearch/data/:playerAge/:playerNationality/:playerClub', funct
     query_age = "p.age";
   }
 
+  var overall = (req.params.playerOverall);
+  if(overall !== "overallUndefined") {
+    switch(overall) {
+      case '0':
+        query_overall = " AND p.overall<70";
+        break;
+      case '1':
+        query_overall = " AND p.overall>=70 AND p.overall<=79";
+        break;
+      case '2':
+        query_overall = " AND p.overall>=80 AND p.overall<=89";
+        break;
+      case '3':
+        query_overall = " AND p.overall>=90";
+        break;
+      default:
+        query_overall = "";
+        break;
+    }
+  } else {
+      query_overall = "";
+  }
+
+
   if(req.params.playerNationality !== "nationUndefined") {
     query_nation = " AND p.nationality = '" +  req.params.playerNationality +"'";
   } else {
@@ -96,7 +120,7 @@ router.get('/playerSearch/data/:playerAge/:playerNationality/:playerClub', funct
     query_club = "";
   }
 
-  var query = "select p.photo, p.id, p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where "+query_age+ query_nation + query_club+ " order by p.overall desc limit 50";
+  var query = "select p.photo, p.id, p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where "+query_age+ query_nation + query_club+ query_overall + " order by p.overall desc limit 50";
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
