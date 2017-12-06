@@ -61,7 +61,16 @@
             
 
           <div ng-controller="PlayerProfileController" ng-init="Submit()">
-            <p ng-repeat="x in data" style="padding: 1em; font-size:200%;">{{x.name}} <img ng-src="{{x.photo}}" height="48px"> </p>
+            <p ng-repeat="x in data" style="font-size:200%;">{{x.name}} <img ng-src="{{x.photo}}" height="48px"> </p>
+            <div class="col-md-7" >
+              <div class="thumbnail">
+                    <div ng-controller="RadarCtrl" style="margin: 2em">
+                    <canvas id="radar" class="chart chart-radar"
+                    chart-data="data2" chart-options="options" chart-labels="labels" >
+                    </canvas>
+                    </div> 
+              </div>
+            </div>
 
                     <table class="table table-striped" border="0" cellpadding="10" cellspacing="1" width="500" align="center">
                         <tr>
@@ -83,9 +92,30 @@
                         <th> Overall </th>
                         <th> Wage </th>
                         <tr ng-repeat="x in data">
-                        <td ng-class="{green: x.overall >=90, yellow: x.overall >=80, red:x.overall<80 }"> {{x.overall}} </td>
+                        <td ng-model="overall" ng-class="{green: x.overall >=90, yellow: x.overall >=80, red:x.overall<80 }"> {{x.overall}} </td>
                         <td> €{{x.wage}} </td>
                         
+                        <tr>
+                        <th> Speed</th>
+                        <th> Finishing</th>
+                        <tr ng-repeat="x in data">
+                          <td ng-class="{green: x.Sprint_speed >=90, yellow: x.Sprint_speed >=80, red:x.Sprint_speed<80 }"> {{x.Sprint_speed}} </td>
+                          <td ng-class="{green: x.Finishing >=90, yellow: x.Finishing >=80, red:x.Finishing<80 }"> {{x.Finishing}} </td>
+
+                        <tr>
+                        <th> Short Pass</th>
+                        <th> Standing Tackle</th>
+                        <tr ng-repeat="x in data">
+                          <td ng-class="{green: x.Short_passing >=90, yellow: x.Short_passing >=80, red:x.Short_passing<80 }"> {{x.Short_passing}} </td>
+                          <td ng-class="{green: x.Standing_tackle >=90, yellow: x.Standing_tackle >=80, red:x.Standing_tackle<80 }"> {{x.Standing_tackle}} </td>
+
+                        <tr>
+                        <th> Stamina</th>
+                        <th> Dribbling</th>
+                        <tr ng-repeat="x in data">
+                          <td ng-class="{green: x.Stamina >=90, yellow: x.Stamina >=80, red:x.Stamina<80 }"> {{x.Stamina}} </td>
+                          <td ng-class="{green: x.Dribbling >=90, yellow: x.Dribbling >=80, red:x.Dribbling<80 }"> {{x.Dribbling}} </td>
+
                         <tr>
                         <th> Acceleration</th>
                         <th> Aggression</th>
@@ -130,12 +160,11 @@
 
                     </tr>
                     </table>
+
                     </div>
+                    
         </div>
-        <div ng-controller="RadarCtrl">
-          <canvas id="radar" class="chart chart-radar" width="400" height="200"
-          chart-data="data" chart-options="options" chart-labels="labels">
-          </canvas> 
+        
         </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>

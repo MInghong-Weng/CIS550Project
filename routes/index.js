@@ -141,12 +141,14 @@ router.get('/playerProfile/id/:teamID', function(req, res, next) {
   console.log(req.params);
   var teamID = req.params.teamID;
   //var query = "select p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where p.age = "+ teamID + " order by p.overall desc";
-  var query = "select p.name, p.age, p.overall, p.photo, p.flag, p.clublogo, p.nationality, p.club, p.wage, p2.preferposition, p3.Acceleration, p3.Aggression, p3.Agility, p3.Balance, p3.Crossing, p3.Curve, p3.Dribbling, p3.Finishing, p3.Free_kick_accuracy, p3.Heading_accuracy, p3.Interceptions, p3.Jumping from mydb.PlayerPersonalData p, mydb.PlayerPlayingPositionData p2, mydb.PlayerAttribute p3 where p.ID = "+ teamID + " and p2.ID = "+ teamID + " and p3.ID = "+ teamID;
+  var query = "select p.name, p.age, p.overall, p.photo, p.flag, p.clublogo, p.nationality, p.club, p.wage, p2.preferposition, p3.Stamina, p3.Standing_tackle, p3.Short_passing, p3.Sprint_speed, p3.Acceleration, p3.Aggression, p3.Agility, p3.Balance, p3.Crossing, p3.Curve, p3.Dribbling, p3.Finishing, p3.Free_kick_accuracy, p3.Heading_accuracy, p3.Interceptions, p3.Jumping from mydb.PlayerPersonalData p, mydb.PlayerPlayingPositionData p2, mydb.PlayerAttribute p3 where p.ID = "+ teamID + " and p2.ID = "+ teamID + " and p3.ID = "+ teamID;
   console.log(query);
+  var query2 = "select result from (select * from( select 3 as result, date, match_api_id from Matches where (home_team_api_id = 9825 and home_team_goal>away_team_goal) or (away_team_api_id = 9825 and home_team_goal<away_team_goal) union select 0 as result, date, match_api_id from Matches where (home_team_api_id = 9825 and home_team_goal<away_team_goal) or (away_team_api_id = 9825 and home_team_goal>away_team_goal) union select 1 as result, date, match_api_id from Matches where (home_team_api_id = 9825 and home_team_goal=away_team_goal) or (away_team_api_id = 9825 and home_team_goal=away_team_goal) order by date desc) result1 limit 10) result2 order by date";
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
     else {res.json(rows);}
     });
+  
 });
 
 

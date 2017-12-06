@@ -243,6 +243,8 @@ app.controller('matchSearchToMatchController', ['$scope', '$location', function(
 
 app.controller('PlayerProfileController', function($scope, $http, $location) {
   //定义当前controller的范围（scope）内的函数、变量
+  
+
   $scope.message="";
   console.log($location.absUrl());
   var url = $location.absUrl();
@@ -254,17 +256,58 @@ app.controller('PlayerProfileController', function($scope, $http, $location) {
   var request = $http.get('/playerProfile/id/' + teamID); //把参数到, 跳到router操作
   request.success(function(data) {
       $scope.data = data;
-
-
+      $scope.data2 = [
+        [data[0].Sprint_speed, data[0].Finishing, data[0].Short_passing, data[0].Standing_tackle, data[0].Stamina, data[0].Dribbling],
+        [0,0,0,0,0,0,0]
+      ];
+      console.log(data);
   });
   request.error(function(data){
       console.log('err');
   });
 };
+
+$scope.labels =["Speed", "Shot", "Pass", "Defense", "Stamina", "Dribbling"];
+
+
+
 });
 
 app.controller('TeamProfileController', function($scope, $http, $location) {
   //定义当前controller的范围（scope）内的函数、变量
+
+  $scope.labels = ["last10", "last9", "last8", "last7", "last6", "last5", "last4", "last3", "last2", "last1"];
+  $scope.series = ['Series A'];
+  /*$scope.data2 = [
+    [3,1,0,3,1,3,3]
+  ];*/
+  $scope.onClick = function (points, evt) {
+    console.log(points, evt);
+  };
+  $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }];
+  $scope.options = {
+    scales: {
+      yAxes: [
+        {
+          id: 'y-axis-1',
+          type: 'linear',
+          display: true,
+          position: 'left',
+          ticks: {
+            fixedStepSize: 1,
+            lineTension: 0
+          },
+          
+        }
+      ]
+    },
+    elements: {
+      line: {
+          tension: 0  //straight lines instead of curve
+      }
+    }
+  };
+  
   $scope.message="";
   console.log($location.absUrl());
   var url = $location.absUrl();
@@ -281,7 +324,10 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
     //   $scope.color = 'yellow';
     // }
       $scope.data = data;
-
+      $scope.data2 = [
+        [data[0].result10, data[0].result9, data[0].result8, data[0].result7, data[0].result6, data[0].result5],
+        [0,0,0,0,0,0,0]
+      ];
 
   });
   request.error(function(data){
@@ -291,14 +337,13 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
 };
 
 });
-app.controller("RadarCtrl", function ($scope) {
-  $scope.labels =["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"];
 
-  $scope.data = [
-    [65, 59, 90, 81, 56, 55, 40],
-    [28, 48, 40, 19, 96, 27, 100]
-  ];
+/********************************** Radar *******************************/
+app.controller("RadarCtrl", function ($scope) {
+
 });
+
+
 /********************************** dashboard *******************************/
 app.controller('followPlayersController', function($scope, $http, $location, $window) {
   var request = $http.get('../dashboard/followedPlayers/');
