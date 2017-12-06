@@ -123,16 +123,33 @@ app.controller('matchSearchController', function($scope, $http) {
   // search match according to user input
   $scope.Submit = function() {
     console.log("matchSearch");
-    console.log($scope.matchSeason);
-
     var season="seasonUndefined";
-    console.log(season);
+    var stage = "stageUndefined";
+    var homeTeam = "homeTeamUndefined";
+    var awayTeam = "awayTeamUndefined";
+
+    console.log($scope.matchSeason.season);
+    console.log($scope.matchStage.stage);
+    console.log($scope.matchHomeTeam.home_team_name);
+    console.log($scope.matchAwayTeam.away_team_name);
 
     if($scope.matchSeason !== undefined && $scope.matchSeason !== null) {
       season = $scope.matchSeason.season.replace('/','-');
     }
 
-    var request = $http.get('/matchSearch/data/' + season);
+    if($scope.matchStage !== undefined && $scope.matchStage !== null) {
+      stage = $scope.matchStage.stage;
+    }
+
+    if($scope.matchHomeTeam !== undefined && $scope.matchHomeTeam !== "") {
+      homeTeam = $scope.matchHomeTeam.home_team_name;
+    }
+
+    if($scope.matchAwayTeam !== undefined && $scope.matchAwayTeam !== "") {
+      awayTeam = $scope.matchAwayTeam.away_team_name;
+    }
+
+    var request = $http.get('/matchSearch/data/'+season+'/'+stage+'/'+homeTeam+'/'+awayTeam);
     request.success(function(matchSearch) {
       console.log(matchSearch);
       $scope.matchSearch = matchSearch;
@@ -310,7 +327,7 @@ app.controller('followPlayersController', function($scope, $http, $location, $wi
   $scope.DelPlayer = function(x) {
     var res = $http.get(`/userInfo/DeletePlayer/${x.id}`);
     res.success(function(message) {
-      
+
       var request = $http.get('../dashboard/followedPlayers/');
       request.success(function(data) {
         console.log(data);

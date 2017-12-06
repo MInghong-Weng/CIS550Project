@@ -243,7 +243,7 @@ router.get('/matchSearch/awayTeam', function(req, res, next) {
 });
 
 
-router.get('/matchSearch/data/:matchSeason/:matchStage/:matchDate/:matchHomeTeam/:matchAwayTeam', function(req, res) {
+router.get('/matchSearch/data/:matchSeason/:matchStage/:matchHomeTeam/:matchAwayTeam', function(req, res) {
   console.log(req.params.matchSeason);
   console.log(req.params.matchStage);
   //console.log(req.params.matchDate);
@@ -297,7 +297,7 @@ router.get('/matchSearch/data/:matchSeason/:matchStage/:matchDate/:matchHomeTeam
   WHERE m.league_id = 1729"
   + query_season + query_stage + query_homeTeam + query_awayTeam + " \
   ORDER BY m.date LIMIT 50";
-//1729
+
   console.log(query);
 
   connection.query(query, function(err, rows, fields) {
