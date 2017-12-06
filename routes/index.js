@@ -180,7 +180,59 @@ router.get('/matchSearch', function(req, res, next) {
 });
 
 router.get('/matchSearch/season', function(req, res, next) {
-  var query = "select distinct m.season from mydb.Matches m ORDER BY m.season";
+  var query = "select distinct m.season from mydb.Matches m WHERE m.league_id = 1729 ORDER BY m.season ";
+  console.log(query);
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+        res.json(rows);
+    }
+    });
+});
+
+router.get('/matchSearch/stage', function(req, res, next) {
+  var query = "select distinct m.stage from mydb.Matches m WHERE m.league_id = 1729 ORDER BY m.stage";
+  console.log(query);
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+        res.json(rows);
+    }
+    });
+});
+/*
+router.get('/matchSearch/date', function(req, res, next) {
+  var query = "select distinct m.date from mydb.Matches m WHERE m.league_id = 1729 ORDER BY m.date ";
+  console.log(query);
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+        res.json(rows);
+    }
+    });
+});
+*/
+router.get('/matchSearch/homeTeam', function(req, res, next) {
+  var query = "select distinct t.team_short_name AS home_team_name \
+  from mydb.Matches m \
+  INNER JOIN Team t ON m.home_team_api_id = t.team_api_id \
+  WHERE m.league_id = 1729\
+  ORDER BY m.date";
+  console.log(query);
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {
+        res.json(rows);
+    }
+    });
+});
+
+router.get('/matchSearch/awayTeam', function(req, res, next) {
+  var query = "select distinct t.team_short_name AS away_team_name \
+  from mydb.Matches m \
+  INNER JOIN Team t ON m.away_team_api_id = t.team_api_id \
+  WHERE m.league_id = 1729\
+  ORDER BY m.date";
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
@@ -191,19 +243,61 @@ router.get('/matchSearch/season', function(req, res, next) {
 });
 
 
-router.get('/matchSearch/data/:matchSeason', function(req, res) {
+router.get('/matchSearch/data/:matchSeason/:matchStage/:matchDate/:matchHomeTeam/:matchAwayTeam', function(req, res) {
   console.log(req.params.matchSeason);
+  console.log(req.params.matchStage);
+  //console.log(req.params.matchDate);
+  console.log(req.params.matchHomeTeam);
+  console.log(req.params.matchAwayTeam);
 
-  var query_season;
+  var query_season,query_stage,query_homeTeam,query_awayTeam;
   var season = (req.params.matchSeason).replace('-','/');
+  var stage = req.params.matchStage;
+  //var date = (req.params.matchDate);
+  var homeTeam = (req.params.matchHomeTeam);
+  var awayTeam = (req.params.matchAwayTeam);
+
   console.log(season);
+  //console.log(date);
+  console.log(stage);
+  console.log(homeTeam);
+  console.log(awayTeam);
 
-  //if(req.params.playerNationality !== "nationUndefined") {
-    query_season = "m.season = '" +  season +"'";
+  if(req.params.matchSeason !== "seasonUndefined") {
+    query_season = " AND m.season = '" +  season + "'";
     console.log(query_season);
-  //} else {query_nation = "";}
-  var query = "select m.season, m.stage, m.date, m.home_team_api_id, m.home_team_goal, m.away_team_api_id, away_team_goal from mydb.Matches m where "+query_season+" order by m.date";
+  } else { query_season = "";}
 
+  if(req.params.matchStage !== "stageUndefined") {
+    query_stage = " AND m.stage = '" +  stage + "'";
+    console.log(query_stage);
+  } else { query_stage = "";}
+/*
+  if(req.params.matchDate !== "dateUndefined") {
+    query_date = " AND m.date = '" +  date + "'";
+    console.log(query_date);
+  } else { query_date = "";}
+*/
+  if(req.params.matchHomeTeam !== "homeTeamUndefined") {
+    query_homeTeam = " AND home_team_name = '" + homeTeam  + "'";
+    console.log(query_homeTeam);
+  } else { query_homeTeam = "";}
+
+  if(req.params.matchAwayTeam !== "awayTeamUndefined") {
+    query_awayTeam = " AND away_team_name = '" + awayTeam + "'";
+    console.log(query_awayTeam);
+  } else { query_awayTeam = "";}
+
+  var query = "SELECT m.home_team_api_id, m.away_team_api_id, \
+  m.season, m.stage, m.date, t1.team_short_name AS home_team_name, m.home_team_goal, \
+  t2.team_short_name AS away_team_name, away_team_goal \
+  FROM mydb.Matches m \
+  INNER JOIN Team t1 ON m.home_team_api_id = t1.team_api_id \
+  INNER JOIN Team t2 ON m.away_team_api_id = t2.team_api_id \
+  WHERE m.league_id = 1729"
+  + query_season + query_stage + query_homeTeam + query_awayTeam + " \
+  ORDER BY m.date LIMIT 50";
+//1729
   console.log(query);
 
   connection.query(query, function(err, rows, fields) {
