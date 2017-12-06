@@ -252,9 +252,28 @@ app.controller('followPlayersController', function($scope, $http, $location, $wi
     res.success(function(message) {
       $window.alert(message);
     });
-    req.error(function() {
+    res.error(function() {
       console.log('err');
     })
   }
 
+  $scope.DelPlayer = function(x) {
+    var res = $http.get(`/userInfo/DeletePlayer/${x.id}`);
+    res.success(function(message) {
+      
+      var request = $http.get('../dashboard/followedPlayers/');
+      request.success(function(data) {
+        console.log(data);
+        $scope.PlayerList = data;
+      });
+      request.error(function(playerSearch){
+          console.log('err');
+      });
+
+      $window.alert(message);
+    });
+    res.error(function() {
+      console.log('err');
+    })
+  }
 });
