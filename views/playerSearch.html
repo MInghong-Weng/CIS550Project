@@ -93,6 +93,7 @@
             <td> Age </td>
             <td> Nationality </td>
             <td> Overall </td>
+            <td> Follow </td>
             <tr ng-repeat="x in playerSearch">
             <td><img style="display:block;" width="100%" height="100%" src={{x.photo}} onerror="this.src='https://kicentral.com/thumbor/VvKksxGuYGQ-skWjbsxvosnu9gM=/48x48/filters:round_corner(20,255,255,255)/https%3A%2F%2Fkicentral.com%2Fmisc%2Fdefaultavatar.png'"/> </td>                
             <td> <a href="" ng-click="goPlayer(x)" ng-controller="playerSearchToPlayerProfileController">{{x.name}}</a>  </td>
@@ -100,6 +101,7 @@
             <td> {{x.age}} </td>
             <td> {{x.nationality}} </td>
             <td> {{x.overall}} </td>
+            <td> <button type="button" class="btn btn-secondary" ng-click="addPlayer(x)" ng-controller="addPlayerController">Add </button></td>
         </tr>
         </table>
         </div>

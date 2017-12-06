@@ -145,12 +145,20 @@ app.controller('Test', function($scope, $location) {
   console.log($location.absUrl());
 });
 
+app.controller('addPlayerController', ['$scope', '$location', function($scope, $location) {
+  $scope.addPlayer = function(x) {
+  console.log(x.id)
+            window.location = "/userInfo/addPlayer/"+x.id;
+  }
+}]);
+
 app.controller('playerSearchToPlayerProfileController', ['$scope', '$location', function($scope, $location) {
   $scope.goPlayer = function(x) {
   console.log(x.id)
             window.location = "/playerProfile/"+x.id;
   }
 }]);
+
 
 app.controller('matchSearchToMatchController', ['$scope', '$location', function($scope, $location) {
   $scope.goTeam = function(x) {
