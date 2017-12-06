@@ -63,6 +63,12 @@
           <div ng-controller="TeamProfileController" ng-init="Submit()">
                     <p style="font-size:200%;" ng-repeat="x in data">{{x.team_long_name}}</p>
                     <p style="padding: 1em;" ng-repeat="x in data"><img ng-src="{{x.logo}}" height="150px"> </p>
+
+                    <canvas id="line" class="chart chart-line" chart-data="data2"
+                    chart-labels="labels" chart-series="series" chart-options="options"
+                    chart-dataset-override="datasetOverride" chart-click="onClick" height="50px">
+                    </canvas>
+
                     <table ng-repeat="x in data" class="table table-striped" border="0" cellpadding="10" cellspacing="1" width="fit-content" align="center" >
                         <tr>
                         <th> short name </th>                        
@@ -117,6 +123,10 @@
                         <tr > <!--controller里面$scope.data-->
                           <td ng-class="{green: x.defenceAggression >=60, yellow: x.defenceAggression >=40, red: x.defenceAggression <=40 }"> {{x.defenceAggression}} </td>
                           <td > {{x.defenceAggressionClass}} </td> 
+
+                        <tr ng-repeat="x in data2">
+                            <th> results</th>
+                            <td > {{x.result}} </td>   
                     </tr>
                     </table>
                     </div>
