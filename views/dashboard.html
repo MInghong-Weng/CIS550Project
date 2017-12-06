@@ -61,6 +61,8 @@
                         <th>Nationality</th>
                         <th>Overall</th>
                         <th>Detail</th>
+                        <th>Options</th>
+                        <th colspan="3" >Choose your team member</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -70,17 +72,21 @@
                         <td>{{x.club}}</td>
                         <td>{{x.nationality}}</td>
                         <td>{{x.overall}}</td>
-                        <td><button class="badge badge-primary" ng-click="Detail(x)">Detail</button></td>
-                        <td><button class="badge badge-primary" ng-click="Pos('GK', x)">GK</button></td>
-                        <td><button class="badge badge-primary" ng-click="Pos('CB1', x)">CB1</button></td>
-                        <td><button class="badge badge-primary" ng-click="Pos('CB2', x)">CB2</button></td>
-                        <td><button class="badge badge-primary" ng-click="Pos('LB', x)">LB</button></td>
-                        <td><button class="badge badge-primary" ng-click="Pos('CM1', x)">CM1</button></td>
-                        <td><button class="badge badge-primary" ng-click="Pos('CM2', x)">CM2</button></td>
-                        <td><button class="badge badge-primary" ng-click="Pos('LM', x)">LM</button></td>
-                        <td><button class="badge badge-primary" ng-click="Pos('RM', x)">RM</button></td>
-                        <td><button class="badge badge-primary" ng-click="Pos('CF1', x)">CF1</button></td>
-                        <td><button class="badge badge-primary" ng-click="Pos('CF2', x)">CF2</button></td>
+                        
+                        <td><button class="badge badge-success" ng-click="Detail(x)">Detail</button></td>
+                        <td><button class="badge badge-success" ng-click="DelPlayer(x)">Delete</button></td>
+                        <td colspan="3">
+                          <button class="badge badge-primary" ng-click="Pos('CB1', x)">CB1</button>
+                          <button class="badge badge-primary" ng-click="Pos('CB2', x)">CB2</button>
+                          <button class="badge badge-primary" ng-click="Pos('LB', x)">LB</button>
+                          <button class="badge badge-primary" ng-click="Pos('CM1', x)">CM1</button>
+                          <button class="badge badge-primary" ng-click="Pos('CM2', x)">CM2</button>
+                          <button class="badge badge-primary" ng-click="Pos('GK', x)">GK</button>
+                          <button class="badge badge-primary" ng-click="Pos('LM', x)">LM</button>
+                          <button class="badge badge-primary" ng-click="Pos('RM', x)">RM</button>
+                          <button class="badge badge-primary" ng-click="Pos('CF1', x)">CF1</button>
+                          <button class="badge badge-primary" ng-click="Pos('CF2', x)">CF2</button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

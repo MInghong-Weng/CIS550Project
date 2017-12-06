@@ -44,11 +44,11 @@ app.controller('playerController', function($scope, $http) {
         if($scope.playerAge !== undefined && $scope.playerAge !== "") {
           age = $scope.playerAge;
         }
-        
+
         if($scope.playerOverall !== undefined && $scope.playerOverall !== "") {
           overall = $scope.playerOverall;
         }
-        
+
 
         console.log(club);
 
@@ -65,38 +65,82 @@ app.controller('playerController', function($scope, $http) {
 
 //matchSearch controller
 app.controller('matchSearchController', function($scope, $http) {
-        $scope.message="";
+  $scope.message="";
+/*
+  var season = (req.params.matchSeason).replace('-','/');
+  var stage = req.params.matchStage;
+  var date = (req.params.matchDate);
+  var matchHomeTeam = (req.params.matchHomeTeam);
+  var matchAwayTeam = (req.params.matchAwayTeam);
+*/
 
-        var req = $http.get('/matchSearch/season');
-        req.success((season) => {
-          $scope.seasons = season;
-          console.log('success');
-    })
-    req.error((season) => {
-        console.log('error');
-    })
+  // select range seasons
+  var reqSeason = $http.get('/matchSearch/season');
+  reqSeason.success((season) => {
+    $scope.seasons = season;
+    console.log('success');
+  })
+  reqSeason.error((season) => {
+    console.log('error');
+  })
 
-    $scope.Submit = function() {
+  var reqdate = $http.get('/matchSearch/stage');
+  reqdate.success((stage) => {
+    $scope.stages = stage;
+    console.log('success');
+  })
+  reqdate.error((stage) => {
+    console.log('error');
+  })
+/*
+  var reqdate = $http.get('/matchSearch/date');
+  reqdate.success((date) => {
+    $scope.dates = date;
+    console.log('success');
+  })
+  reqdate.error((date) => {
+    console.log('error');
+  })
+*/
+  var reqHomeTeam = $http.get('/matchSearch/homeTeam');
+  reqHomeTeam.success((homeTeam) => {
+    $scope.homeTeams = homeTeam;
+    console.log('success');
+  })
+  reqHomeTeam.error((homeTeam) => {
+    console.log('error');
+  })
 
-        console.log("matchSearch");
-        console.log($scope.matchSeason);
+  var reqAwayTeam = $http.get('/matchSearch/awayTeam');
+  reqAwayTeam.success((awayTeam) => {
+    $scope.awayTeams = awayTeam;
+    console.log('success');
+  })
+  reqAwayTeam.error((awayTeam) => {
+    console.log('error');
+  })
 
-        var season="seasonUndefined";
-        console.log(season);
+  // search match according to user input
+  $scope.Submit = function() {
+    console.log("matchSearch");
+    console.log($scope.matchSeason);
 
-        //if($scope.playerNationality !== undefined && $scope.playerNationality !== null) {
-          season = $scope.matchSeason.season.replace('/','-');
-        //}
+    var season="seasonUndefined";
+    console.log(season);
 
-        var request = $http.get('/matchSearch/data/' + season);
-        request.success(function(matchSearch) {
-          //console.log(playerSearch);
-            $scope.matchSearch = matchSearch;
-        });
-        request.error(function(matchSearch){
-            console.log('err');
-        });
-    };
+    if($scope.matchSeason !== undefined && $scope.matchSeason !== null) {
+      season = $scope.matchSeason.season.replace('/','-');
+    }
+
+    var request = $http.get('/matchSearch/data/' + season);
+    request.success(function(matchSearch) {
+      console.log(matchSearch);
+      $scope.matchSearch = matchSearch;
+    });
+    request.error(function(matchSearch){
+      console.log('err');
+    });
+  };
 });
 
 // To implement "Insert a new record", you need to:
@@ -145,12 +189,19 @@ app.controller('Test', function($scope, $location) {
   console.log($location.absUrl());
 });
 
-app.controller('addPlayerController', ['$scope', '$location', function($scope, $location) {
+app.controller('addPlayerController', function($scope,$http, $location, $window) {
   $scope.addPlayer = function(x) {
-  console.log(x.id)
-            window.location = "/userInfo/addPlayer/"+x.id;
+    console.log(x.id)
+    var request = $http.get("/userInfo/addPlayer/"+x.id);
+    request.success(function(message){
+      $window.alert(message);
+    });
+    request.error(function(err){
+      console.log(err);
+    })
+    //$window.alert(res);
   }
-}]);
+});
 
 app.controller('playerSearchToPlayerProfileController', ['$scope', '$location', function($scope, $location) {
   $scope.goPlayer = function(x) {
@@ -161,9 +212,15 @@ app.controller('playerSearchToPlayerProfileController', ['$scope', '$location', 
 
 
 app.controller('matchSearchToMatchController', ['$scope', '$location', function($scope, $location) {
-  $scope.goTeam = function(x) {
-  //console.log(x.id)
-  //          window.location = "/playerProfile/"+x.id;
+
+  $scope.goHomeTeam = function(x) {
+  console.log(x)
+            window.location = "/teamProfile/"+x;
+  }
+
+  $scope.goAwayTeam = function(x) {
+  console.log(x)
+            window.location = "/teamProfile/"+x;
   }
 }]);
 
@@ -179,7 +236,7 @@ app.controller('PlayerProfileController', function($scope, $http, $location) {
   console.log($location.absUrl().substring(start,end));
   var teamID = $location.absUrl().substring(start,end);
   $scope.Submit = function() {    //ng-click的submit操作
-  var request = $http.get('/playerProfile/id/' + teamID);     //把参数到, 跳到router操作
+  var request = $http.get('/playerProfile/id/' + teamID); //把参数到, 跳到router操作
   request.success(function(data) {
       $scope.data = data;
       $scope.data2 = [
@@ -286,8 +343,32 @@ app.controller('followPlayersController', function($scope, $http, $location, $wi
   }
 
   $scope.Pos = function(p, x) {
-    $http.get(`/userInfo/createTeam/${p}/${x.id}`);
-    $window.alert("add!");
+    var res = $http.get(`/userInfo/createTeam/${p}/${x.id}`);
+    res.success(function(message) {
+      $window.alert(message);
+    });
+    res.error(function() {
+      console.log('err');
+    })
   }
 
+  $scope.DelPlayer = function(x) {
+    var res = $http.get(`/userInfo/DeletePlayer/${x.id}`);
+    res.success(function(message) {
+      
+      var request = $http.get('../dashboard/followedPlayers/');
+      request.success(function(data) {
+        console.log(data);
+        $scope.PlayerList = data;
+      });
+      request.error(function(playerSearch){
+          console.log('err');
+      });
+
+      $window.alert(message);
+    });
+    res.error(function() {
+      console.log('err');
+    })
+  }
 });
