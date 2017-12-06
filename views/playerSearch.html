@@ -82,9 +82,9 @@
              </select>
  
 
-        <p style="padding: 2em;"><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span>
-            <button type="button" ng-click="Submit()" class="button">Search</button>
-        </p>
+        <!--<p style="padding: 2em;"><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span>-->
+              <button type="button" ng-click="Submit()" class="btn btn-success">Search</button>                
+        <!-- </p> -->
         <table border="0" cellpadding="10" cellspacing="1" width="500" align="center" class="table table-hover">
             <thead>                
             <tr>
@@ -93,18 +93,19 @@
             <th> Team </th>
             <th> Age </th>
             <th> Nationality </th>
+            <th> Position </th>
             <th> Overall </th>
             <th> Follow </th>
           </thead>
           
             <tr ng-repeat="x in playerSearch">
             <td><img style="display:block;" width="80%" height="80%" src={{x.photo}} class="img-fluid" alt="Responsive image" onerror="this.src='https://kicentral.com/thumbor/VvKksxGuYGQ-skWjbsxvosnu9gM=/48x48/filters:round_corner(20,255,255,255)/https%3A%2F%2Fkicentral.com%2Fmisc%2Fdefaultavatar.png'"/> </td>                
-            <td> <a href="" ng-click="goPlayer(x)" ng-controller="playerSearchToPlayerProfileController">{{x.name}}</a>  </td>
-            <td> {{x.club}} </td>
-            <td> {{x.age}} </td>
-            <td> {{x.nationality}} </td>
-            <td> {{x.overall}} </td>
-            <td> <button type="button" class="btn btn-secondary" ng-click="addPlayer(x)" ng-controller="addPlayerController">Add </button></td>
+            <td class="align-middle"> <a href="" ng-click="goPlayer(x)" ng-controller="playerSearchToPlayerProfileController">{{x.name}}</a>  </td>
+            <td class="align-middle"> {{x.age}} </td>
+            <td class="align-middle"> {{x.nationality}} </td>
+            <td class="align-middle"> {{x.preferposition}} </td>            
+            <td class="align-middle"> {{x.overall}} </td>
+            <td class="align-middle"> <button type="button" class="btn btn-secondary" ng-click="addPlayer(x)" ng-controller="addPlayerController">Add </button></td>
         </tr>
         </table>
         </div>

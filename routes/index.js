@@ -120,7 +120,7 @@ router.get('/playerSearch/data/:playerAge/:playerNationality/:playerClub/:player
     query_club = "";
   }
 
-  var query = "select p.photo, p.id, p.name, p.club, p.age, p.nationality, p.overall from mydb.PlayerPersonalData p where "+query_age+ query_nation + query_club+ query_overall + " order by p.overall desc limit 50";
+  var query = "select p.photo, p.id, p.name, p.club, p.age, p.nationality, p.overall, p1.preferposition from mydb.PlayerPersonalData p natural join mydb.PlayerPlayingPositionData p1 where "+query_age+ query_nation + query_club+ query_overall + " order by p.overall desc limit 50";
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
