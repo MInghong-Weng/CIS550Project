@@ -238,17 +238,19 @@ router.get('/userInfo/addTeam/:id', function(req, res, next) {
       for (var i = 0; i < teams.length; i++) {
         if (teams[i] === teamId) {
             exist = true;
-            res.json(teams);
+            res.send("Already added!");
         }
       }
-      teams.push(teamId);
-      User.findByIdAndUpdate(req.user.doc._id, {$set:{followedTeams: teams}},(err, docs)=> {
-        if (err) {
-          console.log(err);
-        } else {
-          res.send("Successfully add data!");
-        }
-      })
+      if (!exist) {
+        teams.push(teamId);
+        User.findByIdAndUpdate(req.user.doc._id, {$set:{followedTeams: teams}},(err, docs)=> {
+          if (err) {
+            console.log(err);
+          } else {
+            res.send("Successfully add data!");
+          }
+        })
+      }
     });
   } else {
     res.send("Failed, You should login first!");
@@ -266,21 +268,20 @@ router.get('/userInfo/DeleteTeam/:id', function(req, res, next) {
       if (!teams) {
         teams = [];
         res.send(teams);
-      }
-
-      for (var i = 0; i < teams.length; i++) {
-        if (teams[i] != teamId) {
-            newTeams.push(teams[i]);
+      } else {
+        for (var i = 0; i < teams.length; i++) {
+          if (teams[i] != teamId) {
+              newTeams.push(teams[i]);
+          }
         }
+        User.findByIdAndUpdate(req.user.doc._id, {$set:{followedTeams: newTeams}},(err, docs)=> {
+          if (err) {
+            console.log(err);
+          } else {
+            res.send("Successfully delete data!");
+          }
+        })
       }
-
-      User.findByIdAndUpdate(req.user.doc._id, {$set:{followedTeams: newTeams}},(err, docs)=> {
-        if (err) {
-          console.log(err);
-        } else {
-          res.send("Successfully delete data!");
-        }
-      })
     });
   } else {
     res.send("Failed, You should login first!");
@@ -301,17 +302,20 @@ router.get('/userInfo/addPlayer/:id', function(req, res, next) {
       for (var i = 0; i < players.length; i++) {
         if (players[i] === playerId) {
             exist = true;
-            res.json(players);
+            res.send("Already added");
         }
       }
-      teams.push(playerId);
-      User.findByIdAndUpdate(req.user.doc._id, {$set:{followedPlayers: players}},(err, docs)=> {
-        if (err) {
-          console.log(err);
-        } else {
-          res.send("Successfully add data!");
-        }
-      })
+      if (!exist) {
+        console.log("!!!!!!");
+        players.push(playerId);
+        User.findByIdAndUpdate(req.user.doc._id, {$set:{followedPlayers: players}},(err, docs)=> {
+          if (err) {
+            console.log(err);
+          } else {
+            res.send("Successfully add data!");
+          }
+        })
+      }
     });
   } else {
     res.send("You should login first!");

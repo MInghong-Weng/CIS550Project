@@ -241,8 +241,13 @@ app.controller('followPlayersController', function($scope, $http, $location, $wi
   }
 
   $scope.Pos = function(p, x) {
-    $http.get(`/userInfo/createTeam/${p}/${x.id}`);
-    $window.alert("add!");
+    var res = $http.get(`/userInfo/createTeam/${p}/${x.id}`);
+    res.success(function(message) {
+      $window.alert(message);
+    });
+    req.error(function() {
+      console.log('err');
+    })
   }
 
 });
