@@ -304,7 +304,7 @@ router.get('/userInfo/addPlayer/:id', function(req, res, next) {
             res.json(players);
         }
       }
-      teams.push(playerId);
+      players.push(playerId);
       User.findByIdAndUpdate(req.user.doc._id, {$set:{followedPlayers: players}},(err, docs)=> {
         if (err) {
           console.log(err);

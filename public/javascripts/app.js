@@ -145,12 +145,19 @@ app.controller('Test', function($scope, $location) {
   console.log($location.absUrl());
 });
 
-app.controller('addPlayerController', ['$scope', '$location', function($scope, $location) {
+app.controller('addPlayerController', function($scope,$http, $location, $window) {
   $scope.addPlayer = function(x) {
-  console.log(x.id)
-            window.location = "/userInfo/addPlayer/"+x.id;
+    console.log(x.id)
+    var request = $http.get("/userInfo/addPlayer/"+x.id);
+    request.success(function(message){
+      $window.alert(message);
+    });
+    request.error(function(err){
+      console.log(err);
+    })
+    //$window.alert(res);
   }
-}]);
+});
 
 app.controller('playerSearchToPlayerProfileController', ['$scope', '$location', function($scope, $location) {
   $scope.goPlayer = function(x) {
