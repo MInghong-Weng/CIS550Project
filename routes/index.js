@@ -239,6 +239,7 @@ router.get('/userInfo/addTeam/:id', function(req, res, next) {
         if (teams[i] === teamId) {
             exist = true;
             res.send("Already added!");
+            break;
         }
       }
       if (!exist) {
@@ -303,10 +304,10 @@ router.get('/userInfo/addPlayer/:id', function(req, res, next) {
         if (players[i] === playerId) {
             exist = true;
             res.send("Already added");
+            break;
         }
       }
       if (!exist) {
-        console.log("!!!!!!");
         players.push(playerId);
         User.findByIdAndUpdate(req.user.doc._id, {$set:{followedPlayers: players}},(err, docs)=> {
           if (err) {

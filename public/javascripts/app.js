@@ -145,12 +145,19 @@ app.controller('Test', function($scope, $location) {
   console.log($location.absUrl());
 });
 
-app.controller('addPlayerController', ['$scope', '$location', function($scope, $location) {
+app.controller('addPlayerController', function($scope,$http, $location, $window) {
   $scope.addPlayer = function(x) {
-  console.log(x.id)
-            window.location = "/userInfo/addPlayer/"+x.id;
+    console.log(x.id)
+    var request = $http.get("/userInfo/addPlayer/"+x.id);
+    request.success(function(message){
+      $window.alert(message);
+    });
+    request.error(function(err){
+      console.log(err);
+    })
+    //$window.alert(res);
   }
-}]);
+});
 
 app.controller('playerSearchToPlayerProfileController', ['$scope', '$location', function($scope, $location) {
   $scope.goPlayer = function(x) {
@@ -199,7 +206,7 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
   console.log($location.absUrl().substring(start,end));
   var teamID = $location.absUrl().substring(start,end);
   $scope.Submit = function() {    //ng-click的submit操作
-  var request = $http.get('/teamProfile/id/' + teamID);     //把参数到, 跳到router操作
+  var request = $http.get('/teamProfile/id/' + teamID);     //把参数get到, 跳到router操作
   request.success(function(data) {
     // if (data>=10){
     //   $scope.color = 'red';
