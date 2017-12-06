@@ -206,7 +206,7 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
   console.log($location.absUrl().substring(start,end));
   var teamID = $location.absUrl().substring(start,end);
   $scope.Submit = function() {    //ng-click的submit操作
-  var request = $http.get('/teamProfile/id/' + teamID);     //把参数到, 跳到router操作
+  var request = $http.get('/teamProfile/id/' + teamID);     //把参数get到, 跳到router操作
   request.success(function(data) {
     // if (data>=10){
     //   $scope.color = 'red';
