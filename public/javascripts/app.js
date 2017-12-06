@@ -46,7 +46,7 @@ app.controller('playerController', function($scope, $http) {
 
         console.log(club);
 
-        var request = $http.get('/playerSearch/data/' + age + '/'+nation);
+        var request = $http.get('/playerSearch/data/' + age + '/'+nation+'/'+club);
         request.success(function(playerSearch) {
           //console.log(playerSearch);
             $scope.playerSearch = playerSearch;
