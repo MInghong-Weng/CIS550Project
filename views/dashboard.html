@@ -51,7 +51,6 @@
           </nav>
 
         <div class="container">
-
             <div class="table-responsive" ng-controller="followPlayersController">
                 <table class="table table-striped">
                     <thead>
@@ -72,8 +71,16 @@
                         <td>{{x.nationality}}</td>
                         <td>{{x.overall}}</td>
                         <td><button class="badge badge-primary" ng-click="Detail(x)">Detail</button></td>
-                        <td><a href=>Detail</a></td>
-                        <td><a href=>Detail</a></td>
+                        <td><button class="badge badge-primary" ng-click="Pos('GK', x)">GK</button></td>
+                        <td><button class="badge badge-primary" ng-click="Pos('CB1', x)">CB1</button></td>
+                        <td><button class="badge badge-primary" ng-click="Pos('CB2', x)">CB2</button></td>
+                        <td><button class="badge badge-primary" ng-click="Pos('LB', x)">LB</button></td>
+                        <td><button class="badge badge-primary" ng-click="Pos('CM1', x)">CM1</button></td>
+                        <td><button class="badge badge-primary" ng-click="Pos('CM2', x)">CM2</button></td>
+                        <td><button class="badge badge-primary" ng-click="Pos('LM', x)">LM</button></td>
+                        <td><button class="badge badge-primary" ng-click="Pos('RM', x)">RM</button></td>
+                        <td><button class="badge badge-primary" ng-click="Pos('CF1', x)">CF1</button></td>
+                        <td><button class="badge badge-primary" ng-click="Pos('CF2', x)">CF2</button></td>
                     </tr>
                     </tbody>
                 </table>

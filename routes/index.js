@@ -222,10 +222,9 @@ router.get('/userInfo/addTeam/:id', function(req, res, next) {
         if (err) {
           console.log(err);
         } else {
-          console.log("Successfully add data!");
+          res.send("Successfully add data!");
         }
       })
-      res.json(teams);
     });
   } else {
     res.send("Failed, You should login first!");
@@ -255,10 +254,9 @@ router.get('/userInfo/DeleteTeam/:id', function(req, res, next) {
         if (err) {
           console.log(err);
         } else {
-          console.log("Successfully delete data!");
+          res.send("Successfully delete data!");
         }
       })
-      res.json(teams);
     });
   } else {
     res.send("Failed, You should login first!");
@@ -287,10 +285,9 @@ router.get('/userInfo/addPlayer/:id', function(req, res, next) {
         if (err) {
           console.log(err);
         } else {
-          console.log("Successfully add data!");
+          res.send("Successfully add data!");
         }
       })
-      res.json(teams);
     });
   } else {
     res.send("You should login first!");
@@ -319,10 +316,9 @@ router.get('/userInfo/DeletePlayer/:id', function(req, res, next) {
         if (err) {
           console.log(err);
         } else {
-          console.log("Successfully delete data!");
+          res.send("Successfully delete data!");
         }
       })
-      res.json(teams);
     });
   } else {
     res.send("Failed, You should login first!");
@@ -343,16 +339,16 @@ router.get('/userInfo/createTeam/:pos/:id', function(req, res, next) {
       }
       if (exist) {
         res.send("Player already exists!");
+      } else {
+        players[pos] = playerId;
+        User.findByIdAndUpdate(req.user.doc._id, {$set:{myTeam: players}},(err, docs)=> {
+          if (err) {
+            console.log(err);
+          } else {
+            res.send("Successfully update team!");
+          }
+        })
       }
-      players.pos = playerId;
-      User.findByIdAndUpdate(req.user.doc._id, {$set:{myTeam: players}},(err, docs)=> {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("Successfully update team!");
-        }
-      })
-      res.json(teams);
     });
   } else {
     res.send("Failed, You should login first!");
@@ -368,7 +364,7 @@ router.get('/dashboard/followedPlayers/', function(req, res, next){
       connection.query(sqlLine, function(err, rows, fields) {
         if (err) console.log(err);
         else {
-          console.log(rows);
+          //console.log(rows);
           res.json(rows);
         }
       });

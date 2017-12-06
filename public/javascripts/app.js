@@ -221,7 +221,14 @@ app.controller('followPlayersController', function($scope, $http, $location, $wi
   request.error(function(playerSearch){
       console.log('err');
   });
+
   $scope.Detail = function(x) {
     $window.location = `/playerProfile/${x.id}`;
   }
+
+  $scope.Pos = function(p, x) {
+    $http.get(`/userInfo/createTeam/${p}/${x.id}`);
+    $window.alert("add!");
+  }
+
 });
