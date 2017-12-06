@@ -73,6 +73,15 @@
               <option value="">Please Select Club</option>
             </select>
 
+            <select ng-model="playerOverall">
+              <option value="">Please Select Overall Ability</option>
+              <option value="0"> Under 70 </option>
+              <option value="1"> 70 - 79 </option>
+              <option value="2"> 80 - 89 </option>
+              <option value="3"> 90 - 100 </option>
+             </select>
+ 
+
         <p style="padding: 2em;"><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span>
             <button type="button" ng-click="Submit()" class="button">Search</button>
         </p>

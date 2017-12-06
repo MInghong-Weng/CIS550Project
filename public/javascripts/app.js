@@ -30,6 +30,7 @@ app.controller('playerController', function($scope, $http) {
         var age = "ageUndefined";
         var nation="nationUndefined";
         var club = "clubUndefined";
+        var overall = "overallUndefined";
         console.log(nation);
 
         if($scope.playerNationality !== undefined && $scope.playerNationality !== null) {
@@ -43,10 +44,15 @@ app.controller('playerController', function($scope, $http) {
         if($scope.playerAge !== undefined && $scope.playerAge !== "") {
           age = $scope.playerAge;
         }
+        
+        if($scope.playerOverall !== undefined && $scope.playerOverall !== "") {
+          overall = $scope.playerOverall;
+        }
+        
 
         console.log(club);
 
-        var request = $http.get('/playerSearch/data/' + age + '/'+nation+'/'+club);
+        var request = $http.get('/playerSearch/data/' + age + '/'+nation+'/'+club + '/' + overall);
         request.success(function(playerSearch) {
           //console.log(playerSearch);
             $scope.playerSearch = playerSearch;
