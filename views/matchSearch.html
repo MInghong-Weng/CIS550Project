@@ -2,8 +2,8 @@
 <html ng-app="angularjsNodejsTutorial">
     <head>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
-        <script src="/javascripts/Chart.bundle.js" type="text/javascript"></script> 
-        <script src="/javascripts/angular-chart.js" type="text/javascript"></script>  
+        <script src="/javascripts/Chart.bundle.js" type="text/javascript"></script>
+        <script src="/javascripts/angular-chart.js" type="text/javascript"></script>
         <script src="javascripts/app.js" type="text/javascript"></script>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -61,6 +61,18 @@
              <option value="">Please Select Season</option>
            </select>
 
+           <select ng-model="matchStage" ng-options=" x.stage for x in stages">
+             <option value="">Please Select Round</option>
+           </select>
+
+           <select ng-model="matchHomeTeam" ng-options=" x.home_team_name for x in homeTeams">
+             <option value="">Please Select Home Team</option>
+           </select>
+
+           <select ng-model="matchAwayTeam" ng-options=" x.away_team_name for x in awayTeams">
+             <option value="">Please Select Away Team</option>
+           </select>
+
         <p style="padding: 2em;"><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span>
             <button type="button" ng-click="Submit()" class="button">Show Match</button>
         </p>
@@ -71,17 +83,16 @@
             <td> Date </td>
             <td> Home Team </td>
             <td> Home Team Goal </td>
-            <td> Away Team </td>
             <td> Away Team Goal </td>
+            <td> Away Team </td>
             <tr ng-repeat="x in matchSearch">
-            <!--<td> <a href="" ng-click="goTeam(x)" ng-controller="matchSearchToMatchController">{{x.id}}</a>  </td>-->
             <td> {{x.season}} </td>
             <td> {{x.stage}} </td>
             <td> {{x.date}} </td>
-            <td> {{x.home_team_name}} </td>
+            <td> <a href="" ng-click="goHomeTeam(x.home_team_api_id)" ng-controller="matchSearchToMatchController">{{x.home_team_name}}</a></td>
             <td> {{x.home_team_goal}} </td>
-            <td> {{x.away_team_name}} </td>
             <td> {{x.away_team_goal}} </td>
+            <td>  <a href="" ng-click="goAwayTeam(x.away_team_api_id)" ng-controller="matchSearchToMatchController">{{x.away_team_name}}</a> </td>
         </tr>
         </table>
         </div>
