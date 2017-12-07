@@ -187,14 +187,18 @@ app.controller('insertController',function($scope, $http){
 app.controller('userInfoController', function($scope, $http) {
   $scope.user="Please Login";
   $scope.visible = true;
+  $scope.showDash=false;  
   var req = $http.get('/userInfo');
   req.success((data) => {
       //console.log(data);
       if (data) {
         $scope.user = data.doc.name;
         $scope.visible = false;
+        $scope.showDash=true;        
       } else {
         $scope.user="Please Login";
+        $scope.showDash=false;
+      
       }
   })
   req.error((data) => {
