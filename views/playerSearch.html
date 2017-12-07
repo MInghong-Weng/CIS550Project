@@ -101,6 +101,7 @@
             <tr ng-repeat="x in playerSearch">
             <td><img style="display:block;" width="80%" height="80%" src={{x.photo}} class="img-fluid" alt="Responsive image" onerror="this.src='https://kicentral.com/thumbor/VvKksxGuYGQ-skWjbsxvosnu9gM=/48x48/filters:round_corner(20,255,255,255)/https%3A%2F%2Fkicentral.com%2Fmisc%2Fdefaultavatar.png'"/> </td>                
             <td class="align-middle"> <a href="" ng-click="goPlayer(x)" ng-controller="playerSearchToPlayerProfileController">{{x.name}}</a>  </td>
+            <td class="align-middle"> {{x.club}} </td>
             <td class="align-middle"> {{x.age}} </td>
             <td class="align-middle"> {{x.nationality}} </td>
             <td class="align-middle"> {{x.preferposition}} </td>            
