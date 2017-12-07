@@ -148,7 +148,7 @@ router.get('/playerProfile/id/:teamID', function(req, res, next) {
     if (err) console.log(err);
     else {res.json(rows);}
     });
-  
+
 });
 
 
@@ -246,6 +246,7 @@ router.get('/matchSearch/awayTeam', function(req, res, next) {
 
 
 router.get('/matchSearch/data/:matchSeason/:matchStage/:matchHomeTeam/:matchAwayTeam', function(req, res) {
+  console.log("router.get/matchSearch/data");
   console.log(req.params.matchSeason);
   console.log(req.params.matchStage);
   //console.log(req.params.matchDate);
@@ -281,12 +282,12 @@ router.get('/matchSearch/data/:matchSeason/:matchStage/:matchHomeTeam/:matchAway
   } else { query_date = "";}
 */
   if(req.params.matchHomeTeam !== "homeTeamUndefined") {
-    query_homeTeam = " AND home_team_name = '" + homeTeam  + "'";
+    query_homeTeam = " AND t1.team_short_name = '" + homeTeam  + "'";
     console.log(query_homeTeam);
   } else { query_homeTeam = "";}
 
   if(req.params.matchAwayTeam !== "awayTeamUndefined") {
-    query_awayTeam = " AND away_team_name = '" + awayTeam + "'";
+    query_awayTeam = " AND t2.team_short_name = '" + awayTeam + "'";
     console.log(query_awayTeam);
   } else { query_awayTeam = "";}
 
