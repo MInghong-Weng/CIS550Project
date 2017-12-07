@@ -141,11 +141,11 @@ app.controller('matchSearchController', function($scope, $http) {
       stage = $scope.matchStage.stage;
     }
 
-    if($scope.matchHomeTeam !== undefined && $scope.matchHomeTeam !== "") {
+    if($scope.matchHomeTeam !== undefined && $scope.matchHomeTeam !== null) {
       homeTeam = $scope.matchHomeTeam.home_team_name;
     }
 
-    if($scope.matchAwayTeam !== undefined && $scope.matchAwayTeam !== "") {
+    if($scope.matchAwayTeam !== undefined && $scope.matchAwayTeam !== null) {
       awayTeam = $scope.matchAwayTeam.away_team_name;
     }
 
@@ -247,7 +247,7 @@ app.controller('matchSearchToMatchController', ['$scope', '$location', function(
 
 app.controller('PlayerProfileController', function($scope, $http, $location) {
   //定义当前controller的范围（scope）内的函数、变量
-  
+
 
   $scope.message="";
   console.log($location.absUrl());
@@ -301,7 +301,7 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
             fixedStepSize: 1,
             lineTension: 0
           },
-          
+
         }
       ]
     },
@@ -311,7 +311,7 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
       }
     }
   };
-  
+
   $scope.message="";
   console.log($location.absUrl());
   var url = $location.absUrl();
