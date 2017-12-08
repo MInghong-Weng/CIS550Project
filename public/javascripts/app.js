@@ -122,30 +122,30 @@ app.controller('matchSearchController', function($scope, $http) {
 
   // search match according to user input
   $scope.Submit = function() {
-    console.log("matchSearch");
+    console.log("matchSearch submit()");
+
     var season="seasonUndefined";
     var stage = "stageUndefined";
     var homeTeam = "homeTeamUndefined";
     var awayTeam = "awayTeamUndefined";
 
-    console.log($scope.matchSeason.season);
-    console.log($scope.matchStage.stage);
-    console.log($scope.matchHomeTeam.home_team_name);
-    console.log($scope.matchAwayTeam.away_team_name);
-
     if($scope.matchSeason !== undefined && $scope.matchSeason !== null) {
+      console.log($scope.matchSeason.season);
       season = $scope.matchSeason.season.replace('/','-');
     }
 
     if($scope.matchStage !== undefined && $scope.matchStage !== null) {
+      console.log($scope.matchStage.stage);
       stage = $scope.matchStage.stage;
     }
 
     if($scope.matchHomeTeam !== undefined && $scope.matchHomeTeam !== null) {
+      console.log($scope.matchHomeTeam.home_team_name);
       homeTeam = $scope.matchHomeTeam.home_team_name;
     }
 
     if($scope.matchAwayTeam !== undefined && $scope.matchAwayTeam !== null) {
+      console.log($scope.matchAwayTeam.away_team_name);
       awayTeam = $scope.matchAwayTeam.away_team_name;
     }
 
@@ -153,6 +153,9 @@ app.controller('matchSearchController', function($scope, $http) {
     request.success(function(matchSearch) {
       console.log(matchSearch);
       $scope.matchSearch = matchSearch;
+      var date = $scope.matchSearch.date.replace('T04:00:00.000Z','');
+      $scope.matchSearch.date = date;
+      console.log("date:"+date);
     });
     request.error(function(matchSearch){
       console.log('err');
@@ -187,18 +190,18 @@ app.controller('insertController',function($scope, $http){
 app.controller('userInfoController', function($scope, $http) {
   $scope.user="Please Login";
   $scope.visible = true;
-  $scope.showDash=false;  
+  $scope.showDash=false;
   var req = $http.get('/userInfo');
   req.success((data) => {
       //console.log(data);
       if (data) {
         $scope.user = data.doc.name;
         $scope.visible = false;
-        $scope.showDash=true;        
+        $scope.showDash=true;
       } else {
         $scope.user="Please Login";
         $scope.showDash=false;
-      
+
       }
   })
   req.error((data) => {
