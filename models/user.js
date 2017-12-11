@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   id: { type: String, required: true, unqiue: true},
+  userid: {type: String},
   name: { type: String, required: true},
   followedPlayers: [{type: String}],
   followedTeams: [{type: String}],

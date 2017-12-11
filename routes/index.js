@@ -364,6 +364,7 @@ router.get('/userInfo/createTeam/:pos/:id', function(req, res, next) {
       for (var p in players) {
         if (p != pos && players.p == playerId) {
           exist = true;
+          break;
         }
       }
       if (exist) {
@@ -412,4 +413,17 @@ router.get('/dashboard/followedTeams/', function(req, res, next){
     res.send('Failed, You should login first!');
   }
 })
+
+// router.get('/dashboard/myTeam/', function(req, res, next){
+//   if (req.user) {
+//     User.findById(req.user.doc._id, (err, data)=>{
+//       var myTeam = data.myTeam;
+//       console.log(myTeam);
+//       res.json(data.myTeam);
+//     });
+//   } else {
+//     res.send('Failed, You should login first!');
+//   }
+// })
+
 module.exports = router;

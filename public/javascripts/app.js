@@ -236,17 +236,23 @@ app.controller("RadarCtrl", function ($scope) {
 app.controller('followPlayersController', function($scope, $http, $location, $window) {
   var request = $http.get('../dashboard/followedPlayers/');
   request.success(function(data) {
-    console.log(data);
     $scope.PlayerList = data;
   });
   request.error(function(playerSearch){
       console.log('err');
   });
 
-  $scope.Detail = function(x) {
-    $window.location = `/playerProfile/${x.id}`;
-  }
+  // /**************** */
+  // var myTeamReq = $http.get('../dashboard/myTeam/');
+  // myTeamReq.success(function(data) {
+  //   console.log(data);
+  //   $scope.PlayerList = data;
+  // });
+  // myTeamReq.error(function(playerSearch){
+  //     console.log('err');
+  // });
 
+ /******************* */
   $scope.Pos = function(p, x) {
     var res = $http.get(`/userInfo/createTeam/${p}/${x.id}`);
     res.success(function(message) {
@@ -260,7 +266,7 @@ app.controller('followPlayersController', function($scope, $http, $location, $wi
   $scope.DelPlayer = function(x) {
     var res = $http.get(`/userInfo/DeletePlayer/${x.id}`);
     res.success(function(message) {
-      
+
       var request = $http.get('../dashboard/followedPlayers/');
       request.success(function(data) {
         console.log(data);
@@ -275,5 +281,9 @@ app.controller('followPlayersController', function($scope, $http, $location, $wi
     res.error(function() {
       console.log('err');
     })
+  }
+
+  $scope.Detail = function(x) {
+    $window.location = `/playerProfile/${x.id}`;
   }
 });
