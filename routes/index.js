@@ -148,7 +148,7 @@ router.get('/playerProfile/id/:teamID', function(req, res, next) {
     if (err) console.log(err);
     else {res.json(rows);}
     });
-  
+
 });
 
 
@@ -217,9 +217,9 @@ router.get('/matchSearch/date', function(req, res, next) {
 router.get('/matchSearch/homeTeam', function(req, res, next) {
   var query = "select distinct t.team_short_name AS home_team_name \
   from mydb.Matches m \
-  INNER JOIN Team t ON m.home_team_api_id = t.team_api_id \
+  INNER JOIN mydb.Team t ON m.home_team_api_id = t.team_api_id \
   WHERE m.league_id = 1729\
-  ORDER BY m.date";
+  ORDER BY t.team_short_name";
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
@@ -232,9 +232,9 @@ router.get('/matchSearch/homeTeam', function(req, res, next) {
 router.get('/matchSearch/awayTeam', function(req, res, next) {
   var query = "select distinct t.team_short_name AS away_team_name \
   from mydb.Matches m \
-  INNER JOIN Team t ON m.away_team_api_id = t.team_api_id \
+  INNER JOIN mydb.Team t ON m.away_team_api_id = t.team_api_id \
   WHERE m.league_id = 1729\
-  ORDER BY m.date";
+  ORDER BY t.team_short_name";
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
@@ -245,7 +245,8 @@ router.get('/matchSearch/awayTeam', function(req, res, next) {
 });
 
 
-router.get('/matchSearch/data/:matchSeason/:matchStage/:matchDate/:matchHomeTeam/:matchAwayTeam', function(req, res) {
+router.get('/matchSearch/data/:matchSeason/:matchStage/:matchHomeTeam/:matchAwayTeam', function(req, res) {
+  console.log("router.get/matchSearch/data");
   console.log(req.params.matchSeason);
   console.log(req.params.matchStage);
   //console.log(req.params.matchDate);
@@ -281,12 +282,12 @@ router.get('/matchSearch/data/:matchSeason/:matchStage/:matchDate/:matchHomeTeam
   } else { query_date = "";}
 */
   if(req.params.matchHomeTeam !== "homeTeamUndefined") {
-    query_homeTeam = " AND home_team_name = '" + homeTeam  + "'";
+    query_homeTeam = " AND t1.team_short_name = '" + homeTeam  + "'";
     console.log(query_homeTeam);
   } else { query_homeTeam = "";}
 
   if(req.params.matchAwayTeam !== "awayTeamUndefined") {
-    query_awayTeam = " AND away_team_name = '" + awayTeam + "'";
+    query_awayTeam = " AND t2.team_short_name = '" + awayTeam + "'";
     console.log(query_awayTeam);
   } else { query_awayTeam = "";}
 
@@ -294,12 +295,12 @@ router.get('/matchSearch/data/:matchSeason/:matchStage/:matchDate/:matchHomeTeam
   m.season, m.stage, m.date, t1.team_short_name AS home_team_name, m.home_team_goal, \
   t2.team_short_name AS away_team_name, away_team_goal \
   FROM mydb.Matches m \
-  INNER JOIN Team t1 ON m.home_team_api_id = t1.team_api_id \
-  INNER JOIN Team t2 ON m.away_team_api_id = t2.team_api_id \
+  INNER JOIN mydb.Team t1 ON m.home_team_api_id = t1.team_api_id \
+  INNER JOIN mydb.Team t2 ON m.away_team_api_id = t2.team_api_id \
   WHERE m.league_id = 1729"
   + query_season + query_stage + query_homeTeam + query_awayTeam + " \
   ORDER BY m.date LIMIT 50";
-//1729
+
   console.log(query);
 
   connection.query(query, function(err, rows, fields) {
@@ -460,6 +461,7 @@ router.get('/userInfo/createTeam/:pos/:id', function(req, res, next) {
       for (var p in players) {
         if (p != pos && players.p == playerId) {
           exist = true;
+          break;
         }
       }
       if (exist) {
@@ -508,4 +510,17 @@ router.get('/dashboard/followedTeams/', function(req, res, next){
     res.send('Failed, You should login first!');
   }
 })
+
+// router.get('/dashboard/myTeam/', function(req, res, next){
+//   if (req.user) {
+//     User.findById(req.user.doc._id, (err, data)=>{
+//       var myTeam = data.myTeam;
+//       console.log(myTeam);
+//       res.json(data.myTeam);
+//     });
+//   } else {
+//     res.send('Failed, You should login first!');
+//   }
+// })
+
 module.exports = router;

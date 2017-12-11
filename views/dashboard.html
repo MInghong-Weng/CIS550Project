@@ -11,7 +11,7 @@
             background-image: url(https://images.unsplash.com/photo-1511439664149-58b346f60448?auto=format&fit=crop&w=1950&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D);
             background-position: center top;
             background-size: 100% auto;
-        }    
+        } 
         </style>
 
     </head>
@@ -52,7 +52,7 @@
 
         <div class="container">
             <div class="table-responsive" ng-controller="followPlayersController">
-                <table class="table table-striped">
+                <table class="table table-striped table-dark">
                     <thead>
                     <tr>
                         <th>Avatar</th>
@@ -66,33 +66,65 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="x in PlayerList">
-                        <td><img ng-src="{{x.Photo}}" /></td>
-                        <td>{{x.name}}</td>
-                        <td>{{x.club}}</td>
-                        <td>{{x.nationality}}</td>
-                        <td>{{x.overall}}</td>
-                        
-                        <td><button class="badge badge-success" ng-click="Detail(x)">Detail</button></td>
-                        <td><button class="badge badge-success" ng-click="DelPlayer(x)">Delete</button></td>
-                        <td colspan="3">
-                          <button class="badge badge-primary" ng-click="Pos('CB1', x)">CB1</button>
-                          <button class="badge badge-primary" ng-click="Pos('CB2', x)">CB2</button>
-                          <button class="badge badge-primary" ng-click="Pos('LB', x)">LB</button>
-                          <button class="badge badge-primary" ng-click="Pos('CM1', x)">CM1</button>
-                          <button class="badge badge-primary" ng-click="Pos('CM2', x)">CM2</button>
-                          <button class="badge badge-primary" ng-click="Pos('GK', x)">GK</button>
-                          <button class="badge badge-primary" ng-click="Pos('LM', x)">LM</button>
-                          <button class="badge badge-primary" ng-click="Pos('RM', x)">RM</button>
-                          <button class="badge badge-primary" ng-click="Pos('CF1', x)">CF1</button>
-                          <button class="badge badge-primary" ng-click="Pos('CF2', x)">CF2</button>
-                        </td>
-                    </tr>
+                      <tr ng-repeat="x in PlayerList">
+                          <td><img ng-src="{{x.Photo}}" /></td>
+                          <td>{{x.name}}</td>
+                          <td>{{x.club}}</td>
+                          <td>{{x.nationality}}</td>
+                          <td>{{x.overall}}</td>
+                          
+                          <td><button class="badge badge-success" ng-click="Detail(x)">Detail</button></td>
+                          <td><button class="badge badge-success" ng-click="DelPlayer(x)">Delete</button></td>
+                          <td colspan="3">
+                            <button class="badge badge-primary" ng-click="Pos('CB1', x)">CB1</button>
+                            <button class="badge badge-primary" ng-click="Pos('CB2', x)">CB2</button>
+                            <button class="badge badge-primary" ng-click="Pos('LB', x)">LB</button>
+                            <button class="badge badge-primary" ng-click="Pos('CM1', x)">CM1</button>
+                            <button class="badge badge-primary" ng-click="Pos('CM2', x)">CM2</button>
+                            <button class="badge badge-primary" ng-click="Pos('GK', x)">GK</button>
+                            <button class="badge badge-primary" ng-click="Pos('LM', x)">LM</button>
+                            <button class="badge badge-primary" ng-click="Pos('RM', x)">RM</button>
+                            <button class="badge badge-primary" ng-click="Pos('CF1', x)">CF1</button>
+                            <button class="badge badge-primary" ng-click="Pos('CF2', x)">CF2</button>
+                          </td>
+                      </tr>
                     </tbody>
+                </table>
+                <table background="pic/Boisko.svg" align="center" style="width:450px; height:680px; text-align:center; vertical-align:middle;" >
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td ng-model="CF1"><img ng-src="{{CF1.Photo}}" />{{CF1}}</td>
+                      <td></td>
+                      <td ng-model="CF2">{{CF2}}</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                        <td ng-model="LM">{{LM}}</td>
+                        <td ng-model="CM1">{{CM1}}</td>
+                        <td></td>
+                        <td ng-model="CM2">{{CM2}}</td>
+                        <td ng-model="RM">{{RM}}</td>
+                    </tr>
+                    <tr>
+                        <td ng-model="LB">{{LB}}</td>
+                        <td ng-model="CB1">{{CB1}}</td>
+                        <td></td>
+                        <td ng-model="CB2">{{CB2}}</td>
+                        <td ng-model="RB">{{RB}}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td ng-model="GK">{{GK}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+        
+                  </tbody>
                 </table>
             </div>
         </div>
-
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>

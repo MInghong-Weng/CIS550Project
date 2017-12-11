@@ -122,17 +122,34 @@ app.controller('matchSearchController', function($scope, $http) {
 
   // search match according to user input
   $scope.Submit = function() {
-    console.log("matchSearch");
-    console.log($scope.matchSeason);
+    console.log("matchSearch submit()");
 
     var season="seasonUndefined";
-    console.log(season);
+    var stage = "stageUndefined";
+    var homeTeam = "homeTeamUndefined";
+    var awayTeam = "awayTeamUndefined";    
 
     if($scope.matchSeason !== undefined && $scope.matchSeason !== null) {
+      console.log($scope.matchSeason.season);
       season = $scope.matchSeason.season.replace('/','-');
     }
 
-    var request = $http.get('/matchSearch/data/' + season);
+    if($scope.matchStage !== undefined && $scope.matchStage !== null) {
+      console.log($scope.matchStage.stage);
+      stage = $scope.matchStage.stage;
+    }
+
+    if($scope.matchHomeTeam !== undefined && $scope.matchHomeTeam !== null) {
+      console.log($scope.matchHomeTeam.home_team_name);
+      homeTeam = $scope.matchHomeTeam.home_team_name;
+    }
+
+    if($scope.matchAwayTeam !== undefined && $scope.matchAwayTeam !== null) {
+      console.log($scope.matchAwayTeam.away_team_name);
+      awayTeam = $scope.matchAwayTeam.away_team_name;
+    }
+
+    var request = $http.get('/matchSearch/data/'+season+'/'+stage+'/'+homeTeam+'/'+awayTeam);
     request.success(function(matchSearch) {
       console.log(matchSearch);
       $scope.matchSearch = matchSearch;
@@ -170,14 +187,18 @@ app.controller('insertController',function($scope, $http){
 app.controller('userInfoController', function($scope, $http) {
   $scope.user="Please Login";
   $scope.visible = true;
+  $scope.showDash=false;
   var req = $http.get('/userInfo');
   req.success((data) => {
       //console.log(data);
       if (data) {
         $scope.user = data.doc.name;
         $scope.visible = false;
+        $scope.showDash=true;
       } else {
         $scope.user="Please Login";
+        $scope.showDash=false;
+
       }
   })
   req.error((data) => {
@@ -226,7 +247,7 @@ app.controller('matchSearchToMatchController', ['$scope', '$location', function(
 
 app.controller('PlayerProfileController', function($scope, $http, $location) {
   //定义当前controller的范围（scope）内的函数、变量
-  
+
 
   $scope.message="";
   console.log($location.absUrl());
@@ -280,7 +301,7 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
             fixedStepSize: 1,
             lineTension: 0
           },
-          
+
         }
       ]
     },
@@ -290,7 +311,7 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
       }
     }
   };
-  
+
   $scope.message="";
   console.log($location.absUrl());
   var url = $location.absUrl();
@@ -331,17 +352,23 @@ app.controller("RadarCtrl", function ($scope) {
 app.controller('followPlayersController', function($scope, $http, $location, $window) {
   var request = $http.get('../dashboard/followedPlayers/');
   request.success(function(data) {
-    console.log(data);
     $scope.PlayerList = data;
   });
   request.error(function(playerSearch){
       console.log('err');
   });
 
-  $scope.Detail = function(x) {
-    $window.location = `/playerProfile/${x.id}`;
-  }
+  // /**************** */
+  // var myTeamReq = $http.get('../dashboard/myTeam/');
+  // myTeamReq.success(function(data) {
+  //   console.log(data);
+  //   $scope.PlayerList = data;
+  // });
+  // myTeamReq.error(function(playerSearch){
+  //     console.log('err');
+  // });
 
+ /******************* */
   $scope.Pos = function(p, x) {
     var res = $http.get(`/userInfo/createTeam/${p}/${x.id}`);
     res.success(function(message) {
@@ -355,7 +382,7 @@ app.controller('followPlayersController', function($scope, $http, $location, $wi
   $scope.DelPlayer = function(x) {
     var res = $http.get(`/userInfo/DeletePlayer/${x.id}`);
     res.success(function(message) {
-      
+
       var request = $http.get('../dashboard/followedPlayers/');
       request.success(function(data) {
         console.log(data);
@@ -370,5 +397,9 @@ app.controller('followPlayersController', function($scope, $http, $location, $wi
     res.error(function() {
       console.log('err');
     })
+  }
+
+  $scope.Detail = function(x) {
+    $window.location = `/playerProfile/${x.id}`;
   }
 });
