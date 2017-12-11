@@ -44,11 +44,11 @@ app.controller('playerController', function($scope, $http) {
         if($scope.playerAge !== undefined && $scope.playerAge !== "") {
           age = $scope.playerAge;
         }
-        
+
         if($scope.playerOverall !== undefined && $scope.playerOverall !== "") {
           overall = $scope.playerOverall;
         }
-        
+
 
         console.log(club);
 
@@ -65,38 +65,102 @@ app.controller('playerController', function($scope, $http) {
 
 //matchSearch controller
 app.controller('matchSearchController', function($scope, $http) {
-        $scope.message="";
+  $scope.message="";
+/*
+  var season = (req.params.matchSeason).replace('-','/');
+  var stage = req.params.matchStage;
+  var date = (req.params.matchDate);
+  var matchHomeTeam = (req.params.matchHomeTeam);
+  var matchAwayTeam = (req.params.matchAwayTeam);
+*/
 
-        var req = $http.get('/matchSearch/season');
-        req.success((season) => {
-          $scope.seasons = season;
-          console.log('success');
-    })
-    req.error((season) => {
-        console.log('error');
-    })
+  // select range seasons
+  var reqSeason = $http.get('/matchSearch/season');
+  reqSeason.success((season) => {
+    $scope.seasons = season;
+    console.log('success');
+  })
+  reqSeason.error((season) => {
+    console.log('error');
+  })
 
-    $scope.Submit = function() {
+  var reqdate = $http.get('/matchSearch/stage');
+  reqdate.success((stage) => {
+    $scope.stages = stage;
+    console.log('success');
+  })
+  reqdate.error((stage) => {
+    console.log('error');
+  })
+/*
+  var reqdate = $http.get('/matchSearch/date');
+  reqdate.success((date) => {
+    $scope.dates = date;
+    console.log('success');
+  })
+  reqdate.error((date) => {
+    console.log('error');
+  })
+*/
+  var reqHomeTeam = $http.get('/matchSearch/homeTeam');
+  reqHomeTeam.success((homeTeam) => {
+    $scope.homeTeams = homeTeam;
+    console.log('success');
+  })
+  reqHomeTeam.error((homeTeam) => {
+    console.log('error');
+  })
 
-        console.log("matchSearch");
-        console.log($scope.matchSeason);
+  var reqAwayTeam = $http.get('/matchSearch/awayTeam');
+  reqAwayTeam.success((awayTeam) => {
+    $scope.awayTeams = awayTeam;
+    console.log('success');
+  })
+  reqAwayTeam.error((awayTeam) => {
+    console.log('error');
+  })
 
-        var season="seasonUndefined";
-        console.log(season);
+  // search match according to user input
+  $scope.Submit = function() {
+    console.log("matchSearch submit()");
 
-        //if($scope.playerNationality !== undefined && $scope.playerNationality !== null) {
-          season = $scope.matchSeason.season.replace('/','-');
-        //}
+    var season="seasonUndefined";
+    var stage = "stageUndefined";
+    var homeTeam = "homeTeamUndefined";
+    var awayTeam = "awayTeamUndefined";
 
-        var request = $http.get('/matchSearch/data/' + season);
-        request.success(function(matchSearch) {
-          //console.log(playerSearch);
-            $scope.matchSearch = matchSearch;
-        });
-        request.error(function(matchSearch){
-            console.log('err');
-        });
-    };
+    if($scope.matchSeason !== undefined && $scope.matchSeason !== null) {
+      console.log($scope.matchSeason.season);
+      season = $scope.matchSeason.season.replace('/','-');
+    }
+
+    if($scope.matchStage !== undefined && $scope.matchStage !== null) {
+      console.log($scope.matchStage.stage);
+      stage = $scope.matchStage.stage;
+    }
+
+    if($scope.matchHomeTeam !== undefined && $scope.matchHomeTeam !== null) {
+      console.log($scope.matchHomeTeam.home_team_name);
+      homeTeam = $scope.matchHomeTeam.home_team_name;
+    }
+
+    if($scope.matchAwayTeam !== undefined && $scope.matchAwayTeam !== null) {
+      console.log($scope.matchAwayTeam.away_team_name);
+      awayTeam = $scope.matchAwayTeam.away_team_name;
+    }
+
+    var request = $http.get('/matchSearch/data/'+season+'/'+stage+'/'+homeTeam+'/'+awayTeam);
+    request.success(function(matchSearch) {
+      console.log(matchSearch);
+      $scope.matchSearch = matchSearch;
+      var date = $scope.matchSearch.date.replace('T04:00:00.000Z','');
+      $scope.matchSearch.date = date;
+      console.log("date:"+date);
+    });
+    request.error(function(matchSearch){
+      console.log('err');
+    });
+  };
 });
 
 // To implement "Insert a new record", you need to:
@@ -126,14 +190,18 @@ app.controller('insertController',function($scope, $http){
 app.controller('userInfoController', function($scope, $http) {
   $scope.user="Please Login";
   $scope.visible = true;
+  $scope.showDash=false;
   var req = $http.get('/userInfo');
   req.success((data) => {
       //console.log(data);
       if (data) {
         $scope.user = data.doc.name;
         $scope.visible = false;
+        $scope.showDash=true;
       } else {
         $scope.user="Please Login";
+        $scope.showDash=false;
+
       }
   })
   req.error((data) => {
@@ -168,14 +236,22 @@ app.controller('playerSearchToPlayerProfileController', ['$scope', '$location', 
 
 
 app.controller('matchSearchToMatchController', ['$scope', '$location', function($scope, $location) {
-  $scope.goTeam = function(x) {
-  //console.log(x.id)
-  //          window.location = "/playerProfile/"+x.id;
+
+  $scope.goHomeTeam = function(x) {
+  console.log(x)
+            window.location = "/teamProfile/"+x;
+  }
+
+  $scope.goAwayTeam = function(x) {
+  console.log(x)
+            window.location = "/teamProfile/"+x;
   }
 }]);
 
 app.controller('PlayerProfileController', function($scope, $http, $location) {
   //定义当前controller的范围（scope）内的函数、变量
+
+
   $scope.message="";
   console.log($location.absUrl());
   var url = $location.absUrl();
@@ -184,20 +260,61 @@ app.controller('PlayerProfileController', function($scope, $http, $location) {
   console.log($location.absUrl().substring(start,end));
   var teamID = $location.absUrl().substring(start,end);
   $scope.Submit = function() {    //ng-click的submit操作
-  var request = $http.get('/playerProfile/id/' + teamID);     //把参数到, 跳到router操作
+  var request = $http.get('/playerProfile/id/' + teamID); //把参数到, 跳到router操作
   request.success(function(data) {
       $scope.data = data;
-
-
+      $scope.data2 = [
+        [data[0].Sprint_speed, data[0].Finishing, data[0].Short_passing, data[0].Standing_tackle, data[0].Stamina, data[0].Dribbling],
+        [0,0,0,0,0,0,0]
+      ];
+      console.log(data);
   });
   request.error(function(data){
       console.log('err');
   });
 };
+
+$scope.labels =["Speed", "Shot", "Pass", "Defense", "Stamina", "Dribbling"];
+
+
+
 });
 
 app.controller('TeamProfileController', function($scope, $http, $location) {
   //定义当前controller的范围（scope）内的函数、变量
+
+  $scope.labels = ["last10", "last9", "last8", "last7", "last6", "last5", "last4", "last3", "last2", "last1"];
+  $scope.series = ['Series A'];
+  /*$scope.data2 = [
+    [3,1,0,3,1,3,3]
+  ];*/
+  $scope.onClick = function (points, evt) {
+    console.log(points, evt);
+  };
+  $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }];
+  $scope.options = {
+    scales: {
+      yAxes: [
+        {
+          id: 'y-axis-1',
+          type: 'linear',
+          display: true,
+          position: 'left',
+          ticks: {
+            fixedStepSize: 1,
+            lineTension: 0
+          },
+
+        }
+      ]
+    },
+    elements: {
+      line: {
+          tension: 0  //straight lines instead of curve
+      }
+    }
+  };
+
   $scope.message="";
   console.log($location.absUrl());
   var url = $location.absUrl();
@@ -214,7 +331,10 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
     //   $scope.color = 'yellow';
     // }
       $scope.data = data;
-
+      $scope.data2 = [
+        [data[0].result10, data[0].result9, data[0].result8, data[0].result7, data[0].result6, data[0].result5],
+        [0,0,0,0,0,0,0]
+      ];
 
   });
   request.error(function(data){
@@ -224,14 +344,13 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
 };
 
 });
-app.controller("RadarCtrl", function ($scope) {
-  $scope.labels =["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"];
 
-  $scope.data = [
-    [65, 59, 90, 81, 56, 55, 40],
-    [28, 48, 40, 19, 96, 27, 100]
-  ];
+/********************************** Radar *******************************/
+app.controller("RadarCtrl", function ($scope) {
+
 });
+
+
 /********************************** dashboard *******************************/
 app.controller('followPlayersController', function($scope, $http, $location, $window) {
   var request = $http.get('../dashboard/followedPlayers/');
