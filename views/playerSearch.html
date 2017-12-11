@@ -87,27 +87,27 @@
         <!-- </p> -->
         <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="My Player!" data-hashtags="CIS550" data-lang="en" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         <table border="0" cellpadding="10" cellspacing="1" width="500" align="center" class="table table-striped table-dark">
-            <thead>                
+            <thead>
             <tr>
-            <th> Photo</th>
-            <th> Name</th>
-            <th> Team </th>
-            <th> Age </th>
-            <th> Nationality </th>
-            <th> Position </th>
-            <th> Overall </th>
-            <th> Follow </th>
+            <th style="text-align:center"> Photo</th>
+            <th style="text-align:center"> Name</th>
+            <th style="text-align:center"> Team </th>
+            <th style="text-align:center"> Age </th>
+            <th style="text-align:center"> Nationality </th>
+            <th style="text-align:center"> Position </th>
+            <th style="text-align:center"> Overall </th>
+            <th style="text-align:center"> Follow </th>
           </thead>
 
             <tr ng-repeat="x in playerSearch">
             <td><img style="display:block;" width="80%" height="80%" src={{x.photo}} class="img-fluid" alt="Responsive image" onerror="this.src='https://kicentral.com/thumbor/VvKksxGuYGQ-skWjbsxvosnu9gM=/48x48/filters:round_corner(20,255,255,255)/https%3A%2F%2Fkicentral.com%2Fmisc%2Fdefaultavatar.png'"/> </td>
-            <td class="align-middle"> <a href="" ng-click="goPlayer(x)" ng-controller="playerSearchToPlayerProfileController">{{x.name}}</a>  </td>
-            <td class="align-middle"> {{x.club}} </td>
-            <td class="align-middle"> {{x.age}} </td>
-            <td class="align-middle"> {{x.nationality}} </td>
-            <td class="align-middle"> {{x.preferposition}} </td>
-            <td class="align-middle"> {{x.overall}} </td>
-            <td class="align-middle"> <button type="button" class="btn btn-secondary" ng-click="addPlayer(x)" ng-controller="addPlayerController">Add </button></td>
+            <td class="align-middle" style="text-align:center"> <a href="" ng-click="goPlayer(x)" ng-controller="playerSearchToPlayerProfileController">{{x.name}}</a>  </td>
+            <td class="align-middle" style="text-align:center"> {{x.club}} </td>
+            <td class="align-middle" style="text-align:center"> {{x.age}} </td>
+            <td class="align-middle" style="text-align:center"> {{x.nationality}} </td>
+            <td class="align-middle" style="text-align:center"> {{x.preferposition}} </td>
+            <td class="align-middle" style="text-align:center"> {{x.overall}} </td>
+            <td class="align-middle" style="text-align:center"> <button type="button" class="btn btn-secondary" ng-click="addPlayer(x)" ng-controller="addPlayerController">Add </button></td>
         </tr>
         </table>
         </div>
