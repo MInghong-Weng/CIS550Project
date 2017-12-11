@@ -65,17 +65,18 @@
              <option value="">Please Select Round</option>
            </select>
 
-           <select ng-model="matchHomeTeam" ng-options=" x.home_team_name for x in homeTeams">
+           <select type="checkbox" ng-true-value="true" ng-false-value="false" ng-model="matchHomeTeam" ng-options=" x.home_team_name for x in homeTeams">
              <option value="">Please Select Home Team</option>
            </select>
 
-           <select ng-model="matchAwayTeam" ng-options=" x.away_team_name for x in awayTeams">
+           <select type="checkbox" ng-true-value="true" ng-false-value="false" ng-model="matchAwayTeam" ng-options=" x.away_team_name for x in awayTeams">
              <option value="">Please Select Away Team</option>
            </select>
 
         <p style="padding: 2em;"><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span>
-            <button type="button" ng-click="Submit()" class="button">Show Match</button>
+            <button type="button" ng-click="Submit()" class="button">Search Match</button>
         </p>
+
         <table border="0" cellpadding="10" cellspacing="1" width="500" align="center">
             <tr>
             <td> Season</td>
@@ -88,7 +89,7 @@
             <tr ng-repeat="x in matchSearch">
             <td> {{x.season}} </td>
             <td> {{x.stage}} </td>
-            <td> {{x.date}} </td>
+            <td class="collapsing">{{x.date | date:"MM/dd/yyyy"}}</td>
             <td> <a href="" ng-click="goHomeTeam(x.home_team_api_id)" ng-controller="matchSearchToMatchController">{{x.home_team_name}}</a></td>
             <td> {{x.home_team_goal}} </td>
             <td> {{x.away_team_goal}} </td>
