@@ -53,30 +53,30 @@
           </nav>
          <div class="container">
             <!-- Main component for a primary marketing message or call to action-->
-            <div class="jumbotron">
+            <!-- <div class="jumbotron"> -->
 
          <div ng-controller="matchSearchController">
 
-           <select ng-model="matchSeason" ng-options=" x.season for x in seasons">
+           <select ng-model="matchSeason" ng-options=" x.season for x in seasons" class="custom-select">
              <option value="">Please Select Season</option>
            </select>
 
-           <select ng-model="matchStage" ng-options=" x.stage for x in stages">
+           <select ng-model="matchStage" ng-options=" x.stage for x in stages" class="custom-select">
              <option value="">Please Select Round</option>
            </select>
 
-           <select ng-model="matchHomeTeam" ng-options=" x.home_team_name for x in homeTeams">
+           <select ng-model="matchHomeTeam" ng-options=" x.home_team_name for x in homeTeams" class="custom-select">
              <option value="">Please Select Home Team</option>
            </select>
 
-           <select ng-model="matchAwayTeam" ng-options=" x.away_team_name for x in awayTeams">
+           <select ng-model="matchAwayTeam" ng-options=" x.away_team_name for x in awayTeams" class="custom-select">
              <option value="">Please Select Away Team</option>
            </select>
 
-        <p style="padding: 2em;"><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span>
-            <button type="button" ng-click="Submit()" class="button">Show Match</button>
-        </p>
-        <table border="0" cellpadding="10" cellspacing="1" width="500" align="center">
+        <!-- <p style="padding: 2em;"><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span> -->
+            <button type="button" ng-click="Submit()" class="btn btn-success">Show Match</button>
+        <!-- </p> -->
+        <table border="0" cellpadding="10" cellspacing="1" width="500" align="center" class="table table-striped table-dark">
             <tr>
             <td> Season</td>
             <td> Round </td>
