@@ -88,7 +88,7 @@
             <tr ng-repeat="x in matchSearch">
             <td> {{x.season}} </td>
             <td> {{x.stage}} </td>
-            <td> {{x.date}} </td>
+            <td class="collapsing">{{x.date | date:"MM/dd/yyyy"}}</td>
             <td> <a href="" ng-click="goHomeTeam(x.home_team_api_id)" ng-controller="matchSearchToMatchController">{{x.home_team_name}}</a></td>
             <td> {{x.home_team_goal}} </td>
             <td> {{x.away_team_goal}} </td>
