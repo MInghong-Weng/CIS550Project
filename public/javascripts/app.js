@@ -361,15 +361,19 @@ app.controller('followPlayersController', function($scope, $http, $location, $wi
       console.log('err');
   });
 
-  // /**************** */
-  // var myTeamReq = $http.get('../dashboard/myTeam/');
-  // myTeamReq.success(function(data) {
-  //   console.log(data);
-  //   $scope.PlayerList = data;
-  // });
-  // myTeamReq.error(function(playerSearch){
-  //     console.log('err');
-  // });
+  /**************** */
+  var myTeamReq = $http.get('../dashboard/myTeam/');
+  myTeamReq.success(function(team) {
+    console.log(team);
+    for (var i in team) {
+      $scope[i] = team[i][0];
+    }
+  });
+  myTeamReq.error(function(playerSearch){
+      console.log('err');
+  });
+
+
 
  /******************* */
   $scope.Pos = function(p, x) {
@@ -380,12 +384,22 @@ app.controller('followPlayersController', function($scope, $http, $location, $wi
     res.error(function() {
       console.log('err');
     })
+
+    var myTeamReq = $http.get('../dashboard/myTeam/');
+    myTeamReq.success(function(team) {
+      console.log(team);
+      for (var i in team) {
+        $scope[i] = team[i][0];
+      }
+    });
+    myTeamReq.error(function(playerSearch){
+        console.log('err');
+    });
   }
 
   $scope.DelPlayer = function(x) {
     var res = $http.get(`/userInfo/DeletePlayer/${x.id}`);
     res.success(function(message) {
-
       var request = $http.get('../dashboard/followedPlayers/');
       request.success(function(data) {
         console.log(data);

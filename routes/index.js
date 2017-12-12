@@ -10,6 +10,7 @@ const connection = mysql.createConnection({
   user     : 'Project550',
   password : 'Project550',
   database : 'mydb',
+  multipleStatements: true,
 });
 
 //Connect to Mlab
@@ -19,7 +20,7 @@ mongoose.connect('mongodb://Project550:Project550.@ds113566.mlab.com:13566/mydb'
   if (err) {
     console.log('Could not connect to Mlab: ', err);
   } else {
-    console.log('Connected to Mlab!')
+    console.log('Connected to Mlab!');
   }
 });
 
@@ -454,6 +455,7 @@ router.get('/userInfo/DeletePlayer/:id', function(req, res, next) {
 router.get('/userInfo/createTeam/:pos/:id', function(req, res, next) {
   var playerId = req.params.id;
   var pos = req.params.pos;
+  var pic = req.params.pic;
   if (req.user) {
     User.findById(req.user.doc._id, (err, data) => {
       var players = data.myTeam;
@@ -481,6 +483,8 @@ router.get('/userInfo/createTeam/:pos/:id', function(req, res, next) {
     res.send("Failed, You should login first!");
   }
 })
+
+
 
 /************************************* Dashboard  ************************************/
 router.get('/dashboard/followedPlayers/', function(req, res, next){
@@ -511,16 +515,31 @@ router.get('/dashboard/followedTeams/', function(req, res, next){
   }
 })
 
-// router.get('/dashboard/myTeam/', function(req, res, next){
-//   if (req.user) {
-//     User.findById(req.user.doc._id, (err, data)=>{
-//       var myTeam = data.myTeam;
-//       console.log(myTeam);
-//       res.json(data.myTeam);
-//     });
-//   } else {
-//     res.send('Failed, You should login first!');
-//   }
-// })
+router.get('/dashboard/myTeam/', function(req, res, next){
+  if (req.user) {
+    User.findById(req.user.doc._id, (err, data)=>{
+      var myTeam = data.myTeam;
+      console.log(myTeam);
+      var posList = ['GK', 'CB1', 'CB2', 'LB', 'RB', 'CM1', 'CM2', 'LM', 'RM', 'CF1', 'CF2'];
+      var resList = {};
+      var sqlLine = '';
+      for (var i in posList) {
+        sqlLine += `select p.Photo, p.name from mydb.PlayerPersonalData p Where p.id = (${myTeam[posList[i]]});`;
+      }
+      connection.query(sqlLine, function(err, rows, fields) {
+        if (err) console.log(err);
+        else {
+          for (var i = 0; i < posList.length; i++) {
+            resList[posList[i]] = rows[i];
+          }
+          console.log(resList);
+          res.json(resList);
+        }
+      });
+    });
+  } else {
+    res.send('Failed, You should login first!');
+  }
+})
 
 module.exports = router;
