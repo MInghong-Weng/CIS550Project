@@ -247,8 +247,6 @@ app.controller('matchSearchToMatchController', ['$scope', '$location', function(
 
 app.controller('PlayerProfileController', function($scope, $http, $location) {
   //定义当前controller的范围（scope）内的函数、变量
-
-
   $scope.message="";
   console.log($location.absUrl());
   var url = $location.absUrl();
@@ -272,8 +270,7 @@ app.controller('PlayerProfileController', function($scope, $http, $location) {
 };
 
 $scope.labels =["Speed", "Shot", "Pass", "Defense", "Stamina", "Dribbling"];
-
-
+$scope.custom = ['#72C02C', '#72C02C'];
 
 });
 
@@ -282,9 +279,7 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
 
   $scope.labels = ["last10", "last9", "last8", "last7", "last6", "last5", "last4", "last3", "last2", "last1"];
   $scope.series = ['Series A'];
-  /*$scope.data2 = [
-    [3,1,0,3,1,3,3]
-  ];*/
+
   $scope.onClick = function (points, evt) {
     console.log(points, evt);
   };
@@ -328,9 +323,9 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
     //   $scope.color = 'yellow';
     // }
       $scope.data = data;
-      $scope.data2 = [
-        [data[0].result10, data[0].result9, data[0].result8, data[0].result7, data[0].result6, data[0].result5],
-        [0,0,0,0,0,0,0]
+      $scope.data3 = [
+        [data[0].result10, data[0].result9, data[0].result8, data[0].result7, data[0].result6, data[0].result5, data[0].result4, data[0].result3, data[0].result2, data[0].result1],
+        [0,3,0,1,0,0,0,0,0,0,0]
       ];
 
   });
@@ -339,6 +334,31 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
   });
 
 };
+
+});
+
+/**********************************TeamResultsController******************/
+app.controller('TeamResultsController', function($scope, $http, $location) {
+  //定义当前controller的范围（scope）内的函数、变量
+  $scope.message="";
+  console.log($location.absUrl());
+  var url = $location.absUrl();
+  var start = url.lastIndexOf("/")+1;
+  var end = url.length;
+  console.log($location.absUrl().substring(start,end));
+  var teamID = $location.absUrl().substring(start,end);
+
+  var request = $http.get('/teamResults/id/' + teamID);     //把参数get到, 跳到router操作
+  request.success(function(data) {
+    //console.log(data);
+      $scope.data2 = data;
+      console.log($scope.data2);
+  });
+  request.error(function(data){
+      console.log('err');
+  });
+
+
 
 });
 
