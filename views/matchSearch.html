@@ -14,6 +14,7 @@
         background-position: center top;
         background-size: 100% auto;
     }
+    p { font-family: Verdana; }
     </style>
 
     </head>
@@ -53,47 +54,50 @@
           </nav>
          <div class="container">
             <!-- Main component for a primary marketing message or call to action-->
-            <div class="jumbotron">
+            <!-- <div class="jumbotron"> -->
 
          <div ng-controller="matchSearchController">
 
-           <select ng-model="matchSeason" ng-options=" x.season for x in seasons">
+           <select ng-model="matchSeason" ng-options=" x.season for x in seasons" class="custom-select">
              <option value="">Please Select Season</option>
            </select>
 
-           <select ng-model="matchStage" ng-options=" x.stage for x in stages">
+           <select ng-model="matchStage" ng-options=" x.stage for x in stages" class="custom-select">
              <option value="">Please Select Round</option>
            </select>
 
-           <select ng-model="matchHomeTeam" ng-options=" x.home_team_name for x in homeTeams">
+           <select ng-model="matchHomeTeam" ng-options=" x.home_team_name for x in homeTeams" class="custom-select">
              <option value="">Please Select Home Team</option>
            </select>
 
-           <select ng-model="matchAwayTeam" ng-options=" x.away_team_name for x in awayTeams">
+           <select ng-model="matchAwayTeam" ng-options=" x.away_team_name for x in awayTeams" class="custom-select">
              <option value="">Please Select Away Team</option>
            </select>
 
-        <p style="padding: 2em;"><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span>
-            <button type="button" ng-click="Submit()" class="button">Show Match</button>
-        </p>
-        <table border="0" cellpadding="10" cellspacing="1" width="500" align="center">
+        <!-- <p style="padding: 2em;"><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span> -->
+            <button type="button" ng-click="Submit()" class="btn btn-success">Show Match</button>
+        <!-- </p> -->
+        <table border="0" cellpadding="10" cellspacing="1" width="500" align="center" class="table table-striped table-dark">
+            <thead>                
             <tr>
-            <td> Season</td>
-            <td> Round </td>
-            <td> Date </td>
-            <td> Home Team </td>
-            <td> Home Team Goal </td>
-            <td> Away Team Goal </td>
-            <td> Away Team </td>
+            <th style="text-align:center"> Season</th>
+            <th style="text-align:center"> Round </th>
+            <th style="text-align:center"> Date </th>
+            <th style="text-align:center"> Home Team </th>
+            <th style="text-align:center"> Home Team Goal </th>
+            <th style="text-align:center"> Away Team Goal </th>
+            <th style="text-align:center"> Away Team </th>
+          </thead>          
             <tr ng-repeat="x in matchSearch">
-            <td> {{x.season}} </td>
-            <td> {{x.stage}} </td>
-            <td> {{x.date}} </td>
-            <td> <a href="" ng-click="goHomeTeam(x.home_team_api_id)" ng-controller="matchSearchToMatchController">{{x.home_team_name}}</a></td>
-            <td> {{x.home_team_goal}} </td>
-            <td> {{x.away_team_goal}} </td>
-            <td>  <a href="" ng-click="goAwayTeam(x.away_team_api_id)" ng-controller="matchSearchToMatchController">{{x.away_team_name}}</a> </td>
+            <td style="text-align:center"> {{x.season}} </td>
+            <td style="text-align:center"> {{x.stage}} </td>
+            <td class="collapsing" style="text-align:center">{{x.date | date:"MM/dd/yyyy"}}</td>
+            <td style="text-align:center"> <a href="" ng-click="goHomeTeam(x.home_team_api_id)" ng-controller="matchSearchToMatchController">{{x.home_team_name}}</a></td>
+            <td style="text-align:center"> {{x.home_team_goal}} </td>
+            <td style="text-align:center"> {{x.away_team_goal}} </td>
+            <td style="text-align:center">  <a href="" ng-click="goAwayTeam(x.away_team_api_id)" ng-controller="matchSearchToMatchController">{{x.away_team_name}}</a> </td>
         </tr>
+
         </table>
         </div>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

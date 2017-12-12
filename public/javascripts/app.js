@@ -127,7 +127,7 @@ app.controller('matchSearchController', function($scope, $http) {
     var season="seasonUndefined";
     var stage = "stageUndefined";
     var homeTeam = "homeTeamUndefined";
-    var awayTeam = "awayTeamUndefined";
+    var awayTeam = "awayTeamUndefined";    
 
     if($scope.matchSeason !== undefined && $scope.matchSeason !== null) {
       console.log($scope.matchSeason.season);
@@ -153,9 +153,6 @@ app.controller('matchSearchController', function($scope, $http) {
     request.success(function(matchSearch) {
       console.log(matchSearch);
       $scope.matchSearch = matchSearch;
-      var date = $scope.matchSearch.date.replace('T04:00:00.000Z','');
-      $scope.matchSearch.date = date;
-      console.log("date:"+date);
     });
     request.error(function(matchSearch){
       console.log('err');
