@@ -20,7 +20,7 @@ const userSchema = new Schema({
     RM: {type: String, default: 0},
     CF1: {type: String, default: 0},
     CF2: {type: String, default: 0}
-  }
+  },
 });
 
 userSchema.statics.findOrCreate = require("find-or-create");
