@@ -54,6 +54,7 @@
             </div>
           </nav>
 
+
         <div class="container">
             <!-- Main component for a primary marketing message or call to action-->
             
@@ -65,11 +66,15 @@
                         <tr align="center">
                         <th colspan="2" > <p style="font-size:200%;" ng-repeat="x in data">{{x.team_long_name}}</p>
                           <p style="padding: 1em;" ng-repeat="x in data"><img ng-src="{{x.logo}}" height="150px"> </p> </th>                        
-                        <tr > <!--controller里面$scope.data-->                      
-                        <td colspan="2"> <canvas id="line" class="chart chart-line" chart-data="data3"
-                          chart-labels="labels" chart-series="series" chart-options="options"
-                          chart-dataset-override="datasetOverride" chart-click="onClick" height="50px">
-                          </canvas> </td>
+                        <tr>
+                        <td colspan="2">
+                            <div ng-controller="TeamResultsController">
+                                <canvas id="line" class="chart chart-line" chart-data="data3"
+                                  chart-labels="labels" chart-series="series" chart-options="options"
+                                  chart-dataset-override="datasetOverride" chart-click="onClick" height="50px">
+                                </canvas>
+                            </div>
+                        </td>                            
                       
                         <tr>
                         <th> short name </th>                        
@@ -133,16 +138,8 @@
                     </table>
                     </div>
 
-                    <div ng-controller="TeamResultsController">
-                        <table class="table table-striped table-dark" ng-repeat="y in data2">
-                        <tr>
-                            <th> results</th>
-                            <td> {{y.result}} </td>
-                        </table>
-                        
-                    </div>
+                    
         </div>
-
 
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
