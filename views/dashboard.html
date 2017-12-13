@@ -75,10 +75,11 @@
                           
                           <td><button class="badge badge-success" ng-click="Detail(x)">Detail</button></td>
                           <td><button class="badge badge-success" ng-click="DelPlayer(x)">Delete</button></td>
-                          <td colspan="3">
+                          <td colspan="2">
                             <button class="badge badge-primary" ng-click="Pos('CB1', x)">CB1</button>
                             <button class="badge badge-primary" ng-click="Pos('CB2', x)">CB2</button>
                             <button class="badge badge-primary" ng-click="Pos('LB', x)">LB</button>
+                            <button class="badge badge-primary" ng-click="Pos('RB', x)">RB</button>
                             <button class="badge badge-primary" ng-click="Pos('CM1', x)">CM1</button>
                             <button class="badge badge-primary" ng-click="Pos('CM2', x)">CM2</button>
                             <button class="badge badge-primary" ng-click="Pos('GK', x)">GK</button>
@@ -94,29 +95,29 @@
                   <tbody>
                     <tr>
                       <td></td>
-                      <td ng-model="CF1"><img ng-src="{{CF1.Photo}}" />{{CF1.name}}</td>
+                      <td ng-model="CF1"><img ng-src="{{CF1.Photo}}" /><span class="badge badge-primary">{{CF1.name}}</span></td>
                       <td></td>
-                      <td ng-model="CF2"><img ng-src="{{CF2.Photo}}" />{{CF2.name}}</td>
+                      <td ng-model="CF2"><img ng-src="{{CF2.Photo}}" /><span class="badge badge-primary">{{CF2.name}}</span></td>
                       <td></td>
                     </tr>
                     <tr>
-                        <td ng-model="LM"><img ng-src="{{LM.Photo}}" />{{LM.name}}</td>
-                        <td ng-model="CM1"><img ng-src="{{CM1.Photo}}" />{{CM1.name}}</td>
+                        <td ng-model="LM"><img ng-src="{{LM.Photo}}" /><span class="badge badge-primary">{{LM.name}}</span></td>
+                        <td ng-model="CM1"><img ng-src="{{CM1.Photo}}" /><span class="badge badge-primary">{{CM1.name}}</span></td>
                         <td></td>
-                        <td ng-model="CM2"><img ng-src="{{CM2.Photo}}" />{{CM2.name}}</td>
-                        <td ng-model="RM"><img ng-src="{{RM.Photo}}" />{{RM.name}}</td>
+                        <td ng-model="CM2"><img ng-src="{{CM2.Photo}}" /><span class="badge badge-primary">{{CM2.name}}</span></td>
+                        <td ng-model="RM"><img ng-src="{{RM.Photo}}" /><span class="badge badge-primary">{{RM.name}}</span></td>
                     </tr>
                     <tr>
-                        <td ng-model="LB"><img ng-src="{{LB.Photo}}" />{{LB.name}}</td>
-                        <td ng-model="CB1"><img ng-src="{{CB1.Photo}}" />{{CB1.name}}</td>
+                        <td ng-model="LB"><img ng-src="{{LB.Photo}}" /><span class="badge badge-primary">{{LB.name}}</span></td>
+                        <td ng-model="CB1"><img ng-src="{{CB1.Photo}}" /><span class="badge badge-primary">{{CB1.name}}</span></td>
                         <td></td>
-                        <td ng-model="CB2"><img ng-src="{{CB2.Photo}}" />{{CB2.name}}</td>
-                        <td ng-model="RB"><img ng-src="{{RB.Photo}}" />{{RB.name}}</td>
+                        <td ng-model="CB2"><img ng-src="{{CB2.Photo}}" /><span class="badge badge-primary">{{CB2.name}}</span></td>
+                        <td ng-model="RB"><img ng-src="{{RB.Photo}}" /><span class="badge badge-primary">{{RB.name}}</span></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td></td>
-                        <td ng-model="GK"><img ng-src="{{GK.Photo}}" />{{GK.name}}</td>
+                        <td ng-model="GK"><img ng-src="{{GK.Photo}}" /><span class="badge badge-primary">{{GK.name}}</span></td>
                         <td></td>
                         <td></td>
                     </tr>
