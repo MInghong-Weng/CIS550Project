@@ -254,7 +254,7 @@ app.controller('PlayerProfileController', function($scope, $http, $location) {
   var end = url.length;
   console.log($location.absUrl().substring(start,end));
   var teamID = $location.absUrl().substring(start,end);
-  $scope.Submit = function() {    //ng-click的submit操作
+
   var request = $http.get('/playerProfile/id/' + teamID); //把参数到, 跳到router操作
   request.success(function(data) {
       $scope.data = data;
@@ -267,7 +267,7 @@ app.controller('PlayerProfileController', function($scope, $http, $location) {
   request.error(function(data){
       console.log('err');
   });
-};
+
 
 $scope.labels =["Speed", "Shot", "Pass", "Defense", "Stamina", "Dribbling"];
 $scope.custom = ['#72C02C', '#72C02C'];
@@ -277,35 +277,7 @@ $scope.custom = ['#72C02C', '#72C02C'];
 app.controller('TeamProfileController', function($scope, $http, $location) {
   //定义当前controller的范围（scope）内的函数、变量
 
-  $scope.labels = ["last10", "last9", "last8", "last7", "last6", "last5", "last4", "last3", "last2", "last1"];
-  $scope.series = ['Series A'];
 
-  $scope.onClick = function (points, evt) {
-    console.log(points, evt);
-  };
-  $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }];
-  $scope.options = {
-    scales: {
-      yAxes: [
-        {
-          id: 'y-axis-1',
-          type: 'linear',
-          display: true,
-          position: 'left',
-          ticks: {
-            fixedStepSize: 1,
-            lineTension: 0
-          },
-
-        }
-      ]
-    },
-    elements: {
-      line: {
-          tension: 0  //straight lines instead of curve
-      }
-    }
-  };
 
   $scope.message="";
   console.log($location.absUrl());
@@ -323,10 +295,7 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
     //   $scope.color = 'yellow';
     // }
       $scope.data = data;
-      $scope.data3 = [
-        [data[0].result10, data[0].result9, data[0].result8, data[0].result7, data[0].result6, data[0].result5, data[0].result4, data[0].result3, data[0].result2, data[0].result1],
-        [0,3,0,1,0,0,0,0,0,0,0]
-      ];
+
 
   });
   request.error(function(data){
@@ -340,6 +309,41 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
 /**********************************TeamResultsController******************/
 app.controller('TeamResultsController', function($scope, $http, $location) {
   //定义当前controller的范围（scope）内的函数、变量
+  $scope.labels = ["last10", "last9", "last8", "last7", "last6", "last5", "last4", "last3", "last2", "last1"];
+  $scope.series = ['Last 10 Matches'];
+
+  $scope.onClick = function (points, evt) {
+    console.log(points, evt);
+  };
+  $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }];
+  $scope.options = {
+    scales: {
+      yAxes: [
+        {
+          id: 'y-axis-1',
+          type: 'linear',
+          display: true,
+          position: 'left',
+          ticks: {
+            beginAtZero: true,
+            fixedStepSize: 1,
+            lineTension: 0,
+            callback: function(value, index, values){
+              if (value == 0){return 'Lost'};
+              if (value == 1){return 'Draw'};
+              if (value == 2){return 'Won'};
+            }
+          },
+        }
+      ]
+    },
+    elements: {
+      line: {
+          tension: 0  //straight lines instead of curve
+      }
+    }
+  };
+
   $scope.message="";
   console.log($location.absUrl());
   var url = $location.absUrl();
@@ -352,6 +356,10 @@ app.controller('TeamResultsController', function($scope, $http, $location) {
   request.success(function(data) {
     //console.log(data);
       $scope.data2 = data;
+      console.log($scope.data2);
+      $scope.data3 = [
+        [data[0].result, data[1].result, data[2].result, data[3].result, data[4].result, data[5].result, data[6].result, data[7].result, data[8].result, data[9].result],
+      ];
       console.log($scope.data2);
   });
   request.error(function(data){
