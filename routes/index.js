@@ -121,7 +121,7 @@ router.get('/playerSearch/data/:playerAge/:playerNationality/:playerClub/:player
     query_club = "";
   }
 
-  var query = "select p.photo, p.id, p.name, p.club, p.age, p.nationality, p.overall, p1.preferposition from mydb.PlayerPersonalData p natural join mydb.PlayerPlayingPositionData p1 where "+query_age+ query_nation + query_club+ query_overall + " order by p.overall desc limit 50";
+  var query = "select p.photo, p.id, p.name, p.club, p.age, p.nationality, p.overall, p1.preferposition from mydb.PlayerPersonalData p natural join mydb.PlayerPlayingPositionData p1 where "+query_age+ query_nation + query_club+ query_overall + " order by p.overall desc limit 100";
   console.log(query);
   connection.query(query, function(err, rows, fields) {
     if (err) console.log(err);
@@ -311,7 +311,7 @@ router.get('/matchSearch/data/:matchSeason/:matchStage/:matchHomeTeam/:matchAway
   INNER JOIN mydb.Team t2 ON m.away_team_api_id = t2.team_api_id \
   WHERE m.league_id = 1729"
   + query_season + query_stage + query_homeTeam + query_awayTeam + " \
-  ORDER BY m.date LIMIT 50";
+  ORDER BY m.date desc LIMIT 100";
 
   console.log(query);
 
