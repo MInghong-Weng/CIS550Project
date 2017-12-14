@@ -77,55 +77,58 @@
                         </td>                            
                       
                         <tr>
-                        <th> short name </th>                        
+                        <th> Short Name </th>
+                        <th> Total Goal </th>                         
                         <tr > <!--controller里面$scope.data-->                      
-                        <td> {{x.team_short_name}} </td>
+                        <td> {{x.team_short_name}} </td>            
+                        <td ng-controller="TeamGoalController" ng-model="z"> {{z}} </td>
+                        
                         
                         <tr>
-                        <th> buildUpPlaySpeed</th>
-                        <th> buildUpPlaySpeedClass</th>
+                        <th> Build Up Play Speed</th>
+                        <th> Build Up Play Speed Class</th>
                         <tr > <!--controller里面$scope.data-->
                           <td ng-class="{green: x.buildUpPlaySpeed >=60, yellow: x.buildUpPlaySpeed >=40, red: x.buildUpPlaySpeed <=40 }"> {{x.buildUpPlaySpeed}} </td>
                           <td > {{x.buildUpPlaySpeedClass}} </td>
 
                         <tr>
-                        <th> buildUpPlayDribbling</th>
-                        <th> buildUpPlayDribblingClass</th>
+                        <th> Build Up Play Dribbling</th>
+                        <th> Build Up Play Dribbling Class</th>
                         <tr > <!--controller里面$scope.data-->
                           <td ng-class="{green: x.buildUpPlayDribbling >=60, yellow: x.buildUpPlayDribbling >=40, red: x.buildUpPlayDribbling <=40 }"> {{x.buildUpPlayDribbling}} </td>
                           <td > {{x.buildUpPlayDribblingClass}} </td>
 
                         <tr>
-                        <th> buildUpPlayPassing</th>
-                        <th> buildUpPlayPassingClass</th>
+                        <th> Build Up Play Passing</th>
+                        <th> Build Up Play PassingClass</th>
                         <tr > <!--controller里面$scope.data-->
                           <td ng-class="{green: x.buildUpPlayPassing >=60, yellow: x.buildUpPlayPassing >=40, red: x.buildUpPlayPassing <=40 }"> {{x.buildUpPlayPassing}} </td>
                           <td > {{x.buildUpPlayPassingClass}} </td>  
 
                         <tr>
-                        <th> chanceCreationPassing</th>
-                        <th> chanceCreationPassingClass</th>
+                        <th> Chance Creation Passing</th>
+                        <th> Chance Creation Passing Class</th>
                         <tr > <!--controller里面$scope.data-->
                           <td ng-class="{green: x.chanceCreationPassing >=60, yellow: x.chanceCreationPassing >=40, red: x.chanceCreationPassing <=40 }"> {{x.chanceCreationPassing}} </td>
                           <td > {{x.chanceCreationPassingClass}} </td>
                           
                         <tr>
-                        <th> chanceCreationShooting</th>
-                        <th> chanceCreationShootingClass</th>
+                        <th> Chance Creation Shooting</th>
+                        <th> Chance Creation ShootingClass</th>
                         <tr > <!--controller里面$scope.data-->
                           <td ng-class="{green: x.chanceCreationShooting >=60, yellow: x.chanceCreationShooting >=40, red: x.chanceCreationShooting <=40 }"> {{x.chanceCreationShooting}} </td>
                           <td > {{x.chanceCreationShootingClass}} </td> 
 
                         <tr>
-                        <th> defencePressure</th>
-                        <th> defencePressureClass</th>
+                        <th> Defence Pressure</th>
+                        <th> Defence Pressure Class</th>
                         <tr > <!--controller里面$scope.data-->
                           <td ng-class="{green: x.defencePressure >=60, yellow: x.defencePressure >=40, red: x.defencePressure <=40 }"> {{x.defencePressure}} </td>
                           <td > {{x.defencePressureClass}} </td>
                           
                         <tr>
-                        <th> defenceAggression</th>
-                        <th> defenceAggressionClass</th>
+                        <th> Defence Aggression</th>
+                        <th> Defence AggressionClass</th>
                         <tr > <!--controller里面$scope.data-->
                           <td ng-class="{green: x.defenceAggression >=60, yellow: x.defenceAggression >=40, red: x.defenceAggression <=40 }"> {{x.defenceAggression}} </td>
                           <td > {{x.defenceAggressionClass}} </td> 

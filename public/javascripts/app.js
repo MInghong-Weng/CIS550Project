@@ -276,9 +276,6 @@ $scope.custom = ['#72C02C', '#72C02C'];
 
 app.controller('TeamProfileController', function($scope, $http, $location) {
   //定义当前controller的范围（scope）内的函数、变量
-
-
-
   $scope.message="";
   console.log($location.absUrl());
   var url = $location.absUrl();
@@ -303,6 +300,29 @@ app.controller('TeamProfileController', function($scope, $http, $location) {
   });
 
 };
+
+});
+
+app.controller('TeamGoalController', function($scope, $http, $location) {
+  //定义当前controller的范围（scope）内的函数、变量
+  $scope.message="";
+  console.log("subian");
+  var url = $location.absUrl();
+  var start = url.lastIndexOf("/")+1;
+  var end = url.length;
+  console.log($location.absUrl().substring(start,end));
+  var teamID = $location.absUrl().substring(start,end);
+
+  var request = $http.get('/teamGoal/id/' + teamID);     //把参数get到, 跳到router操作
+  request.success(function(data) {
+      console.log(data);
+      $scope.z = data[0].totalgoal;
+
+  });
+  request.error(function(data){
+      console.log('err');
+  });
+
 
 });
 
@@ -355,12 +375,9 @@ app.controller('TeamResultsController', function($scope, $http, $location) {
   var request = $http.get('/teamResults/id/' + teamID);     //把参数get到, 跳到router操作
   request.success(function(data) {
     //console.log(data);
-      $scope.data2 = data;
-      console.log($scope.data2);
       $scope.data3 = [
         [data[0].result, data[1].result, data[2].result, data[3].result, data[4].result, data[5].result, data[6].result, data[7].result, data[8].result, data[9].result],
       ];
-      console.log($scope.data2);
   });
   request.error(function(data){
       console.log('err');
