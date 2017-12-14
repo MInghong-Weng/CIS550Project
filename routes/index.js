@@ -174,6 +174,20 @@ router.get('/teamProfile/id/:teamID', function(req, res, next) {
       });
 });
 
+router.get('/teamGoal/id/:teamID', function(req, res, next) {
+  console.log(req.params);
+  var teamID = req.params.teamID;
+  var query = "select sum(goal) as totalgoal from (\
+                select sum(home_team_goal) as goal from Matches where home_team_api_id = "+teamID+" group by home_team_api_id\
+                union\
+                select sum(away_team_goal) as goal from Matches where away_team_api_id = "+teamID+" group by away_team_api_id) total";
+  console.log(query);
+  connection.query(query, function(err, rows, fields) {
+    if (err) console.log(err);
+    else {res.json(rows);}
+    });
+});
+
 router.get('/teamResults/id/:teamID', function(req, res, next) {
   console.log(req.params);
   var teamID = req.params.teamID;
