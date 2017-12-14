@@ -57,18 +57,7 @@
             <!-- <div class="jumbotron"> -->
 
          <div ng-controller="matchSearchController">
-           <script>
-             (function() {
-               var cx = '003687809174522341756:oe8oy5qabqg';
-               var gcse = document.createElement('script');
-               gcse.type = 'text/javascript';
-               gcse.async = true;
-               gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-               var s = document.getElementsByTagName('script')[0];
-               s.parentNode.insertBefore(gcse, s);
-             })();
-           </script>
-           <gcse:search></gcse:search>
+           
 
            <select ng-model="matchSeason" ng-options=" x.season for x in seasons" class="custom-select">
              <option value="">Please Select Season</option>
@@ -89,7 +78,18 @@
         <!-- <p style="padding: 2em;"><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span> -->
             <button type="button" ng-click="Submit()" class="btn btn-success">Show Match</button>
         <!-- </p> -->
-
+        <script>
+          (function() {
+            var cx = '003687809174522341756:oe8oy5qabqg';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+          })();
+        </script>
+        <gcse:search></gcse:search>
         <table border="0" cellpadding="10" cellspacing="1" width="500" align="center" class="table table-striped table-dark">
             <thead>
             <tr>
