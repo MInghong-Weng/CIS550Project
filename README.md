@@ -42,7 +42,7 @@ Tactic board: Users can create their own team by choosing positions for players.
 3. Use command: npm install
 4. Use command: node app
 
-## Data Source
+## Data Source And Schema
 
 Database are populated in AWS mySQL and MLab MongoDB
 
@@ -60,3 +60,48 @@ FIFA 18 (Game) Complete Player Dataset (CSV):
 - 70+ attributes
 - Player and Flag Images, Position, personal data like Nationality, Photo, Club, Age, Wage, Salary etc.
 - https://www.kaggle.com/stahamtan/fifa-18-interactive-exploration/data
+
+Schema:
+
+Relational Database:
+
+![](readmeImage/picture8.png)
+MongoDB:
+
+EmbeddedData Model {
+
+​            _id: <ObjectId>,
+
+​            name:  “Joe White”,
+
+​            Userid: 1234
+
+​            followedPlayers: [playerId1, playerId2,playerId3],
+
+​            myTeam: {
+
+​                        GK: playerId, 
+
+​                        CB1: playerId,
+
+​                        CB2: playerId, 
+
+​                        LB: playerId,
+
+​                        RB: playerId,
+
+​                        CM1: playerId,
+
+​                        CM2: playerId,
+
+​                        LM: playerId,
+
+​                        RM: playerId,
+
+​                        CF1: playerId,
+
+​                        CF2: playerId
+
+​	}
+
+}
