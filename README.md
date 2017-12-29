@@ -9,31 +9,31 @@ For the client side, the AngularJS is used to make requests, display data and re
 
 Twitter Feeds: Home page displays two twitter Hashtag search widget showing streaming data with hashtag Premier League and UEFA Champions League.
 
-![](readmeImage/picture1.png)Search Players: Allow users to search all players in FIFA18 DataBase according to certain conditions: Nationality, Age,  Current Club, Overall in-game ability. Each field can be selected to one value or left blank. Player search results including players’ photo, club, nationality, preferred position on field and overall ability.Users can also add a player to their personal dream football team at the player search result page.
+![img](readmeImage/picture1.png)Search Players: Allow users to search all players in FIFA18 DataBase according to certain conditions: Nationality, Age,  Current Club, Overall in-game ability. Each field can be selected to one value or left blank. Player search results including players’ photo, club, nationality, preferred position on field and overall ability.Users can also add a player to their personal dream football team at the player search result page.
 
-![](readmeImage/picture2.png)
+![img](readmeImage/picture2.png)
 
 Search Team: Present 34 teams in the EPL with their latest 10 matches records and team attributes.
 
-![](readmeImage/picture3.png)
+![img](readmeImage/picture3.png)
 
 Team Profile: Display detailed team information and attributes in a spreadsheet with colored scores, and line chart of performance trend, the total goal in recent seasons. 
 
-![](readmeImage/picture4.png)
+![img](readmeImage/picture4.png)
 
 Search Match: Filtered by Match, Round, Home Team and Away Team, present above information plus Date and Scores for both teams. The user can navigate to the Team detail page.
 
-![](readmeImage/picture5.png)
+![img](readmeImage/picture5.png)
 
 Player Profile: Display detailed player information in spreadsheet and radar chart. The user can also share their player’s profile link to Twitter by Twitter Button.
 
-![](readmeImage/picture6.png)
+![img](readmeImage/picture6.png)
 
 Followed Players: Displaying the list of user's followed players if the user is logged in. Otherwise, the link to the dashboard is hidden. Once a user is logged in, the web app would check whether he/she has registered. If not, the app would create a document to hold the user data with default values. The user can add their favorite players to their list or delete from the dashboard.Tactic board: Users can create their own team by choosing positions for players.
 
 Tactic board: Users can create their own team by choosing positions for players.
 
-![](readmeImage/picture7.png)
+![img](readmeImage/picture7.png)
 
 ##How To Run
 
@@ -65,7 +65,7 @@ Schema:
 
 Relational Database:
 
-![](readmeImage/picture8.png)
+![img](readmeImage/picture8.png)
 MongoDB:
 
 EmbeddedData Model {
