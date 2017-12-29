@@ -9,10 +9,10 @@ For the client side, the AngularJS is used to make requests, display data and re
 
 Twitter Feeds: Home page displays two twitter Hashtag search widget showing streaming data with hashtag Premier League and UEFA Champions League.
 
-![img](/readmeImage/picture1.png)
+![img](readmeImage/Picture1.png)
 Search Players: Allow users to search all players in FIFA18 DataBase according to certain conditions: Nationality, Age,  Current Club, Overall in-game ability. Each field can be selected to one value or left blank. Player search results including players’ photo, club, nationality, preferred position on field and overall ability.Users can also add a player to their personal dream football team at the player search result page.
 
-![img](readmeImage/picture2.png)
+![img](readmeImage/Picture2.png)
 
 Search Team: Present 34 teams in the EPL with their latest 10 matches records and team attributes.
 
