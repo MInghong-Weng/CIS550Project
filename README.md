@@ -1,4 +1,4 @@
-# FootBall Camp
+# Soccer Database Web Application
 APP DEMO: ec2-34-239-126-102.compute-1.amazonaws.com:3000
 
 The whole APP is built based on MEAN Stack. 
